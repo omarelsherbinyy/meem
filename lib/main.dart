@@ -9,20 +9,16 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: MaterialApp(
-          title: "MAhmoudd hatems",
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: LoginScreen()),
+      builder: (BuildContext context, Widget? child) {
+        return MaterialApp(
+            debugShowCheckedModeBanner: false, home: LoginScreen());
+      },
     );
   }
 }
