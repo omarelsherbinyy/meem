@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:meem/core/theming/colors.dart';
-import 'package:meem/core/widgets/email_password.dart';
+import 'package:meem/core/utils/colors.dart';
+import 'package:meem/features/Auth/presentation/widgets/email_password.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({super.key});
+class LoginView extends StatelessWidget {
+  const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
