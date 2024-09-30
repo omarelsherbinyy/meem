@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meem/core/utils/colors.dart';
+import 'package:meem/features/Auth/presentation/widgets/custom_bottom.dart';
 import 'package:meem/features/Auth/presentation/widgets/email_password.dart';
 
 class LoginView extends StatelessWidget {
@@ -25,7 +26,9 @@ class LoginView extends StatelessWidget {
                   width: 272.w,
                 ),
               ),
-               EmailAndPasswod()
+               EmailAndPasswod(),
+              SizedBox(height: 50.h,),
+              CustomBottom(text: "Login", onPressed: (){})
             ],
            
 
