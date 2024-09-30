@@ -12,7 +12,7 @@ class EmailAndPasswod extends StatelessWidget {
       children: [
         CustomTextFormField(hintText: "Email", validator: (value) {}),
         SizedBox(
-          height: 20.h,
+          height: 30.h,
         ),
 
          CustomTextFormField(hintText: "Pasword", validator: (value) {}),
