@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meem/core/utils/colors.dart';
+import 'package:meem/core/utils/string.dart';
 import 'package:meem/features/Auth/presentation/widgets/custom_bottom.dart';
 import 'package:meem/features/Auth/presentation/widgets/email_password.dart';
+
+import '../widgets/social_signins.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -15,23 +18,57 @@ class LoginView extends StatelessWidget {
           child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 12.w),
         child: SingleChildScrollView(
-          child: Column(
-           // mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 51.w, vertical: 24.h),
-                child: Image.asset(
-                  "assets/images/Logo_Log_In.png",
-                  height: 232.h,
-                  width: 272.w,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 10.h,
                 ),
-              ),
-               EmailAndPasswod(),
-              SizedBox(height: 50.h,),
-              CustomBottom(text: "Login", onPressed: (){})
-            ],
-           
+                Row(
+                  children: [
+                    Text("Welcome\nBack!",
+                        style: TextStyle(
+                            fontSize: 32.sp,
+                            fontFamily:StringManager.fontFamily,
+                            fontWeight: FontWeight.bold,
+                            color: ColorsManager.textBlue))
+                  ],
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+            const     EmailAndPassword(),
 
+                Row(mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        // Handle forgot password action here
+                      },
+                      child: Text(
+                        "Forgot Password?",
+                        style: TextStyle(
+                          fontSize: 14.sp,
+                          color: ColorsManager.mainPink,
+
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                CustomBottom(text: "Login", onPressed: () {}),
+                SizedBox(
+                  height: 50.h,
+                ),
+              const  SocialSignIn(textBegin: "Create An Account ",textEnd: "Sign Up",)
+
+              ],
+            ),
           ),
         ),
       )),

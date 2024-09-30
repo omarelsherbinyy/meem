@@ -5,7 +5,7 @@ import 'package:meem/core/utils/colors.dart';
 
 
 class CustomBottom extends StatelessWidget {
-  const CustomBottom({super.key, required this.text, required this.onPressed,this.width, this.height = 55});
+  const CustomBottom({super.key, required this.text, required this.onPressed,this.width, this.height = 50});
   final double height ;
   final double? width;
  final   String text;

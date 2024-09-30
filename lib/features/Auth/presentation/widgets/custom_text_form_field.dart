@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meem/core/utils/colors.dart';
+import 'package:meem/core/utils/string.dart';
 
-class CustomTextFormField extends StatelessWidget {
+class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField(
       {super.key,
         this.contentPadding,
@@ -38,38 +39,44 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
 
   @override
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  @override
   Widget build(BuildContext context) {
-    double height = 55.h;
+    double height = 50.h;
     double width = MediaQuery.of(context).size.width;
 
     return SizedBox(
       width: width,
       height: height, // Set height directly here
       child: TextFormField(
-        controller: controller,
-        onChanged: onChanged,
-        onSaved: onSaved,
-        obscureText: isObsecureText ?? false,
-        style: inputTextStyle ?? TextStyle(fontSize: 16.sp),
+        controller: widget.controller,
+        onChanged: widget.onChanged,
+        onSaved: widget.onSaved,
+        obscureText: widget.isObsecureText ?? false,
+        style: widget.inputTextStyle ?? TextStyle(fontSize: 16.sp),
         decoration: InputDecoration(
           isDense: true,
-          contentPadding: contentPadding ??
+          contentPadding: widget.contentPadding ??
               EdgeInsets.symmetric(horizontal: 12.w, vertical: 20.h), // Adjust padding to increase space inside
-          suffixIcon: suffixIcon,
-          prefixIcon: prefixIcon,
-          hintText: hintText,
+          suffixIcon: widget.suffixIcon,
+          prefixIcon: widget.prefixIcon,
+          hintText: widget.hintText,
           hintStyle: TextStyle(
+            fontFamily: StringManager.fontFamily,
             color: ColorsManager.gray,
             fontSize: 14.sp,
             fontWeight: FontWeight.normal,
           ),
-          enabledBorder: enableBorder ?? customBorder(),
-          focusedBorder: focusedBorder ?? customBorder(ColorsManager.lightPink),
-          errorBorder: errorBorder ?? customBorder(Colors.red),
+          enabledBorder: widget.enableBorder ?? customBorder(),
+          focusedBorder: widget.focusedBorder ?? customBorder(ColorsManager.lightPink),
+          errorBorder: widget.errorBorder ?? customBorder(Colors.red),
           errorStyle: TextStyle(fontSize: 12.sp),
-          focusedErrorBorder: focusedErrorBorder ?? customBorder(Colors.red),
+          focusedErrorBorder: widget.focusedErrorBorder ?? customBorder(Colors.red),
         ),
-        validator: (value) => validator(value),
+        validator: (value) => widget.validator(value),
       ),
     );
   }
