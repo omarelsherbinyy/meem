@@ -7,4 +7,6 @@ class Routes {
   static const String favorites = '/Favorites';
   static const String userProfile = '/User Profile';
   static const String Signup='/Signup';
+  static const String ForgotPassword='/ForgotPassword';
+  static const String OnboardingLoginSignup='/OnboardingLoginSignup';
 }
