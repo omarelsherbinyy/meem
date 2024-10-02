@@ -47,7 +47,7 @@ class OnboardingLoginSignup extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                height: 50.h,
+                height: 100.h,
               ),
               CustomBorderBottom(
                 text: 'Login',
