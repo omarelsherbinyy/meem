@@ -41,11 +41,12 @@ class LoginView extends StatelessWidget {
                   const EmailAndPassword(),
 
                   // Forgot password option
+                  SizedBox(height: 8.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      TextButton(
-                        onPressed: () {
+                      GestureDetector(
+                        onTap: () {
                           // Handle forgot password action here
                         },
                         child: Text(
