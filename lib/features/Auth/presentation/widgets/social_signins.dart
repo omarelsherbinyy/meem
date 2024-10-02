@@ -13,28 +13,28 @@ class SocialSignIn extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
+        const Text(
           "- OR Continue with -",
           style: TextStyle(fontSize: 16, color: Colors.grey,fontFamily: StringManager.fontFamily,fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _socialButton('assets/images/googleicon.svg' ,onTap: () {
               // Add your Google sign-in functionality here
             }),
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
             _socialButton('assets/images/appleicon.svg', onTap: () {
               // Add your Apple sign-in functionality here
             }),
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
             _socialButton('assets/images/facebookicon.svg', onTap: () {
               // Add your Facebook sign-in functionality here
             }),
           ],
         ),
-        SizedBox(height: 30),
+        const SizedBox(height: 30),
         GestureDetector(
           onTap: () {
             // Navigate to Sign-up page
@@ -42,11 +42,11 @@ class SocialSignIn extends StatelessWidget {
           child: RichText(
             text: TextSpan(
               text: textBegin,
-              style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: StringManager.fontFamily),
+              style: const TextStyle(color: Colors.black, fontSize: 16,fontFamily: StringManager.fontFamily),
               children: [
                 TextSpan(
                   text: textEnd,
-                  style: TextStyle(color: ColorsManager.mainPink,fontFamily: StringManager.fontFamily,fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: ColorsManager.mainPink,fontFamily: StringManager.fontFamily,fontWeight: FontWeight.bold),
                 ),
               ],
             ),

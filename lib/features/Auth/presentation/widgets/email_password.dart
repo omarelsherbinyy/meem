@@ -20,11 +20,11 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           CustomTextFormField(
 
             prefixIcon: Icon(
-              Icons.person_outline_rounded,
-              size: 26.sp,
+              Icons.email_outlined,
+              size: 24.sp,
               color: ColorsManager.gray,
             ),
-            hintText: "Username or Email",
+            hintText: "Email",
             validator: (value) {},
           ),
           SizedBox(height: 30.h),
@@ -37,7 +37,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             ),
             suffixIcon: IconButton(
               icon: Icon(
-                isObsecureText ? Icons.visibility_outlined : Icons.visibility_off_outlined,
+                 isObsecureText ? Icons.visibility_outlined : Icons.visibility_off_outlined,
                 size: 24.sp,
                 color: ColorsManager.gray,
               ),

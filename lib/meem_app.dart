@@ -16,7 +16,7 @@ class MeemApp extends StatelessWidget {
         return const MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Meem',
-          initialRoute: Routes.logIn,
+          initialRoute: Routes.Signup,
           onGenerateRoute: AppRouter.onGenerateRoute,
         );
       },
