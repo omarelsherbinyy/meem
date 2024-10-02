@@ -6,47 +6,52 @@ import 'package:meem/core/utils/string.dart';
 class SocialSignIn extends StatelessWidget {
   final String textBegin;
   final String textEnd;
+  final VoidCallback onTap; // Pass navigation callback
 
-  const SocialSignIn({super.key, required this.textBegin, required this.textEnd});
+  const SocialSignIn({
+    Key? key,
+    required this.textBegin,
+    required this.textEnd,
+    required this.onTap, // Required callback
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(
+        const Text(
           "- OR Continue with -",
-          style: TextStyle(fontSize: 16, color: Colors.grey,fontFamily: StringManager.fontFamily,fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 16, color: Colors.grey, fontFamily: StringManager.fontFamily, fontWeight: FontWeight.bold),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            _socialButton('assets/images/googleicon.svg' ,onTap: () {
-              // Add your Google sign-in functionality here
+            _socialButton('assets/images/googleicon.svg', onTap: () {
+              // Add Google sign-in functionality
             }),
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
             _socialButton('assets/images/appleicon.svg', onTap: () {
-              // Add your Apple sign-in functionality here
+              // Add Apple sign-in functionality
             }),
-            SizedBox(width: 20),
+            const SizedBox(width: 20),
             _socialButton('assets/images/facebookicon.svg', onTap: () {
-              // Add your Facebook sign-in functionality here
+              // Add Facebook sign-in functionality
             }),
           ],
         ),
-        SizedBox(height: 30),
+        const SizedBox(height: 30),
         GestureDetector(
-          onTap: () {
-            // Navigate to Sign-up page
-          },
+          onTap: onTap, // Trigger navigation
           child: RichText(
             text: TextSpan(
               text: textBegin,
-              style: TextStyle(color: Colors.black, fontSize: 16,fontFamily: StringManager.fontFamily),
+              style: const TextStyle(color: Colors.black, fontSize: 16, fontFamily: StringManager.fontFamily),
               children: [
                 TextSpan(
                   text: textEnd,
-                  style: TextStyle(color: ColorsManager.mainPink,fontFamily: StringManager.fontFamily,fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: ColorsManager.mainPink, fontFamily: StringManager.fontFamily, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -56,7 +61,7 @@ class SocialSignIn extends StatelessWidget {
     );
   }
 
-  Widget _socialButton(String assetPath, {required Function onTap, double iconHeight =35}) {
+  Widget _socialButton(String assetPath, {required Function onTap, double iconHeight = 35}) {
     return GestureDetector(
       onTap: () => onTap(),
       child: CircleAvatar(
@@ -65,9 +70,9 @@ class SocialSignIn extends StatelessWidget {
         child: SvgPicture.asset(
           assetPath,
           width: 30,
-          height: iconHeight, // Using the parameter passed or the default 80
-          // Ensure no color filter is applied
+          height: iconHeight,
         ),
       ),
     );
-  }}
+  }
+}
