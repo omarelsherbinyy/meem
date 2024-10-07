@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meem/core/utils/colors.dart';
 import 'package:meem/features/Auth/presentation/views/login_view.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   @override
@@ -37,6 +38,12 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
     return 0;
   }
 
+  final PageController _pageController = PageController();
+  @override
+  void dispose() {
+    _pageController.dispose(); // Dispose of the PageController when done
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -68,53 +75,67 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         child: ListView(
           children: [
             // Main Product Image with Carousel
-            Card(
-              elevation: 4, // Add elevation for shadow effect
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12.r), // Rounded corners
-              ),
-              child: SizedBox(
-                height: 250.h,
-                child: PageView.builder(
-                  itemCount: productData['images'].length,
-                  itemBuilder: (context, index) {
-                    return ClipRRect(
-                      borderRadius: BorderRadius.circular(12.r), // Round the image corners as well
-                      child: Image.network(
-                        productData['images'][index],
-                        fit: BoxFit.cover,
-                      ),
-                    );
-                  },
+            Column(
+              children: [
+                SizedBox(
+                  height: 220.h, // Adjust the height as needed
+                  child: PageView.builder(
+                    controller: _pageController,
+                    itemCount: productData['images'].length,
+                    itemBuilder: (context, index) {
+                      return ClipRRect(
+                        borderRadius: BorderRadius.circular(12.r),
+                        child: Image.network(
+                          productData['images'][index],
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    },
+                  ),
                 ),
-              ),
+
+                // Dots Indicator under the images within the card
+                SizedBox(height: 10.h), // Add spacing between the images and dots
+                SmoothPageIndicator(
+                  controller: _pageController, // Controller for PageView
+                  count: productData['images'].length, // Number of dots
+                  effect: ExpandingDotsEffect(
+                    dotColor: Colors.grey,
+                    activeDotColor: Colors.blue,
+                    dotHeight: 8.0.h,
+                    dotWidth: 8.0.w ,
+                    spacing: 5.0.sp, // Spacing between dots
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 16),
+
+            SizedBox(height: 16.h),
 
             // Product Name
             Text(
               productData['name'],
               style: TextStyle(
-                fontSize: 24,
+                fontSize: 24.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 8.h),
 
 
             // Ratings and Reviews Count
             Row(
               children: [
-                Icon(Icons.star, color: Colors.amber, size: 18),
-                Icon(Icons.star, color: Colors.amber, size: 18),
-                Icon(Icons.star, color: Colors.amber, size: 18),
-                Icon(Icons.star, color: Colors.amber, size: 18),
-                Icon(Icons.star_half, color: Colors.amber, size: 18),
-                SizedBox(width: 8),
+                Icon(Icons.star, color: Colors.amber, size: 18.sp),
+                Icon(Icons.star, color: Colors.amber, size: 18.sp),
+                Icon(Icons.star, color: Colors.amber, size: 18.sp),
+                Icon(Icons.star, color: Colors.amber, size: 18.sp),
+                Icon(Icons.star_half, color: Colors.amber, size: 18.sp),
+                SizedBox(width: 8.w),
                 Text("56,890 reviews"),
               ],
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 8.h),
 
             // Price and Discount Information
             Row(
@@ -122,43 +143,43 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 Text(
                   "\EGP ${productData['price']}",
                   style: TextStyle(
-                    fontSize: 22,
+                    fontSize: 22.sp,
                     color: Colors.green,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(width: 10),
+                SizedBox(width: 10.h),
                 if (productData['old_price'] != productData['price'])
                   Text(
                     "\EGP ${productData['old_price']}",
                     style: TextStyle(
-                      fontSize: 16,
+                      fontSize: 16.sp,
                       color: Colors.grey,
                       decoration: TextDecoration.lineThrough,
                     ),
                   ),
-                SizedBox(width: 10),
+                SizedBox(width: 10.w),
                 if (discountPercentage > 0)
                   Text(
                     "${discountPercentage.toStringAsFixed(0)}% Off",
-                    style: TextStyle(
+                    style:const TextStyle(
                       color: Colors.red,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
               ],
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 16.h),
 
             // Product Details
             Text(
               "Product Details",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: 20.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 8.h),
 
             // Expandable Product Description
             GestureDetector(
@@ -176,12 +197,13 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         : (productData['description'].length > 100
                         ? productData['description'].substring(0, 100) + '...'
                         : productData['description']),
-                    style: TextStyle(fontSize: 16),
+                    style: TextStyle(fontSize: 16.sp),
                   ),
-                  SizedBox(height: 8),
+                  SizedBox(height: 8.h),
                   Text(
                     isDescriptionExpanded ? "Show Less" : "Show More",
                     style: TextStyle(
+                      fontSize: 14.sp,
                       color: Colors.blue,
                       fontWeight: FontWeight.bold,
                     ),
@@ -189,67 +211,104 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 ],
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 16.h),
 
             // Buttons (Add to Cart, Buy Now)
             Row(
               children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Go to cart functionality
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                    ),
-                    child: Text("Go to Cart"),
+
+                Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30.0.r), // Rounded corners
+                gradient:const LinearGradient(
+                  colors: [Colors.deepPurpleAccent, Colors.blue],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+              child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.transparent, // To apply the container gradient
+                  shadowColor: Colors.transparent,
+                  padding: EdgeInsets.symmetric(vertical: 12.0.sp, horizontal: 20.0.sp),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      // Buy now functionality
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.green,
-                    ),
-                    child: Text("Buy Now"),
-                  ),
+                icon: Icon(Icons.shopping_cart_outlined, color: Colors.white,size: 26.sp,), // Hand icon
+                label: Text(
+                  "Go To cart",
+                  style: TextStyle(color: Colors.white, fontSize: 20.sp),
                 ),
+                onPressed: () {
+                  // Add your onPressed logic here BUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUYYYYYYYYYYYYYYYYYYYYYYY
+                },
+              ),
+            ), SizedBox(width: 8.w,),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(30.0.r), // Rounded corners
+                    gradient:const LinearGradient(
+                      colors: [Colors.green, Colors.greenAccent],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ),
+                  ),
+                  child: ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      padding: EdgeInsets.symmetric(vertical: 12.0.sp, horizontal: 20.0.sp),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                    ),
+                    icon: Icon(Icons.touch_app, color: Colors.white,size: 26.sp,), // Hand icon
+                    label: Text(
+                      "Buy Now",
+                      style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                    ),
+                    onPressed: () {
+                      // Add your onPressed logic here BUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUYYYYYYYYYYYYYYYYYYYYYYY
+                    },
+                  ),
+                )
+
+
+
               ],
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 16.h),
 
             // Delivery Information
             Container(
               padding: EdgeInsets.all(12.sp),
               decoration: BoxDecoration(
                 color: Colors.pink.shade50,
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(12.sp),
               ),
               child: Row( mainAxisSize: MainAxisSize.max,
                 children: [
-                  Icon(Icons.delivery_dining, color: Colors.red),
+                  Icon(Icons.delivery_dining, color: Colors.red,size: 26.sp,),
                   SizedBox(width: 8.w),
-                  Text(
+                 const Text(
                     "Delivery in \n1 Within Hour",
                     style: TextStyle(color: Colors.red),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 16.h),
 
             // Similar Products Section This Will Rreplaced By Product Cardddddddddddddddddddddddddddddddddddddd
             Text(
               "Similar To",
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8),
+            SizedBox(height: 8.h),
             SizedBox(
               height: 200,
               child: ListView.builder(
