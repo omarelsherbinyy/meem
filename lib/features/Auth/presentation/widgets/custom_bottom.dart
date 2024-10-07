@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meem/core/utils/colors.dart';
+import 'package:meem/core/utils/string.dart';
 
 
 class CustomBottom extends StatelessWidget {
@@ -24,7 +25,11 @@ final VoidCallback onPressed;
         highlightColor: ColorsManager.white.withOpacity(0.2),
         splashColor: ColorsManager.white.withOpacity(0.3),
         elevation: 0,
-        child: Text(text, style: TextStyle(fontSize: 20.sp,fontWeight: FontWeight.w500),),
+        child: Text(text, style: TextStyle(
+          fontFamily: StringManager.fontFamily,
+          fontSize: 20.sp,
+          fontWeight: FontWeight.w500,
+        ),),
         
 
       ),
@@ -65,6 +70,7 @@ class CustomBorderBottom extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
+            fontFamily: StringManager.fontFamily,
             fontSize: 20.sp,
             fontWeight: FontWeight.w500,
           ),

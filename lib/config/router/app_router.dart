@@ -8,6 +8,8 @@ import 'package:meem/features/home/presentation/view/home_view.dart';
 import 'package:meem/features/onBoarding/presentation/view/onboarding_view.dart';
 import 'package:meem/features/user_profile/presentation/views/user_profile_view.dart';
 
+import '../../features/Auth/presentation/views/forgot_password_view.dart';
+import '../../features/Auth/presentation/views/onboarding_login_signup.dart';
 import '../../features/Auth/presentation/views/signup_view.dart';
 import '../../features/Products/presentation/product_view.dart';
 class AppRouter {
@@ -45,8 +47,14 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => const SignupView(),
         );
+
       case Routes.ProductDetailsPage:
         return MaterialPageRoute(builder: (context)=>ProductDetailsPage());
+      case Routes.ForgotPassword:
+        return MaterialPageRoute(builder: (context)=> ForgotPasswordView());
+      case Routes.OnboardingLoginSignup:
+        return MaterialPageRoute(builder: (context)=>const OnboardingLoginSignup());
+
      
       default:
         return unDefineRoute();

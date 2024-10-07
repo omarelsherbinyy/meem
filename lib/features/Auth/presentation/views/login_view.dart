@@ -47,6 +47,7 @@ class LoginView extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () {
+                          Navigator.pushNamed(context, Routes.ForgotPassword);
                           // Handle forgot password action here
                         },
                         child: Text(
