@@ -37,7 +37,7 @@ class AppRouter {
         );
       case Routes.userProfile:
         return MaterialPageRoute(
-          builder: (context) => const UserProfileView(),
+          builder: (context) =>  UserProfileView(),
         );
       case Routes.cart:
         return MaterialPageRoute(
