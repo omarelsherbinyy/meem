@@ -5,6 +5,8 @@ import 'package:meem/core/utils/colors.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../widgets/calculate_discount_percentage.dart';
+
 class ProductDetailsPage extends StatefulWidget {
   const ProductDetailsPage({super.key});
 
@@ -33,14 +35,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
   bool isDescriptionExpanded = false;
 
-  double calculateDiscountPercentage(dynamic oldPrice, dynamic newPrice) {
-    if (oldPrice > newPrice) {
-      return ((oldPrice.toDouble() - newPrice.toDouble()) /
-              oldPrice.toDouble()) *
-          100;
-    }
-    return 0;
-  }
 
   final PageController _pageController = PageController();
 
@@ -53,7 +47,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
   @override
   Widget build(BuildContext context) {
     final double discountPercentage = calculateDiscountPercentage(
-        productData['old_price'], productData['price']);
+        productData['old_price'].toDouble(), productData['price'].toDouble());
 
     return Scaffold(
       backgroundColor: ColorsManager.white,
@@ -83,7 +77,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             Column(
               children: [
                 SizedBox(
-                  height: 220.h, // Adjust the height as needed
+                  height: 200.h, // Adjust the height as needed
                   child: PageView.builder(
                     controller: _pageController,
                     itemCount: productData['images'].length,
@@ -92,7 +86,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         borderRadius: BorderRadius.circular(12.r),
                         child: Image.network(
                           productData["images"][index],
-                          fit: BoxFit.cover,
+                          fit: BoxFit.scaleDown,
                           loadingBuilder: (context, child, loadingProgress) {
                             if (loadingProgress == null) return child;
                             return Shimmer.fromColors(
@@ -123,7 +117,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   count: productData['images'].length, // Number of dots
                   effect: ExpandingDotsEffect(
                     dotColor: Colors.grey,
-                    activeDotColor: Colors.blue,
+                    activeDotColor: ColorsManager.mainPink,
                     dotHeight: 8.0.h,
                     dotWidth: 8.0.w,
                     spacing: 5.0.sp, // Spacing between dots
@@ -235,7 +229,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             ),
             SizedBox(height: 16.h),
 
-            // Buttons (Add to Cart, Buy Now)
+            // Adsaaaaaaaaaaaaaaaaaaaaaaaaaaa Buttons (Add to Cart, Buy Now) adssssssssssssssssssssssssssssssss Logic  neeeeded here
             Row(
               children: [
                 Container(
@@ -265,8 +259,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       size: 26.sp,
                     ), // Hand icon
                     label: Text(
-                      "Go To cart",
-                      style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                      "Add To Cart",
+                      style: TextStyle(color: Colors.white, fontSize: 14.sp),
                     ),
                     onPressed: () {
                       // Add your onPressed logic here BUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUYYYYYYYYYYYYYYYYYYYYYYY
@@ -304,7 +298,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                     // Hand icon
                     label: Text(
                       "Buy Now",
-                      style: TextStyle(color: Colors.white, fontSize: 20.sp),
+                      style: TextStyle(color: Colors.white, fontSize: 14.sp),
                     ),
                     onPressed: () {
                       // Add your onPressed logic here BUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUYYYYYYYYYYYYYYYYYYYYYYY
@@ -326,7 +320,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Icon(
-                    Icons.delivery_dining,
+                    Icons.local_shipping_outlined,
                     color: Colors.red,
                     size: 26.sp,
                   ),
@@ -340,7 +334,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
             ),
             SizedBox(height: 16.h),
 
-            // Similar Products Section This Will Rreplaced By Product Cardddddddddddddddddddddddddddddddddddddd
+            // Similar Products Section This Will Replaced By Product Cardddddddddddddddddddddddddddddddddddddd
             Text(
               "Similar To",
               style: TextStyle(
