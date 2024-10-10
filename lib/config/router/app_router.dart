@@ -11,6 +11,7 @@ import 'package:meem/features/user_profile/presentation/views/user_profile_view.
 import '../../features/Auth/presentation/views/forgot_password_view.dart';
 import '../../features/Auth/presentation/views/onboarding_login_signup.dart';
 import '../../features/Auth/presentation/views/signup_view.dart';
+
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -42,15 +43,16 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => const CartView(),
         );
-      case Routes.Signup:
+      case Routes.signUp:
         return MaterialPageRoute(
-          builder: (context) => const SignupView(),
+          builder: (context) => const SignUpView(),
         );
-      case Routes.ForgotPassword:
-        return MaterialPageRoute(builder: (context)=> ForgotPasswordView());
-      case Routes.OnboardingLoginSignup:
-        return MaterialPageRoute(builder: (context)=>const OnboardingLoginSignup());
-     
+      case Routes.forgotPassword:
+        return MaterialPageRoute(builder: (context) => ForgotPasswordView());
+      case Routes.onboardingLoginSignUp:
+        return MaterialPageRoute(
+            builder: (context) => const OnboardingLoginSignUp());
+
       default:
         return unDefineRoute();
     }
