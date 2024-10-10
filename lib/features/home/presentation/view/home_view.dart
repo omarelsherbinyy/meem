@@ -16,39 +16,63 @@ class _HomeViewState extends State<HomeView> {
 
   // Dummy data for categories and products
   final List<Map<String, String>> categories = [
-    {'name': 'Beauty', 'imageUrl': 'https://m.media-amazon.com/images/M/MV5BNzA3MmE3YTgtYzA1Zi00NDBjLTlmZjAtYzY0MWU3MTZjMjdlXkEyXkFqcGc@._V1_.jpg'},
-    {'name': 'Fashion', 'imageUrl': 'https://t4.ftcdn.net/jpg/02/62/24/31/360_F_262243135_q7xBjfg02gaeD1NVfIqHBLz3qrOMFYcw.jpg'},
-    {'name': 'Kids', 'imageUrl': 'https://cdn.cdnparenting.com/articles/2020/08/23110028/1036459504-1024x700.webp'},
-    {'name': 'Mens', 'imageUrl': 'https://www.nextdirect.com/nxtcms/resource/blob/6091888/698f23220d45c0cdc3c6c4e28ab8353c/linen-data.jpg'},
-    {'name': 'Womens', 'imageUrl': 'https://img.freepik.com/premium-photo/blonde-woman-with-blonde-hair-white-tank-top_662214-104682.jpg'},
+    {
+      'name': 'Beauty',
+      'imageUrl':
+          'https://m.media-amazon.com/images/M/MV5BNzA3MmE3YTgtYzA1Zi00NDBjLTlmZjAtYzY0MWU3MTZjMjdlXkEyXkFqcGc@._V1_.jpg'
+    },
+    {
+      'name': 'Fashion',
+      'imageUrl':
+          'https://t4.ftcdn.net/jpg/02/62/24/31/360_F_262243135_q7xBjfg02gaeD1NVfIqHBLz3qrOMFYcw.jpg'
+    },
+    {
+      'name': 'Kids',
+      'imageUrl':
+          'https://cdn.cdnparenting.com/articles/2020/08/23110028/1036459504-1024x700.webp'
+    },
+    {
+      'name': 'Mens',
+      'imageUrl':
+          'https://www.nextdirect.com/nxtcms/resource/blob/6091888/698f23220d45c0cdc3c6c4e28ab8353c/linen-data.jpg'
+    },
+    {
+      'name': 'Womens',
+      'imageUrl':
+          'https://img.freepik.com/premium-photo/blonde-woman-with-blonde-hair-white-tank-top_662214-104682.jpg'
+    },
   ];
 
   final List<Map<String, String>> products = [
     {
       'name': 'IWC Watch',
       'price': '65',
-      'imageUrl': 'https://images-cdn.ubuy.ae/6340059bd6d2d86e2476d684-iwc-ingenieur-dual-time-titanium.jpg',
+      'imageUrl':
+          'https://images-cdn.ubuy.ae/6340059bd6d2d86e2476d684-iwc-ingenieur-dual-time-titanium.jpg',
       'description': 'A luxury watch with precision engineering.',
       'rating': '4.5'
     },
     {
       'name': 'Labbin Sneakers',
       'price': '35',
-      'imageUrl': 'https://fashion-section-website-media.s3.ap-south-1.amazonaws.com/media/2023/01/28165228/D-2.jpg',
+      'imageUrl':
+          'https://fashion-section-website-media.s3.ap-south-1.amazonaws.com/media/2023/01/28165228/D-2.jpg',
       'description': 'Comfortable and stylish sneakers for everyday use.',
       'rating': '4.2'
     },
     {
       'name': 'Suit',
       'price': '150',
-      'imageUrl': 'https://tie-house.com/wp-content/uploads/2023/08/00000435.jpg',
+      'imageUrl':
+          'https://tie-house.com/wp-content/uploads/2023/08/00000435.jpg',
       'description': 'Elegant suit for formal occasions.',
       'rating': '4.8'
     },
     {
       'name': 'HRX Sneakers',
       'price': '249',
-      'imageUrl': 'https://media.vogue.in/wp-content/uploads/2018/08/11520405637462-HRX-by-Hrithik-Roshan-Women-Black-Running-Shoes-6951520405637271-1.jpg',
+      'imageUrl':
+          'https://media.vogue.in/wp-content/uploads/2018/08/11520405637462-HRX-by-Hrithik-Roshan-Women-Black-Running-Shoes-6951520405637271-1.jpg',
       'description': 'High-performance sneakers for athletic wear.',
       'rating': '4.7'
     },
@@ -61,63 +85,71 @@ class _HomeViewState extends State<HomeView> {
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         padding: EdgeInsets.symmetric(horizontal: 12),
-        decoration: BoxDecoration( boxShadow: [
-        BoxShadow(
-        color: Colors.black.withOpacity(0.075),
-        spreadRadius: 1,
-        blurRadius: 5,
-        offset: const Offset(0, 1),
-      ),
-      ],
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.075),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: const Offset(0, 1),
+            ),
+          ],
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
-
-
         ),
         child: Row(
           children: [
             Icon(Icons.search_outlined, color: ColorsManager.lightGray),
             Expanded(
               child: TextField(
-                style: TextStyle(fontSize: 15.sp,
+                style: TextStyle(
+                  fontSize: 15.sp,
                   fontFamily: StringManager.fontFamily,
                   fontWeight: FontWeight.normal,
-                  color: ColorsManager.lightGray,),
-                decoration: InputDecoration(
-
-
-                  hintText: ' Search any product',
-                  border: InputBorder.none
+                  color: ColorsManager.lightGray,
                 ),
+                decoration: InputDecoration(
+                    hintText: ' Search any product', border: InputBorder.none),
               ),
             ),
-            Icon(Icons.mic_none_rounded, color:  ColorsManager.lightGray),
+            Icon(Icons.mic_none_rounded, color: ColorsManager.lightGray),
           ],
         ),
       ),
     );
   }
 
-  // Categories List
+// Categories List
   Widget _buildCategoriesList() {
-    return Container(
-      height: 100,
-      padding: EdgeInsets.symmetric(horizontal: 16),
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: categories.length,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              CircleAvatar(
-                backgroundImage: NetworkImage(categories[index]['imageUrl']!),
-                radius: 30,
+    return GestureDetector(
+      onTap: () {}, // Nav for category list
+      child: Container(
+        height: 150.h,  // Height is scaled using ScreenUtil
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h), // Use w for width and h for height
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: categories.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: EdgeInsets.all(8.w), // Adjust padding to be responsive
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    backgroundImage: NetworkImage(categories[index]['imageUrl']!),
+                    radius: 30.r,  // Use ScreenUtil for radius
+                  ),
+                  SizedBox(height: 8.h),  // SizedBox with responsive height
+                  Text(
+                    categories[index]['name']!,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                    ),
+                  ),
+                ],
               ),
-              SizedBox(height: 8),
-              Text(categories[index]['name']!),
-            ],
-          );
-        },
+            );
+          },
+        ),
       ),
     );
   }
@@ -156,7 +188,8 @@ class _HomeViewState extends State<HomeView> {
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       child: ListTile(
-        leading: Image.network('https://st.depositphotos.com/1168775/1325/i/450/depositphotos_13250179-stock-photo-hot-deals-red-logo.jpg'),
+        leading: Image.network(
+            'https://st.depositphotos.com/1168775/1325/i/450/depositphotos_13250179-stock-photo-hot-deals-red-logo.jpg'),
         title: Text("Women Printed Kurta"),
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -267,7 +300,8 @@ class _HomeViewState extends State<HomeView> {
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
                               backgroundColor: ColorsManager.mainBlue,
-                              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 12, vertical: 8),
                             ),
                             child: Text(
                               "Add",
@@ -326,11 +360,11 @@ class _HomeViewState extends State<HomeView> {
               pinned: false,
               backgroundColor: Colors.white,
               elevation: 0,
-              leading: Icon(Icons.menu, color: Colors.black),
+              leading: Icon(Icons.menu_outlined, color: Colors.black),
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/images/cart logo.png', height: 34),
+                  Image.asset('assets/images/cart logo.png', height: 40),
                   Text(
                     "meem",
                     style: TextStyle(
@@ -344,7 +378,8 @@ class _HomeViewState extends State<HomeView> {
               ),
               actions: [
                 IconButton(
-                  icon: Icon(Icons.account_circle, color: Colors.black),
+                  icon:
+                      Icon(Icons.account_circle_outlined, color: Colors.black),
                   onPressed: () {},
                 ),
               ],
@@ -352,8 +387,18 @@ class _HomeViewState extends State<HomeView> {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
+
                   _buildSearchBar(),
                   _buildCategoriesList(),
+                  Text(
+                    "All Featured",
+                    style: TextStyle(
+                      fontSize: 26.sp,
+                      fontFamily: StringManager.fontFamily,
+                      fontWeight: FontWeight.bold,
+                      color: ColorsManager.mainBlue,
+                    ),
+                  ),
                   _buildPromotionalBanner(),
                   _buildDealsOfDay(),
                   _buildProductListings("Trending"),

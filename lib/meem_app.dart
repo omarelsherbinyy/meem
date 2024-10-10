@@ -19,7 +19,6 @@ class MeemApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (BuildContext context, Widget? child) {
-
         return BlocProvider(
           create: (context) => AuthCubit(
             authRepo: git.get<AuthRepoImpl>(),
@@ -29,7 +28,7 @@ class MeemApp extends StatelessWidget {
             title: 'Meem',
             initialRoute:
             Hive.box(Constants.tokenBox).get(Constants.tokenKey) == null
-                ? Routes.ProductDetailsPage
+                ? Routes.home
                 : Routes.home,
             onGenerateRoute: AppRouter.onGenerateRoute,
           ),
