@@ -12,6 +12,8 @@ import '../../features/Auth/presentation/views/forgot_password_view.dart';
 import '../../features/Auth/presentation/views/onboarding_login_signup.dart';
 import '../../features/Auth/presentation/views/signup_view.dart';
 
+import '../../features/Products/presentation/product_view.dart';
+
 class AppRouter {
   static Route onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -37,7 +39,7 @@ class AppRouter {
         );
       case Routes.userProfile:
         return MaterialPageRoute(
-          builder: (context) => const UserProfileView(),
+          builder: (context) =>  UserProfileView(),
         );
       case Routes.cart:
         return MaterialPageRoute(
@@ -47,11 +49,16 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => const SignUpView(),
         );
+
       case Routes.forgotPassword:
         return MaterialPageRoute(builder: (context) => ForgotPasswordView());
       case Routes.onboardingLoginSignUp:
         return MaterialPageRoute(
             builder: (context) => const OnboardingLoginSignUp());
+
+      case Routes.ProductDetailsPage:
+        return MaterialPageRoute(builder: (context)=>ProductDetailsPage());
+    
 
       default:
         return unDefineRoute();
