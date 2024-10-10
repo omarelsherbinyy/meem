@@ -168,7 +168,7 @@ class _UserProfileViewState extends State<UserProfileView> {
       child: CustomTextFormField(
         hintText: label,
         controller: TextEditingController(text: value),
-        isObsecureText: isPassword,
+   //    isObsecureText: isPassword,
         validator: (value) {
           if (value == null || value.isEmpty) {
             return '$label cannot be empty';

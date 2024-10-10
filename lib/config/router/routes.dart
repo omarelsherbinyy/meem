@@ -12,6 +12,7 @@ class Routes {
   static const String ProductDetailsPage='/ProductDetailsPage';
   static const String ForgotPassword='/ForgotPassword';
   static const String OnboardingLoginSignup='/OnboardingLoginSignup';
+  static const String CheckoutScreen='/CheckoutScreen';
 
 
 }
