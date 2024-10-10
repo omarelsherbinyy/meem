@@ -51,7 +51,7 @@ class SocialSignIn extends StatelessWidget {
               children: [
                 TextSpan(
                   text: textEnd,
-                  style: const TextStyle(color: ColorsManager.mainPink, fontFamily: StringManager.fontFamily, fontWeight: FontWeight.bold),
+                  style: const TextStyle(color: ColorsManager.mainBlue, fontFamily: StringManager.fontFamily, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
