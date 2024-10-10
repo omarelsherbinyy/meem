@@ -6,8 +6,8 @@ import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/string.dart';
 import '../widgets/custom_bottom.dart';
 
-class OnboardingLoginSignup extends StatelessWidget {
-  const OnboardingLoginSignup({super.key});
+class OnboardingLoginSignUp extends StatelessWidget {
+  const OnboardingLoginSignUp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class OnboardingLoginSignup extends StatelessWidget {
       body: SafeArea(
           child: SingleChildScrollView(
         child: Padding(
-          padding:  EdgeInsets.symmetric(horizontal: 12.w),
+          padding: EdgeInsets.symmetric(horizontal: 12.w),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
@@ -66,7 +66,7 @@ class OnboardingLoginSignup extends StatelessWidget {
                   splashColor: Colors.white,
                   borderRadius: BorderRadius.circular(12.r),
                   onTap: () {
-                    Navigator.pushNamed(context, Routes.Signup);
+                    Navigator.pushNamed(context, Routes.signUp);
                   },
                   child: Ink(
                     decoration: BoxDecoration(
@@ -77,7 +77,9 @@ class OnboardingLoginSignup extends StatelessWidget {
                       ),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 20.w), // Padding for the button content
+                      padding: EdgeInsets.symmetric(
+                          vertical: 10.h,
+                          horizontal: 20.w), // Padding for the button content
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

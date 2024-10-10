@@ -1,29 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meem/core/utils/colors.dart';
+import 'package:meem/features/Auth/presentation/cubits/cubit/auth_cubit.dart';
 import 'package:meem/features/Auth/presentation/widgets/custom_text_form_field.dart';
 
+// ignore: must_be_immutable
 class EmailAndPassword extends StatefulWidget {
-  final bool showConfirmPassword; // Control whether to show the confirm password field
-
-  const EmailAndPassword({
-    Key? key,
-    this.showConfirmPassword = false, // Default is false (for login), can set to true (for registration)
-  }) : super(key: key);
+  final bool
+      showConfirmPassword; // Control whether to show the confirm password field
+  final GlobalKey<FormState> formKeyController;
+  AutovalidateMode autovalidateModeController;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  EmailAndPassword({
+    required this.formKeyController,
+    required this.autovalidateModeController,
+    required this.emailController,
+    required this.passwordController,
+    super.key,
+    this.showConfirmPassword =
+        false, // Default is false (for login), can set to true (for registration)
+  });
 
   @override
   _EmailAndPasswordState createState() => _EmailAndPasswordState();
 }
 
 class _EmailAndPasswordState extends State<EmailAndPassword> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  bool isObsecureText = true; // State variable to toggle password visibility
-  bool isObsecureConfirmText = true; // State variable to toggle confirm password visibility
-
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController = TextEditingController();
+  bool isObscureText = true; // State variable to toggle password visibility
+  bool isObscureConfirmText =
+      true; // State variable to toggle confirm password visibility
+  
 
   String? _emailValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -52,7 +60,8 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
     if (value == null || value.isEmpty) {
       return "Please confirm your password";
     }
-    if (value != _passwordController.text) {
+    if (value !=
+        BlocProvider.of<AuthCubit>(context).registerPasswordController.text) {
       return "Passwords do not match";
     }
     return null;
@@ -60,13 +69,16 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
 
   @override
   Widget build(BuildContext context) {
+    final authCubit = BlocProvider.of<AuthCubit>(context);
+
     return Form(
-      key: _formKey,
+      key: widget.formKeyController,
+      autovalidateMode: widget.autovalidateModeController,
       child: Column(
         children: [
           // Email field
           CustomTextFormField(
-            controller: _emailController,
+            controller: widget.emailController,
             prefixIcon: Icon(
               Icons.email_outlined,
               size: 24.sp,
@@ -79,8 +91,8 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
 
           // Password field
           CustomTextFormField(
-            controller: _passwordController,
-            isObsecureText: isObsecureText,
+            controller: widget.passwordController,
+            isObscureText: isObscureText,
             prefixIcon: Icon(
               Icons.lock_outline_rounded,
               size: 24.sp,
@@ -88,7 +100,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             ),
             suffixIcon: IconButton(
               icon: Icon(
-                isObsecureText
+                isObscureText
                     ? Icons.visibility_outlined
                     : Icons.visibility_off_outlined,
                 size: 24.sp,
@@ -96,7 +108,8 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               ),
               onPressed: () {
                 setState(() {
-                  isObsecureText = !isObsecureText; // Toggle password visibility
+                  isObscureText =
+                      !isObscureText; // Toggle password visibility
                 });
               },
             ),
@@ -108,8 +121,9 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
           if (widget.showConfirmPassword) ...[
             SizedBox(height: 22.h),
             CustomTextFormField(
-              controller: _confirmPasswordController,
-              isObsecureText: isObsecureConfirmText,
+              validator: _confirmPasswordValidator,
+              controller: authCubit.registerConfirmPasswordController,
+              isObscureText: isObscureConfirmText,
               prefixIcon: Icon(
                 Icons.lock_outline_rounded,
                 size: 24.sp,
@@ -117,7 +131,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               ),
               suffixIcon: IconButton(
                 icon: Icon(
-                  isObsecureConfirmText
+                  isObscureConfirmText
                       ? Icons.visibility_outlined
                       : Icons.visibility_off_outlined,
                   size: 24.sp,
@@ -125,12 +139,12 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
                 ),
                 onPressed: () {
                   setState(() {
-                    isObsecureConfirmText = !isObsecureConfirmText; // Toggle confirm password visibility
+                    isObscureConfirmText =
+                        !isObscureConfirmText; // Toggle confirm password visibility
                   });
                 },
               ),
               hintText: "Confirm Password",
-              validator: _confirmPasswordValidator,
             ),
           ],
         ],

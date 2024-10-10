@@ -6,21 +6,21 @@ import 'package:meem/core/utils/string.dart';
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField(
       {super.key,
-        this.contentPadding,
-        this.focusedBorder,
-        this.enableBorder,
-        this.errorBorder,
-        this.focusedErrorBorder,
-        this.inputTextStyle,
-        required this.hintText,
-        this.onSaved,
-        this.onChanged,
-        this.isObsecureText,
-        this.suffixIcon,
-        this.prefixIcon,
-        this.backgroundColor,
-        required this.validator,
-        this.controller});
+      this.contentPadding,
+      this.focusedBorder,
+      this.enableBorder,
+      this.errorBorder,
+      this.focusedErrorBorder,
+      this.inputTextStyle,
+      required this.hintText,
+      this.onSaved,
+      this.onChanged,
+      this.isObscureText,
+      this.suffixIcon,
+      this.prefixIcon,
+      this.backgroundColor,
+      required this.validator,
+      this.controller});
 
   final EdgeInsetsDirectional? contentPadding;
   final InputBorder? focusedBorder;
@@ -31,7 +31,7 @@ class CustomTextFormField extends StatefulWidget {
   final String hintText;
   final void Function(String?)? onSaved;
   final void Function(String)? onChanged;
-  final bool? isObsecureText;
+  final bool? isObscureText;
   final Widget? suffixIcon;
   final Widget? prefixIcon;
   final Color? backgroundColor;
@@ -55,12 +55,13 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         controller: widget.controller,
         onChanged: widget.onChanged,
         onSaved: widget.onSaved,
-        obscureText: widget.isObsecureText ?? false,
+        obscureText: widget.isObscureText ?? false,
         style: widget.inputTextStyle ?? TextStyle(fontSize: 16.sp),
         decoration: InputDecoration(
           isDense: true,
-          contentPadding: widget.contentPadding ??
-              EdgeInsets.symmetric(horizontal: 12.w, vertical: 20.h), // Adjust padding to increase space inside
+          contentPadding: EdgeInsets.symmetric(
+              horizontal: 12.w,
+              vertical: 20.h), // Adjust padding to increase space inside
           suffixIcon: widget.suffixIcon,
           prefixIcon: widget.prefixIcon,
           hintText: widget.hintText,
@@ -71,10 +72,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             fontWeight: FontWeight.normal,
           ),
           enabledBorder: widget.enableBorder ?? customBorder(),
-          focusedBorder: widget.focusedBorder ?? customBorder(ColorsManager.lightPink),
+          focusedBorder:
+              widget.focusedBorder ?? customBorder(ColorsManager.lightPink),
           errorBorder: widget.errorBorder ?? customBorder(Colors.red),
           errorStyle: TextStyle(fontSize: 12.sp),
-          focusedErrorBorder: widget.focusedErrorBorder ?? customBorder(Colors.red),
+          focusedErrorBorder:
+              widget.focusedErrorBorder ?? customBorder(Colors.red),
         ),
         validator: (value) => widget.validator(value),
       ),

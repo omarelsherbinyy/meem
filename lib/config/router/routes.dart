@@ -6,10 +6,12 @@ class Routes {
   static const String cart = '/Cart';
   static const String favorites = '/Favorites';
   static const String userProfile = '/User Profile';
-  static const String Signup='/Signup';
-
+  static const String signUp = '/SignUp';
+  static const String forgotPassword = '/ForgotPassword';
+  static const String onboardingLoginSignUp = '/OnboardingLoginSignUp';
   static const String ProductDetailsPage='/ProductDetailsPage';
   static const String ForgotPassword='/ForgotPassword';
   static const String OnboardingLoginSignup='/OnboardingLoginSignup';
+
 
 }

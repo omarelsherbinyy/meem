@@ -1,43 +1,43 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
 
-class Failure {
+abstract class Failure {
   final String errorMessage;
-
-  Failure({required this.errorMessage});
+  Failure({
+    required this.errorMessage,
+  });
 }
 
 class ServerFailure extends Failure {
   ServerFailure({required super.errorMessage});
-  factory ServerFailure.fromDioException(DioException error) {
-    switch (error.type) {
-      case DioExceptionType.connectionError:
-        return ServerFailure(errorMessage: '  No internet connection');
-
-      case DioExceptionType.sendTimeout:
-        return ServerFailure(errorMessage: ' Send timeout with ApiServer');
-
-      case DioExceptionType.receiveTimeout:
-        return ServerFailure(errorMessage: 'Receive timeout with ApiServer');
-
-      case DioExceptionType.badResponse:
-        return ServerFailure.fromBadResponse(
-            error.response!.data, error.response!.statusCode!);
-      case DioExceptionType.cancel:
+  factory ServerFailure.fromDioException(DioException dioError) {
+    switch (dioError.type) {
+      case DioExceptionType.connectionTimeout:
         return ServerFailure(
-            errorMessage: 'Request to ApiServer was cancelled');
-
+            errorMessage: "Connection Timeout with ApiServer ");
+      case DioExceptionType.receiveTimeout:
+        return ServerFailure(errorMessage: "Receive Timeout with ApiServer ");
+      case DioExceptionType.sendTimeout:
+        return ServerFailure(errorMessage: "Send Timeout with ApiServer ");
+      case DioExceptionType.cancel:
+        return ServerFailure(errorMessage: "Request is cancel ");
+      case DioExceptionType.connectionError:
+        return ServerFailure(errorMessage: "No internet Connection");
       case DioExceptionType.unknown:
-        return ServerFailure(errorMessage: 'Unexpected error');
-
+        return ServerFailure(errorMessage: "Unexpected Error,try again");
+      case DioExceptionType.badResponse:
+        return ServerFailure._formBadResponse(
+            dioError.response!.statusCode!, dioError.response!.data);
       default:
-        return ServerFailure(errorMessage: 'Unexpected error');
+        return ServerFailure(errorMessage: 'Opps , there was an error');
     }
   }
-
-  factory ServerFailure.fromBadResponse(response, int statusCode) {
+  factory ServerFailure._formBadResponse(int statusCode, dynamic response) {
     switch (statusCode) {
       case 400:
-        return ServerFailure(errorMessage: response['status_message']);
+        return ServerFailure(
+          errorMessage: response["message"], //this for changed Depend on api
+        );
       case 401:
         return ServerFailure(errorMessage: 'Unauthorized');
       case 403:
@@ -127,6 +127,3 @@ class ServerFailure extends Failure {
     }
   }
 }
-
-
-//

@@ -9,11 +9,11 @@ class SocialSignIn extends StatelessWidget {
   final VoidCallback onTap; // Pass navigation callback
 
   const SocialSignIn({
-    Key? key,
+    super.key,
     required this.textBegin,
     required this.textEnd,
     required this.onTap, // Required callback
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
