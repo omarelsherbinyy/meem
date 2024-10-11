@@ -2,9 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
-
 import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/string.dart';
+import '../../widgets/product_card.dart';
+
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -108,8 +109,62 @@ class _HomeViewState extends State<HomeView> {
     }
   ];
 
+  final List<Map<String, dynamic>> products = [
+    {
+      "id": 52,
+      "price": 25000,
+      "old_price": 25000,
+      "discount": 0,
+      "image":
+      "https://student.valuxapps.com/storage/uploads/products/1615440322npwmU.71DVgBTdyLL._SL1500_.jpg",
+      "name": "Apple iPhone 12 Pro Max 256GB 6 GB RAM, Pacific Blue",
+      "description": "DISPLAY\r\nSize: 6.7 inches...",
+      "in_favorites": false,
+      "in_cart": true
+    },
+    {
+      "id": 55,
+      "price": 44500,
+      "old_price": 44500,
+      "discount": 0,
+      "image":
+      "https://student.valuxapps.com/storage/uploads/products/1615442168bVx52.item_XXL_36581132_143760083.jpeg",
+      "name": "Apple MacBook Pro",
+      "description":
+      "Bring home the Apple MacBook Pro and experience computing like never before...",
+      "in_favorites": true,
+      "in_cart": true
+    },
+    {
+      "id": 53,
+      "price": 5599,
+      "old_price": 10230,
+      "discount": 45,
+      "image":
+      "https://student.valuxapps.com/storage/uploads/products/1615440689wYMHV.item_XXL_36330138_142814934.jpeg",
+      "name":
+      "JBL Xtreme 2 Portable Waterproof Bluetooth Speaker - Blue JBLXTREME2BLUAM",
+      "description":
+      "GENERAL SPECIFICATIONS\r\nMusic playing time: 15 hours...",
+      "in_favorites": true,
+      "in_cart": true
+    },
+    {
+      "id": 54,
+      "price": 11499,
+      "old_price": 12499,
+      "discount": 8,
+      "image":
+      "https://student.valuxapps.com/storage/uploads/products/1615441020ydvqD.item_XXL_51889566_32a329591e022.jpeg",
+      "name": "Samsung 65 Inch Smart TV 4K Ultra HD Curved - UA65RU7300RXUM",
+      "description":
+      "Brand: Samsung\r\nColor: black\r\nModel: UA65RU7300...",
+      "in_favorites": false,
+      "in_cart": false
+    },
+  ];
 
-  final List<Map<String, String>> products = [
+  final List<Map<String, String>> trendProducts = [
     {
       'name': 'IWC Watch',
       'price': '65',
@@ -325,114 +380,35 @@ class _HomeViewState extends State<HomeView> {
         ));
   }
 
-  // Product Listings with detailed cards
-  Widget _buildProductListings(String title) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                title,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: Text("View all"),
-              ),
-            ],
+
+// Section Title Widget
+  Widget _buildSectionTitle(String title) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 18.sp,
+              fontWeight: FontWeight.bold,
+              color: ColorsManager.textBlue,
+            ),
           ),
-        ),
-        Container(
-          height: 300.h,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: products.length,
-            itemBuilder: (context, index) {
-              return Card(
-                margin: EdgeInsets.symmetric(horizontal: 8),
-                child: Container(
-                  width: 200.w,
-                  padding: EdgeInsets.all(12),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Image.network(
-                        products[index]['imageUrl']!,
-                        height: 120.h,
-                        fit: BoxFit.cover,
-                      ),
-                      SizedBox(height: 8.h),
-                      Text(
-                        products[index]['name']!,
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 4.h),
-                      Text(
-                        products[index]['description']!,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          color: Colors.grey,
-                        ),
-                      ),
-                      SizedBox(height: 8.h),
-                      Row(
-                        children: [
-                          Icon(Icons.star, color: Colors.yellow, size: 16.w),
-                          SizedBox(width: 4.w),
-                          Text(
-                            products[index]['rating']!,
-                            style: TextStyle(
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 8.h),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "\$${products[index]['price']}",
-                            style: TextStyle(
-                              fontSize: 16.sp,
-                              fontWeight: FontWeight.bold,
-                              color: ColorsManager.mainBlue,
-                            ),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: ColorsManager.mainBlue,
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 12, vertical: 8),
-                            ),
-                            child: Text(
-                              "Add",
-                              style: TextStyle(fontSize: 14.sp),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              );
+          TextButton(
+            onPressed: () {
+              // Handle navigation to see all
             },
+            child: Text("See All", style: TextStyle(color: ColorsManager.mainBlue)),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
+
+// Popular Products Widget
+
 
   // Bottom Navigation Bar
   BottomNavigationBar _buildBottomNavigationBar() {
@@ -523,7 +499,8 @@ class _HomeViewState extends State<HomeView> {
                   _buildBannerSlider(),
                   _buildDealsOfDay(),
 
-                  _buildProductListings("Trending"),
+                  PopularProducts(),
+                  RecentlyAddedProducts()
                 ],
               ),
             ),
