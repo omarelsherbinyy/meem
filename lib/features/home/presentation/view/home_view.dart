@@ -1,5 +1,7 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shimmer/shimmer.dart';
 
 import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/string.dart';
@@ -43,6 +45,70 @@ class _HomeViewState extends State<HomeView> {
     },
   ];
 
+  final List<Map<String, dynamic>> banners = [
+    {
+      "id": 11,
+      "image": "https://student.valuxapps.com/storage/uploads/banners/1689106904Mzsmc.photo_2023-07-11_23-08-24.png",
+      "category": null,
+      "product": null
+    },
+    {
+      "id": 12,
+      "image": "https://student.valuxapps.com/storage/uploads/banners/1689106848R4Nxl.photo_2023-07-11_23-08-19.png",
+      "category": null,
+      "product": null
+    },
+    {
+      "id": 17,
+      "image": "https://student.valuxapps.com/storage/uploads/banners/1689106932hsRxm.photo_2023-07-11_23-07-53.png",
+      "category": null,
+      "product": null
+    },
+    {
+      "id": 19,
+      "image": "https://student.valuxapps.com/storage/uploads/banners/1689110348KHwtl.sales-abstract-landing-page-with-photo_52683-28304 (1) (2).png",
+      "category": null,
+      "product": null
+    },
+    {
+      "id": 23,
+      "image": "https://student.valuxapps.com/storage/uploads/banners/1689108526i90RV.online-shopping-banner-template_23-2148764566 (1).png",
+      "category": null,
+      "product": null
+    },
+    {
+      "id": 24,
+      "image": "https://student.valuxapps.com/storage/uploads/banners/1689108648Avc1g.banner-template-with-summer-sale_23-2148515754 (1).png",
+      "category": null,
+      "product": null
+    },
+    {
+      "id": 26,
+      "image": "https://student.valuxapps.com/storage/uploads/banners/1689107104Ezc0d.photo_2023-07-11_23-07-59.png",
+      "category": null,
+      "product": null
+    },
+    {
+      "id": 27,
+      "image": "https://student.valuxapps.com/storage/uploads/banners/1689106762vIpcq.photo_2023-07-11_23-07-38.png",
+      "category": null,
+      "product": null
+    },
+    {
+      "id": 28,
+      "image": "https://student.valuxapps.com/storage/uploads/banners/1689106805161JH.photo_2023-07-11_23-07-43.png",
+      "category": null,
+      "product": null
+    },
+    {
+      "id": 29,
+      "image": "https://student.valuxapps.com/storage/uploads/banners/1689108280StVEo.cyber-monday-banner-template_23-2148748266 (1).png",
+      "category": null,
+      "product": null
+    }
+  ];
+
+
   final List<Map<String, String>> products = [
     {
       'name': 'IWC Watch',
@@ -83,8 +149,8 @@ class _HomeViewState extends State<HomeView> {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        padding: EdgeInsets.symmetric(horizontal: 12),
+        margin: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
+        padding: EdgeInsets.symmetric(horizontal: 12.sp),
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -95,7 +161,7 @@ class _HomeViewState extends State<HomeView> {
             ),
           ],
           color: Colors.white,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(8.sp),
         ),
         child: Row(
           children: [
@@ -124,21 +190,24 @@ class _HomeViewState extends State<HomeView> {
     return GestureDetector(
       onTap: () {}, // Nav for category list
       child: Container(
-        height: 150.h,  // Height is scaled using ScreenUtil
-        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h), // Use w for width and h for height
+        height: 120.h,
+        // Height is scaled using ScreenUtil
+        padding: EdgeInsets.symmetric(horizontal: 8.w),
+        // Use w for width and h for height
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: categories.length,
           itemBuilder: (context, index) {
             return Padding(
-              padding: EdgeInsets.all(8.w), // Adjust padding to be responsive
+              padding: EdgeInsets.all(8.sp), // Adjust padding to be responsive
               child: Column(
                 children: [
                   CircleAvatar(
-                    backgroundImage: NetworkImage(categories[index]['imageUrl']!),
-                    radius: 30.r,  // Use ScreenUtil for radius
+                    backgroundImage:
+                        NetworkImage(categories[index]['imageUrl']!),
+                    radius: 34.r, // Use ScreenUtil for radius
                   ),
-                  SizedBox(height: 8.h),  // SizedBox with responsive height
+                  SizedBox(height: 8.h), // SizedBox with responsive height
                   Text(
                     categories[index]['name']!,
                     style: TextStyle(
@@ -154,62 +223,106 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  // Promotional Banner
-  Widget _buildPromotionalBanner() {
-    return Container(
-      margin: EdgeInsets.all(16),
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Colors.pink[100],
+  Widget _buildBannerSlider() {
+    return CarouselSlider(
+      options: CarouselOptions(
+        height: 200.h, // Adjust the height based on your design
+        autoPlay: true,
+        enlargeCenterPage: true,
+        aspectRatio: 16 / 9,
+        autoPlayInterval: Duration(seconds: 3),
+        viewportFraction: 0.9, // Adjust to show part of the next banner
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            "50-40% OFF",
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          Text("Now in [product]"),
-          Text("All colors"),
-          SizedBox(height: 16),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.pink),
-            onPressed: () {},
-            child: Text("Shop Now"),
-          ),
-        ],
+      items: banners.map((banner) {
+        return Builder(
+          builder: (BuildContext context) {
+            return Container(
+              margin: EdgeInsets.symmetric(horizontal: 5.w),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  banner['image'],
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child; // Image is fully loaded
+                    } else {
+                      return _buildShimmerBanner(); // Show shimmer while loading
+                    }
+                  },
+                ),
+              ),
+            );
+          },
+        );
+      }).toList(),
+    );
+  }
+
+// Shimmer effect for loading banners
+  Widget _buildShimmerBanner() {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Container(
+        height: 200.h,
+        margin: EdgeInsets.symmetric(horizontal: 5.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
       ),
     );
   }
 
-  // Deals of the Day
+
+
+
   Widget _buildDealsOfDay() {
-    return Card(
-      margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: ListTile(
-        leading: Image.network(
-            'https://st.depositphotos.com/1168775/1325/i/450/depositphotos_13250179-stock-photo-hot-deals-red-logo.jpg'),
-        title: Text("Women Printed Kurta"),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Limited time offer"),
-            Row(
-              children: [
-                Icon(Icons.timer, color: Colors.blue),
-                Text("22h 55m 20s"),
-              ],
+    return Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.r),
+            color: ColorsManager.mainBlue),
+        height: 70.h,
+        padding: EdgeInsets.symmetric(horizontal: 8.sp),
+        margin: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
+        child: ListTile(
+          title: Text(
+            "Deals Of To Day",
+            style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.normal,
+              color: ColorsManager.white,
             ),
-          ],
-        ),
-        trailing: ElevatedButton(
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.blue),
-          onPressed: () {},
-          child: Text("View All"),
-        ),
-      ),
-    );
+          ),
+          subtitle: Row(
+            children: [
+              Icon(Icons.timer_outlined, color: ColorsManager.white),
+              SizedBox(width: 4.sp),
+              // Space between icon and text
+              Text(
+                "22h 55m 20s", // Placeholder for timer text
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  fontFamily: StringManager.fontFamily,
+                  fontWeight: FontWeight.normal,
+                  color: ColorsManager.white,
+                ),
+              ),
+            ],
+          ),
+          trailing: IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.arrow_forward_outlined,
+                color: ColorsManager.white,
+                size: 28.sp,
+              )),
+        ));
   }
 
   // Product Listings with detailed cards
@@ -387,20 +500,29 @@ class _HomeViewState extends State<HomeView> {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-
                   _buildSearchBar(),
-                  _buildCategoriesList(),
-                  Text(
-                    "All Featured",
-                    style: TextStyle(
-                      fontSize: 26.sp,
-                      fontFamily: StringManager.fontFamily,
-                      fontWeight: FontWeight.bold,
-                      color: ColorsManager.mainBlue,
+                  Padding(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    child: Row(
+                      children: [
+                        Text(
+                          "All Featured",
+                          style: TextStyle(
+                            fontSize: 18.sp,
+                            fontFamily: StringManager.fontFamily,
+                            fontWeight: FontWeight.w600,
+                            color: ColorsManager.textBlue,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  _buildPromotionalBanner(),
+
+                  _buildCategoriesList(), // The Circles for Category
+                  _buildBannerSlider(),
                   _buildDealsOfDay(),
+
                   _buildProductListings("Trending"),
                 ],
               ),
