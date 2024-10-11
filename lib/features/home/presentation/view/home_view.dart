@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/string.dart';
+import '../../widgets/custom_bottom_nav.dart';
 import '../../widgets/product_card.dart';
 
 
@@ -407,40 +408,11 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-// Popular Products Widget
-
-
-  // Bottom Navigation Bar
-  BottomNavigationBar _buildBottomNavigationBar() {
-    return BottomNavigationBar(
-      currentIndex: _selectedIndex,
-      onTap: (index) {
-        setState(() {
-          _selectedIndex = index;
-        });
-      },
-      items: const [
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.shopping_cart),
-          label: 'Cart',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.account_circle),
-          label: 'Profile',
-        ),
-      ],
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsManager.white,
-      bottomNavigationBar: _buildBottomNavigationBar(),
+      //bottomNavigationBar: CustomBottomNavBar(),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
@@ -497,9 +469,8 @@ class _HomeViewState extends State<HomeView> {
 
                   _buildCategoriesList(), // The Circles for Category
                   _buildBannerSlider(),
-                  _buildDealsOfDay(),
-
                   PopularProducts(),
+                  _buildDealsOfDay(),
                   RecentlyAddedProducts()
                 ],
               ),
