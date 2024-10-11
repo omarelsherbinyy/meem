@@ -16,7 +16,7 @@ final VoidCallback onPressed;
       height: height.h,
       width: width ?? MediaQuery.of(context).size.width,
       child: MaterialButton(onPressed: onPressed,
-        color: ColorsManager.mainPink,
+        color: ColorsManager.mainBlue,
         textColor: ColorsManager.white,
         padding: EdgeInsets.only(right: 50.w,left: 50.w),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
@@ -53,18 +53,18 @@ class CustomBorderBottom extends StatelessWidget {
       child: MaterialButton(
         onPressed: onPressed,
         color: ColorsManager.white, // Button background color
-        textColor: ColorsManager.mainPink, // Button text color
+        textColor: ColorsManager.mainBlue, // Button text color
         padding: EdgeInsets.symmetric(horizontal: 50.w),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12.r), // Rounded corners
           side: const BorderSide( // Border color and width
-            color: ColorsManager.mainPink, // Set border color
+            color: ColorsManager.mainBlue, // Set border color
             width: 2, // Set border width
           ),
         ),
-        hoverColor: ColorsManager.mainPink.withOpacity(0.1),
-        highlightColor: ColorsManager.mainPink.withOpacity(0.2),
-        splashColor: ColorsManager.mainPink.withOpacity(0.3),
+        hoverColor: ColorsManager.mainBlue.withOpacity(0.1),
+        highlightColor: ColorsManager.mainBlue.withOpacity(0.2),
+        splashColor: ColorsManager.mainBlue.withOpacity(0.3),
         elevation: 0,
         child: Text(
           text,

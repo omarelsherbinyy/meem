@@ -1,4 +1,5 @@
 class Routes {
+
   static const String onboarding = '/On Boarding';
   static const String logIn = '/Log in';
   static const String logOut = '/log Out';

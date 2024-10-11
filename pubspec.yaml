@@ -29,19 +29,24 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cached_network_image: ^3.4.1
+  carousel_slider: ^5.0.0
+  circle_nav_bar: ^2.1.0+1
   cupertino_icons: ^1.0.8
   dartz: ^0.10.1
   dio: ^5.7.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
+  flutter_product_card: ^0.0.7
   flutter_screenutil: ^5.9.3
   flutter_svg: ^2.0.10+1
   get_it: ^8.0.0
   google_fonts: ^6.2.1
+  google_nav_bar: ^5.0.6
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   image_picker: ^1.1.2
+  persistent_bottom_nav_bar: ^6.2.1
   shimmer: ^3.0.0
   smooth_page_indicator: ^1.2.0+3
 

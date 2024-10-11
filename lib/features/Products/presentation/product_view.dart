@@ -117,7 +117,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   count: productData['images'].length, // Number of dots
                   effect: ExpandingDotsEffect(
                     dotColor: Colors.grey,
-                    activeDotColor: ColorsManager.mainPink,
+                    activeDotColor: ColorsManager.mainBlue,
                     dotHeight: 8.0.h,
                     dotWidth: 8.0.w,
                     spacing: 5.0.sp, // Spacing between dots
