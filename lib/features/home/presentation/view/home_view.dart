@@ -261,7 +261,7 @@ class _HomeViewState extends State<HomeView> {
               title: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/images/cart logo.png', height: 40),
+                  Image.asset('assets/images/cart logo.png', height: 40.h),
                   Text(
                     "meem",
                     style: TextStyle(
