@@ -200,84 +200,7 @@ class _HomeViewState extends State<HomeView> {
     },
   ];
 
-  // Search Bar
-  Widget _buildSearchBar() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8),
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
-        padding: EdgeInsets.symmetric(horizontal: 12.sp),
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.075),
-              spreadRadius: 1,
-              blurRadius: 5,
-              offset: const Offset(0, 1),
-            ),
-          ],
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(8.sp),
-        ),
-        child: Row(
-          children: [
-            Icon(Icons.search_outlined, color: ColorsManager.lightGray),
-            Expanded(
-              child: TextField(
-                style: TextStyle(
-                  fontSize: 15.sp,
-                  fontFamily: StringManager.fontFamily,
-                  fontWeight: FontWeight.normal,
-                  color: ColorsManager.lightGray,
-                ),
-                decoration: InputDecoration(
-                    hintText: ' Search any product', border: InputBorder.none),
-              ),
-            ),
-            Icon(Icons.mic_none_rounded, color: ColorsManager.lightGray),
-          ],
-        ),
-      ),
-    );
-  }
 
-// Categories List
-  Widget _buildCategoriesList() {
-    return GestureDetector(
-      onTap: () {}, // Nav for category list
-      child: Container(
-        height: 120.h,
-        // Height is scaled using ScreenUtil
-        padding: EdgeInsets.symmetric(horizontal: 8.w),
-        // Use w for width and h for height
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemCount: categories.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: EdgeInsets.all(8.sp), // Adjust padding to be responsive
-              child: Column(
-                children: [
-                  CircleAvatar(
-                    backgroundImage:
-                        NetworkImage(categories[index]['imageUrl']!),
-                    radius: 34.r, // Use ScreenUtil for radius
-                  ),
-                  SizedBox(height: 8.h), // SizedBox with responsive height
-                  Text(
-                    categories[index]['name']!,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                    ),
-                  ),
-                ],
-              ),
-            );
-          },
-        ),
-      ),
-    );
-  }
 
   Widget _buildBannerSlider() {
     return CarouselSlider(
@@ -286,7 +209,7 @@ class _HomeViewState extends State<HomeView> {
         autoPlay: true,
         enlargeCenterPage: true,
         aspectRatio: 16 / 9,
-        autoPlayInterval: Duration(seconds: 3),
+        autoPlayInterval:const Duration(seconds: 3),
         viewportFraction: 0.9, // Adjust to show part of the next banner
       ),
       items: banners.map((banner) {
@@ -307,7 +230,7 @@ class _HomeViewState extends State<HomeView> {
                     if (loadingProgress == null) {
                       return child; // Image is fully loaded
                     } else {
-                      return _buildShimmerBanner(); // Show shimmer while loading
+                      return ShimmerBanner(); // Show shimmer while loading
                     }
                   },
                 ),
@@ -319,94 +242,8 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-// Shimmer effect for loading banners
-  Widget _buildShimmerBanner() {
-    return Shimmer.fromColors(
-      baseColor: Colors.grey[300]!,
-      highlightColor: Colors.grey[100]!,
-      child: Container(
-        height: 200.h,
-        margin: EdgeInsets.symmetric(horizontal: 5.w),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
-    );
-  }
 
 
-
-
-  Widget _buildDealsOfDay() {
-    return Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12.r),
-            color: ColorsManager.mainBlue),
-        height: 65.h,
-        padding: EdgeInsets.symmetric(horizontal: 8.sp),
-        margin: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
-        child: ListTile(
-          title: Text(
-            "Deals Of To Day",
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.normal,
-              color: ColorsManager.white,
-            ),
-          ),
-          subtitle: Row(
-            children: [
-              Icon(Icons.timer_outlined, color: ColorsManager.white),
-              SizedBox(width: 4.sp),
-              // Space between icon and text
-              Text(
-                "22h 55m 20s", // Placeholder for timer text
-                style: TextStyle(
-                  fontSize: 12.sp,
-                  fontFamily: StringManager.fontFamily,
-                  fontWeight: FontWeight.normal,
-                  color: ColorsManager.white,
-                ),
-              ),
-            ],
-          ),
-          trailing: IconButton(
-              onPressed: () {},
-              icon: Icon(
-                Icons.arrow_forward_outlined,
-                color: ColorsManager.white,
-                size: 28.sp,
-              )),
-        ));
-  }
-
-
-// Section Title Widget
-  Widget _buildSectionTitle(String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.bold,
-              color: ColorsManager.textBlue,
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              // Handle navigation to see all
-            },
-            child: Text("See All", style: TextStyle(color: ColorsManager.mainBlue)),
-          ),
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -446,7 +283,7 @@ class _HomeViewState extends State<HomeView> {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  _buildSearchBar(),
+                  SearchBar(),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                     child: Text(
@@ -459,10 +296,10 @@ class _HomeViewState extends State<HomeView> {
                       ),
                     ),
                   ),
-                  _buildCategoriesList(),
+                  CategoriesList(categories: categories),
                   _buildBannerSlider(),
                   PopularProducts(),
-                  _buildDealsOfDay(),
+                  DealsOfDay(),
                   RecentlyAddedProducts()
                 ],
               ),
@@ -508,6 +345,173 @@ class _HomeViewState extends State<HomeView> {
           ),
         ),
       ) ,
+    );
+  }
+}
+
+
+class DealsOfDay extends StatelessWidget {
+  const DealsOfDay({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12.r),
+            color: ColorsManager.mainBlue),
+        height: 65.h,
+        padding: EdgeInsets.symmetric(horizontal: 8.sp),
+        margin: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
+        child: ListTile(
+          title: Text(
+            "Deals Of To Day",
+            style: TextStyle(
+              fontSize: 16.sp,
+              fontWeight: FontWeight.normal,
+              color: ColorsManager.white,
+            ),
+          ),
+          subtitle: Row(
+            children: [
+              Icon(Icons.timer_outlined, color: ColorsManager.white),
+              SizedBox(width: 4.sp),
+              // Space between icon and text
+              Text(
+                "22h 55m 20s", // Placeholder for timer text
+                style: TextStyle(
+                  fontSize: 12.sp,
+                  fontFamily: StringManager.fontFamily,
+                  fontWeight: FontWeight.normal,
+                  color: ColorsManager.white,
+                ),
+              ),
+            ],
+          ),
+          trailing: IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.arrow_forward_outlined,
+                color: ColorsManager.white,
+                size: 28.sp,
+              )),
+        ));
+  }
+}
+
+class ShimmerBanner extends StatelessWidget {
+  const ShimmerBanner({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: Colors.grey[300]!,
+      highlightColor: Colors.grey[100]!,
+      child: Container(
+        height: 200.h,
+        margin: EdgeInsets.symmetric(horizontal: 5.w),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+  }
+}
+
+class CategoriesList extends StatelessWidget {
+  const CategoriesList({
+    super.key,
+    required this.categories,
+  });
+
+  final List<Map<String, String>> categories;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {}, // Nav for category list
+      child: Container(
+        height: 120.h,
+        // Height is scaled using ScreenUtil
+        padding: EdgeInsets.symmetric(horizontal: 8.w),
+        // Use w for width and h for height
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: categories.length,
+          itemBuilder: (context, index) {
+            return Padding(
+              padding: EdgeInsets.all(8.sp), // Adjust padding to be responsive
+              child: Column(
+                children: [
+                  CircleAvatar(
+                    backgroundImage:
+                        NetworkImage(categories[index]['imageUrl']!),
+                    radius: 34.r, // Use ScreenUtil for radius
+                  ),
+                  SizedBox(height: 8.h), // SizedBox with responsive height
+                  Text(
+                    categories[index]['name']!,
+                    style: TextStyle(
+                      fontSize: 14.sp,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class SearchBar extends StatelessWidget {
+  const SearchBar({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
+        padding: EdgeInsets.symmetric(horizontal: 12.sp),
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.075),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: const Offset(0, 1),
+            ),
+          ],
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8.sp),
+        ),
+        child: Row(
+          children: [
+            Icon(Icons.search_outlined, color: ColorsManager.lightGray),
+            Expanded(
+              child: TextField(
+                style: TextStyle(
+                  fontSize: 15.sp,
+                  fontFamily: StringManager.fontFamily,
+                  fontWeight: FontWeight.normal,
+                  color: ColorsManager.lightGray,
+                ),
+                decoration: InputDecoration(
+                    hintText: ' Search any product', border: InputBorder.none),
+              ),
+            ),
+            Icon(Icons.mic_none_rounded, color: ColorsManager.lightGray),
+          ],
+        ),
+      ),
     );
   }
 }

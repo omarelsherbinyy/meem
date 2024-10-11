@@ -303,41 +303,41 @@ class _RecentlyAddedProductsState extends State<RecentlyAddedProducts> {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            itemCount: products.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 20,
-              childAspectRatio: 0.7,
+          child: SizedBox(
+            height: 250, // Set a fixed height for the horizontal list
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal, // Enable horizontal scrolling
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                final product = products[index];
+                return Container(
+                  width: 160, // Set a width for each product card
+                  margin: const EdgeInsets.only(right: 16), // Space between cards
+                  child: ProductCard(
+                    product: Product(
+                      id: product['id'],
+                      title: product['name'],
+                      images: [product['image']],
+                      price: product['price'].toDouble(),
+                      isFavourite: product['in_favorites'],
+                      discount: product['discount'], // Include discount here
+                      colors: [],
+                      rating: 0.0,
+                      isPopular: false, // Default popular status
+                    ),
+                    onPress: () {
+                      // Action when a product card is tapped
+                    },
+                    onFavoriteToggle: () {
+                      // Toggle favorite status and update UI
+                      setState(() {
+                        product['in_favorites'] = !product['in_favorites'];
+                      });
+                    },
+                  ),
+                );
+              },
             ),
-            itemBuilder: (context, index) {
-              final product = products[index];
-              return ProductCard(
-                product: Product(
-                  id: product['id'],
-                  title: product['name'],
-                  images: [product['image']],
-                  price: product['price'].toDouble(),
-                  isFavourite: product['in_favorites'],
-                  discount: product['discount'], // Include discount here
-                  colors: [], // Empty list for now
-                  rating: 0.0, // Default rating
-                  isPopular: false, // Default popular status
-                ),
-                onPress: () {
-                  // Action when a product card is tapped
-                },
-                onFavoriteToggle: () {
-                  // Toggle favorite status and update UI
-                  setState(() {
-                    product['in_favorites'] = !product['in_favorites'];
-                  });
-                },
-              );
-            },
           ),
         ),
       ],
@@ -377,8 +377,8 @@ class ProductCard extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: ColorsManager.lightGray,
-                blurRadius: 4,
-                spreadRadius: 0.2,
+                blurRadius: 4.r,
+                spreadRadius: 0.2.r,
                 offset: const Offset(0, 2), // changes position of shadow
               ),
             ],
@@ -409,9 +409,12 @@ class ProductCard extends StatelessWidget {
                   ),
                   // Favorite Icon Positioned on the Left Under the Image
                   Positioned(
+
+
                     right: 10, // Adjust as needed
-                    bottom: -10, // Adjust as needed to position it under the image
+                    bottom: -5, // Adjust as needed to position it under the image
                     child: IconButton(
+                      color: Colors.redAccent,
                       onPressed: onFavoriteToggle,
                       icon: Icon(
                         product.isFavourite ? Icons.favorite : Icons.favorite_border,
@@ -437,6 +440,7 @@ class ProductCard extends StatelessWidget {
                       maxLines: 2, // Limit title to 2 lines
                       overflow: TextOverflow.ellipsis,
                     ),
+
                     const SizedBox(height: 5),
                     Column(
                       children: [
