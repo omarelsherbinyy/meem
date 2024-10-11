@@ -4,7 +4,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
 import '../../../../core/utils/colors.dart';
 import '../../../../core/utils/string.dart';
-import '../../widgets/custom_bottom_nav.dart';
+
+import 'package:google_nav_bar/google_nav_bar.dart';
 import '../../widgets/product_card.dart';
 
 
@@ -17,7 +18,6 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   int _selectedIndex = 0;
-
   // Dummy data for categories and products
   final List<Map<String, String>> categories = [
     {
@@ -412,12 +412,11 @@ class _HomeViewState extends State<HomeView> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsManager.white,
-      //bottomNavigationBar: CustomBottomNavBar(),
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-              floating: true,
+              floating: false,
               pinned: false,
               backgroundColor: Colors.white,
               elevation: 0,
@@ -439,8 +438,7 @@ class _HomeViewState extends State<HomeView> {
               ),
               actions: [
                 IconButton(
-                  icon:
-                      Icon(Icons.account_circle_outlined, color: Colors.black),
+                  icon: Icon(Icons.account_circle_outlined, color: Colors.black),
                   onPressed: () {},
                 ),
               ],
@@ -450,24 +448,18 @@ class _HomeViewState extends State<HomeView> {
                 [
                   _buildSearchBar(),
                   Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                    child: Row(
-                      children: [
-                        Text(
-                          "All Featured",
-                          style: TextStyle(
-                            fontSize: 18.sp,
-                            fontFamily: StringManager.fontFamily,
-                            fontWeight: FontWeight.w600,
-                            color: ColorsManager.textBlue,
-                          ),
-                        ),
-                      ],
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    child: Text(
+                      "All Featured",
+                      style: TextStyle(
+                        fontSize: 18.sp,
+                        fontFamily: StringManager.fontFamily,
+                        fontWeight: FontWeight.w600,
+                        color: ColorsManager.textBlue,
+                      ),
                     ),
                   ),
-
-                  _buildCategoriesList(), // The Circles for Category
+                  _buildCategoriesList(),
                   _buildBannerSlider(),
                   PopularProducts(),
                   _buildDealsOfDay(),
@@ -478,6 +470,45 @@ class _HomeViewState extends State<HomeView> {
           ],
         ),
       ),
+      bottomNavigationBar: Container(
+        color: Colors.white,
+        child: Padding(
+          padding: EdgeInsets.symmetric(vertical: 10.h),
+          child: GNav(
+            tabBorderRadius: 15.r,
+            backgroundColor: Colors.white,
+            color: Colors.grey,
+            activeColor: ColorsManager.mainBlue,
+            iconSize: 24.sp,
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
+            tabs: const [
+              GButton(
+                icon: Icons.home_outlined,
+                text: 'Home',
+              ),
+              GButton(
+                icon: Icons.search_outlined,
+                text: 'Search',
+              ),
+              GButton(
+                icon: Icons.shopping_cart_outlined,
+                text: 'Cart',
+              ),
+              GButton(
+                icon: Icons.person_outline_rounded,
+                text: 'Profile',
+              ),
+            ],
+            selectedIndex: _selectedIndex,
+            onTabChange: (index) {
+              setState(() {
+                _selectedIndex = index;
+              });
+            },
+          ),
+        ),
+      ) ,
     );
   }
 }
+
