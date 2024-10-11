@@ -247,8 +247,8 @@ class _PopularProductsState extends State<PopularProducts> {
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 16,
-              mainAxisSpacing: 20,
-              childAspectRatio: 0.7,
+              mainAxisSpacing: 16,
+              childAspectRatio: 0.65,
             ),
             itemBuilder: (context, index) {
               final product = products[index];
@@ -345,6 +345,7 @@ class _RecentlyAddedProductsState extends State<RecentlyAddedProducts> {
   }
 }
 
+
 class ProductCard extends StatelessWidget {
   final Product product;
   final VoidCallback onPress;
@@ -371,6 +372,7 @@ class ProductCard extends StatelessWidget {
       child: GestureDetector(
         onTap: onPress,
         child: Container(
+          height: 300.h,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.r),
             color: Colors.white,
@@ -390,42 +392,61 @@ class ProductCard extends StatelessWidget {
               Stack(
                 children: [
                   Center(
-                    child: SizedBox(
-                      height: 120.h,
-                      child: AspectRatio(
-                        aspectRatio: 1.0,
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
-                          child: Image.network(
-                            product.images[0],
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return const Center(child: Icon(Icons.error)); // Handle image loading errors
-                            },
+                    child: Padding(
+                      padding: const EdgeInsets.all(8),
+                      child: SizedBox(
+                        height: 140.h, // Limit image height
+                        child: AspectRatio(
+                          aspectRatio: 1.7,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.vertical(top: Radius.circular(15.r)),
+                            child: Image.network(
+                              product.images[0],
+                              fit: BoxFit.cover,
+                              errorBuilder: (context, error, stackTrace) {
+                                return const Center(child: Icon(Icons.error));
+                              },
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                  // Favorite Icon Positioned on the Left Under the Image
                   Positioned(
-
-
-                    right: 10, // Adjust as needed
-                    bottom: -5, // Adjust as needed to position it under the image
+                    right: 0,
+                    bottom: -10,
                     child: IconButton(
                       color: Colors.redAccent,
                       onPressed: onFavoriteToggle,
                       icon: Icon(
                         product.isFavourite ? Icons.favorite : Icons.favorite_border,
-                        color: product.isFavourite ?  Colors.redAccent :  ColorsManager.lightGray,
+                        color: product.isFavourite ? Colors.redAccent : Colors.grey,
                       ),
                     ),
                   ),
+                  if (product.discount > 0)
+                    Positioned(
+                      top: 10,
+                      left: 10,
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Text(
+                          '-${product.discount.toString()}%',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
                 ],
               ),
               Padding(
-                padding: EdgeInsets.all(10.0.sp),
+                padding:  EdgeInsets.symmetric(horizontal: 6.w),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -441,7 +462,7 @@ class ProductCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
 
-                    const SizedBox(height: 5),
+                     SizedBox(height: 5.h),
                     Column(
                       children: [
                         // Discounted Price display
@@ -477,6 +498,7 @@ class ProductCard extends StatelessWidget {
     );
   }
 }
+
 
 class Product {
   final int id;
