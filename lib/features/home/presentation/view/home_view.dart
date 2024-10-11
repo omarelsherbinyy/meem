@@ -253,7 +253,7 @@ class _HomeViewState extends State<HomeView> {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-              floating: false,
+              floating: true,
               pinned: false,
               backgroundColor: Colors.white,
               elevation: 0,
