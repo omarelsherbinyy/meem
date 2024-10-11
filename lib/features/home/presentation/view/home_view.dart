@@ -287,7 +287,7 @@ class _HomeViewState extends State<HomeView> {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12.r),
             color: ColorsManager.mainBlue),
-        height: 70.h,
+        height: 65.h,
         padding: EdgeInsets.symmetric(horizontal: 8.sp),
         margin: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
         child: ListTile(
