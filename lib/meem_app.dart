@@ -26,10 +26,10 @@ class MeemApp extends StatelessWidget {
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Meem',
-            initialRoute:Routes.signUp,
-            // Hive.box(Constants.tokenBox).get(Constants.tokenKey) == null
-            //     ? Routes.onboardingLoginSignUp
-            //     : Routes.home,
+            initialRoute:
+             Hive.box(Constants.tokenBox).get(Constants.tokenKey) == null
+                ? Routes.onboardingLoginSignUp
+                : Routes.home,
             onGenerateRoute: AppRouter.onGenerateRoute,
           ),
         );
