@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:meem/core/utils/colors.dart';
 import 'package:meem/core/utils/string.dart';
@@ -6,13 +7,13 @@ import 'package:meem/core/utils/string.dart';
 class SocialSignIn extends StatelessWidget {
   final String textBegin;
   final String textEnd;
-  final VoidCallback onTap; // Pass navigation callback
+  final VoidCallback onTap;
 
   const SocialSignIn({
     super.key,
     required this.textBegin,
     required this.textEnd,
-    required this.onTap, // Required callback
+    required this.onTap,
   });
 
   @override
@@ -20,34 +21,34 @@ class SocialSignIn extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text(
+         Text(
           "- OR Continue with -",
-          style: TextStyle(fontSize: 16, color: Colors.grey, fontFamily: StringManager.fontFamily, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 16.sp, color: Colors.grey, fontFamily: StringManager.fontFamily, fontWeight: FontWeight.bold),
         ),
-        const SizedBox(height: 20),
+         SizedBox(height: 20.h),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _socialButton('assets/images/googleicon.svg', onTap: () {
               // Add Google sign-in functionality
             }),
-            const SizedBox(width: 20),
+             SizedBox(width: 20.w),
             _socialButton('assets/images/appleicon.svg', onTap: () {
               // Add Apple sign-in functionality
             }),
-            const SizedBox(width: 20),
+             SizedBox(width: 20.w),
             _socialButton('assets/images/facebookicon.svg', onTap: () {
               // Add Facebook sign-in functionality
             }),
           ],
         ),
-        const SizedBox(height: 30),
+         SizedBox(height: 20.h),
         GestureDetector(
           onTap: onTap, // Trigger navigation
           child: RichText(
             text: TextSpan(
               text: textBegin,
-              style: const TextStyle(color: Colors.black, fontSize: 16, fontFamily: StringManager.fontFamily),
+              style:  TextStyle(color: Colors.black, fontSize: 14.sp, fontFamily: StringManager.fontFamily),
               children: [
                 TextSpan(
                   text: textEnd,
@@ -66,7 +67,7 @@ class SocialSignIn extends StatelessWidget {
       onTap: () => onTap(),
       child: CircleAvatar(
         radius: 30,
-        backgroundColor: Colors.pink.withOpacity(0.1),
+        backgroundColor: Colors.blueAccent.withOpacity(0.1),
         child: SvgPicture.asset(
           assetPath,
           width: 30,

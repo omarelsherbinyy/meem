@@ -8,6 +8,7 @@ import 'package:meem/core/utils/string.dart';
 import 'package:meem/features/Auth/presentation/cubits/cubit/auth_cubit.dart';
 import 'package:meem/features/Auth/presentation/widgets/custom_bottom.dart';
 import 'package:meem/features/Auth/presentation/widgets/email_password.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart'; // Import added
 
 import '../../../../config/router/routes.dart';
 import '../widgets/custom_text_form_field.dart';
@@ -42,7 +43,7 @@ class SignUpView extends StatelessWidget {
                       color: ColorsManager.textBlue,
                     ),
                   ),
-                  SizedBox(height: 22.h),
+                  SizedBox(height: 20.h),
 
                   // Full Name field
                   CustomTextFormField(
@@ -54,14 +55,13 @@ class SignUpView extends StatelessWidget {
                     ),
                     hintText: "Full Name",
                     validator: (value) {
-                      // Add validation logic for full name
                       if (value == null || value.isEmpty) {
                         return "Please enter your full name";
                       }
                       return null;
                     },
                   ),
-                  SizedBox(height: 22.h),
+                  SizedBox(height: 6.h),
 
                   // Phone Number field
                   CustomTextFormField(
@@ -73,15 +73,13 @@ class SignUpView extends StatelessWidget {
                     ),
                     hintText: "Phone Number",
                     validator: (value) {
-                      // Add validation logic for phone number
                       if (value == null || value.isEmpty) {
                         return "Please enter your phone number";
                       }
-                      // You can add more phone number validation here if necessary
                       return null;
                     },
                   ),
-                  SizedBox(height: 22.h),
+                  SizedBox(height: 6.h),
 
                   // Email and Password fields
                   EmailAndPassword(
@@ -89,26 +87,39 @@ class SignUpView extends StatelessWidget {
                     emailController: authCubit.registerEmailController,
                     formKeyController: authCubit.registerFormKeyController,
                     autovalidateModeController:
-                        authCubit.registerAutovalidateModeController,
+                    authCubit.registerAutovalidateModeController,
                     passwordController: authCubit.registerPasswordController,
                   ),
-                  SizedBox(height: 22.h),
+                  SizedBox(height: 10.h),
 
-                  // Login button
+                  // Sign Up button
                   BlocConsumer<AuthCubit, AuthState>(
-                    listener: (context, state) {
+                    listener:  (context, state) {
                       if (state is RegisterSuccessState) {
-                        context.showSnackBar(
-                            content: Text(state.authModel.message!));
-                        if (state.authModel.data?.token != null) {
-                          navigateToView(context, route: Routes.home);
+                        if (state.authModel.data!=null){
+                          context.showAwesomeSnackBar(
+                            title: 'Success!',
+                            message: 'You have logged in successfully.',
+                            contentType: ContentType.success,
+                          );
+                          if (state.authModel.data?.token != null) {
+                            navigateToView(context, route: Routes.home);
+                          }
+
+                        }
+                        else {
+                          context.showAwesomeSnackBar(
+                            title: 'Error!',
+                            message: state.authModel.message!,
+                            contentType: ContentType.failure,
+                          );
                         }
                       } else if (state is RegisterFailureState) {
-                        context.showSnackBar(
-                            content: Text(
-                          state.errorMessage,
-                          style: const TextStyle(color: Colors.red),
-                        ));
+                        context.showAwesomeSnackBar(
+                          title: 'Error!',
+                          message: state.errorMessage,
+                          contentType: ContentType.failure,
+                        );
                       }
                     },
                     builder: (context, state) {
@@ -116,34 +127,32 @@ class SignUpView extends StatelessWidget {
                         return SizedBox(
                           height: 55.h,
                           child: const Center(
-                            child: CircularProgressIndicator(),
+                            child: CircularProgressIndicator(
+                              color: ColorsManager.mainBlue,
+                            ),
                           ),
                         );
                       } else {
                         return CustomBottom(
                           text: "Sign Up",
                           onPressed: () {
-                            if (authCubit
-                                .registerFormKeyController.currentState!
-                                .validate()) {
+                            if (authCubit.registerFormKeyController.currentState!.validate()) {
                               authCubit.register(
                                 context,
                                 email: authCubit.registerEmailController.text,
-                                password:
-                                    authCubit.registerPasswordController.text,
+                                password: authCubit.registerPasswordController.text,
                                 name: authCubit.registerNameController.text,
                                 phone: authCubit.registerPhoneController.text,
                               );
                             } else {
-                              authCubit.loginAutovalidateModeController =
-                                  AutovalidateMode.always;
+                              authCubit.loginAutovalidateModeController = AutovalidateMode.always;
                             }
                           },
                         );
                       }
                     },
                   ),
-                  SizedBox(height: 22.h),
+                  SizedBox(height: 20.h),
 
                   // Social SignIn widget (login suggestion)
                   SocialSignIn(

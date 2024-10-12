@@ -10,10 +10,8 @@ class Routes {
   static const String signUp = '/SignUp';
   static const String forgotPassword = '/ForgotPassword';
   static const String onboardingLoginSignUp = '/OnboardingLoginSignUp';
-  static const String ProductDetailsPage='/ProductDetailsPage';
-  static const String ForgotPassword='/ForgotPassword';
-  static const String OnboardingLoginSignup='/OnboardingLoginSignup';
-  static const String CheckoutScreen='/CheckoutScreen';
+  static const String productDetailsPage='/ProductDetailsPage';
+  static const String checkoutScreen='/CheckoutScreen';
 
 
 }

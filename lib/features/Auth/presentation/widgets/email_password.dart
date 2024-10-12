@@ -87,7 +87,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
             hintText: "Email",
             validator: _emailValidator,
           ),
-          SizedBox(height: 22.h),
+          SizedBox(height: 6.h),
 
           // Password field
           CustomTextFormField(
@@ -119,7 +119,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
 
           // Conditionally show Confirm Password field
           if (widget.showConfirmPassword) ...[
-            SizedBox(height: 22.h),
+            SizedBox(height: 6.h),
             CustomTextFormField(
               validator: _confirmPasswordValidator,
               controller: authCubit.registerConfirmPasswordController,

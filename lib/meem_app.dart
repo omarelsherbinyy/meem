@@ -27,8 +27,8 @@ class MeemApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Meem',
             initialRoute:
-            Hive.box(Constants.tokenBox).get(Constants.tokenKey) == null
-                ? Routes.home
+             Hive.box(Constants.tokenBox).get(Constants.tokenKey) == null
+                ? Routes.onboardingLoginSignUp
                 : Routes.home,
             onGenerateRoute: AppRouter.onGenerateRoute,
           ),
