@@ -1,9 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 
 extension ContextExtension on BuildContext {
-  double get screenHeight => MediaQuery.sizeOf(this).height;
-  double get screenWidth => MediaQuery.sizeOf(this).width;
+  void showAwesomeSnackBar({
+    required String title,
+    required String message,
+    ContentType contentType = ContentType.help, // Default type
+  }) {
+    final snackBar = SnackBar(
+      elevation: 0,
+      behavior: SnackBarBehavior.floating,
+      backgroundColor: Colors.transparent,
+      content: AwesomeSnackbarContent(
+        title: title,
+        message: message,
+        contentType: contentType,
+      ),
+    );
 
-  ScaffoldFeatureController showSnackBar({required Widget content}) =>
-      ScaffoldMessenger.of(this).showSnackBar(SnackBar(content: content));
+    ScaffoldMessenger.of(this)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(snackBar);
+  }
 }
