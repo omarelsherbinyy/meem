@@ -48,11 +48,11 @@ class AppRouter {
           builder: (context) => const SignUpView (),
         );
 
-      case Routes.ProductDetailsPage:
+      case Routes.productDetailsPage:
         return MaterialPageRoute(builder: (context)=>const ProductDetailsPage());
-      case Routes.ForgotPassword:
+      case Routes.forgotPassword:
         return MaterialPageRoute(builder: (context)=> ForgotPasswordView());
-      case Routes.OnboardingLoginSignup:
+      case Routes.onboardingLoginSignUp:
         return MaterialPageRoute(builder: (context)=>const OnboardingLoginSignUp());
 
      
