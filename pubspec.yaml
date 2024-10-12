@@ -50,7 +50,6 @@ dependencies:
   persistent_bottom_nav_bar: ^6.2.1
   shimmer: ^3.0.0
   smooth_page_indicator: ^1.2.0+3
-  toastification: ^2.3.0
 
 
 dev_dependencies:

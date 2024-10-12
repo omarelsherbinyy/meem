@@ -82,15 +82,24 @@ class _LoginViewState extends State<LoginView> {
                   BlocConsumer<AuthCubit, AuthState>(
                     listener:  (context, state) {
                       if (state is LoginSuccessState) {
-                        context.showAwesomeSnackBar(
-                          title: 'Success!',
-                          message: 'You have logged in successfully.',
-                          contentType: ContentType.success,
+                        if (state.authModel.data!=null){
+                          context.showAwesomeSnackBar(
+                            title: 'Success!',
+                            message: 'You have logged in successfully.',
+                            contentType: ContentType.success,
+                          );
+                          if (state.authModel.data?.token != null) {
+                            navigateToView(context, route: Routes.home);
+                          }
+
+                        }
+                        else {
+                          context.showAwesomeSnackBar(
+                          title: 'Error!',
+                          message: state.authModel.message!,
+                          contentType: ContentType.failure,
                         );
-                        // Automatically navigate to home after a short delay
-                        Future.delayed(Duration(seconds: 2), () {
-                          navigateToView(context, route: Routes.home);
-                        });
+                        }
                       } else if (state is LoginFailureState) {
                         context.showAwesomeSnackBar(
                           title: 'Error!',

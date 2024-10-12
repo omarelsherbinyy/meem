@@ -94,22 +94,32 @@ class SignUpView extends StatelessWidget {
 
                   // Sign Up button
                   BlocConsumer<AuthCubit, AuthState>(
-                    listener: (context, state) {
+                    listener:  (context, state) {
                       if (state is RegisterSuccessState) {
-                        // Show success message
-                        final message = state.authModel.message ?? 'Registration successful!';
-                        context.showAwesomeSnackBar(
-                          title: 'Success!',
-                          message: message,
-                          contentType: ContentType.success,
-                        );
-
-                        // Navigate to home after a delay
-                        if (state.authModel.data?.token != null) {
-                          Future.delayed(Duration(seconds: 2), () {
+                        if (state.authModel.data!=null){
+                          context.showAwesomeSnackBar(
+                            title: 'Success!',
+                            message: 'You have logged in successfully.',
+                            contentType: ContentType.success,
+                          );
+                          if (state.authModel.data?.token != null) {
                             navigateToView(context, route: Routes.home);
-                          });
+                          }
+
                         }
+                        else {
+                          context.showAwesomeSnackBar(
+                            title: 'Error!',
+                            message: state.authModel.message!,
+                            contentType: ContentType.failure,
+                          );
+                        }
+                      } else if (state is RegisterFailureState) {
+                        context.showAwesomeSnackBar(
+                          title: 'Error!',
+                          message: state.errorMessage,
+                          contentType: ContentType.failure,
+                        );
                       }
                     },
                     builder: (context, state) {
