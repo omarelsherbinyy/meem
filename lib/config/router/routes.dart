@@ -12,6 +12,7 @@ class Routes {
   static const String onboardingLoginSignUp = '/OnboardingLoginSignUp';
   static const String productDetailsPage='/ProductDetailsPage';
   static const String checkoutScreen='/CheckoutScreen';
+  static const String categoriesScreen='/CategoriesScreen';
 
 
 }
