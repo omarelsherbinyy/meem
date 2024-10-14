@@ -11,10 +11,12 @@ import '../../../Auth/presentation/widgets/custom_bottom.dart';
 import '../../../Auth/presentation/widgets/custom_text_form_field.dart';
 
 class UserProfileView extends StatefulWidget {
-  const UserProfileView({Key? key}) : super(key: key);
+  const UserProfileView({super.key});
 
   @override
-  _UserProfileViewState createState() => _UserProfileViewState();
+  _UserProfileViewState createState() {
+    return _UserProfileViewState();
+  }
 }
 
 class _UserProfileViewState extends State<UserProfileView> {
@@ -97,87 +99,102 @@ class _UserProfileViewState extends State<UserProfileView> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              GestureDetector(
-                onTap: _pickImage,
-                child: Stack(
-                  children: [
-                    AnimatedOpacity(
-                      opacity: _isLoading ? 0.5 : 1.0,
-                      duration: const Duration(milliseconds: 300),
-                      child: CircleAvatar(
-                        radius: 50.r,
-                        backgroundImage: _image != null
-                            ? FileImage(File(_image!.path))
-                            : const AssetImage('assets/images/defaultavatar.jpg') as ImageProvider<Object>,
-                      ),
-                    ),
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                        height: 30.r,
-                        width: 30.r,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: ColorsManager.white, width: 4.w),
-                          shape: BoxShape.circle,
-                          color: ColorsManager.mainBlue,
+        child: Stack( // Use Stack to overlay loading indicator
+          children: [
+            SingleChildScrollView(
+              child: Column(
+                children: [
+                  GestureDetector(
+                    onTap: _pickImage,
+                    child: Stack(
+                      children: [
+                        AnimatedOpacity(
+                          opacity: _isLoading ? 0.5 : 1.0,
+                          duration: const Duration(milliseconds: 300),
+                          child: CircleAvatar(
+                            radius: 50.r,
+                            backgroundImage: _image != null
+                                ? FileImage(File(_image!.path))
+                                : const AssetImage('assets/images/defaultavatar.jpg') as ImageProvider<Object>,
+                          ),
                         ),
-                        child: Icon(
-                          Icons.edit_outlined,
-                          color: Colors.white,
-                          size: 16.r,
+                        Positioned(
+                          bottom: 0,
+                          right: 0,
+                          child: Container(
+                            height: 30.r,
+                            width: 30.r,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: ColorsManager.white, width: 4.w),
+                              shape: BoxShape.circle,
+                              color: ColorsManager.mainBlue,
+                            ),
+                            child: Icon(
+                              Icons.edit_outlined,
+                              color: Colors.white,
+                              size: 16.r,
+                            ),
+                          ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 8.h),
-              Text(
-                userData['name'],
-                style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold,fontFamily: StringManager.fontFamily,color: ColorsManager.textBlue),
-              ),
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    userData['name'],
+                    style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold, fontFamily: StringManager.fontFamily, color: ColorsManager.textBlue),
+                  ),
 
-              SizedBox(height: 8.h),
-              Text(userData['email'] ,style: TextStyle(fontFamily: StringManager.fontFamily),),
-              SizedBox(height: 8.h),
-              SizedBox(
-                height: 20.h,
-                child: Row(
-                  children: [
-                    Text(
-                      "Personal Details",
-                      style: TextStyle(
-                          fontSize: 18.sp,
-                          fontFamily: StringManager.fontFamily,
-                          fontWeight: FontWeight.bold,
-                          color: ColorsManager.textBlue),
+                  SizedBox(height: 8.h),
+                  Text(userData['email'], style: const TextStyle(fontFamily: StringManager.fontFamily),),
+                  SizedBox(height: 8.h),
+                  SizedBox(
+                    height: 20.h,
+                    child: Row(
+                      children: [
+                        Text(
+                          "Personal Details",
+                          style: TextStyle(
+                              fontSize: 18.sp,
+                              fontFamily: StringManager.fontFamily,
+                              fontWeight: FontWeight.bold,
+                              color: ColorsManager.textBlue),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-              SizedBox(height: 8.h),
-              _buildDetailSection("Email Address", userData['email']),
-              _buildCustomTextFormField("Email Address", userData['email']),
-              _buildDetailSection("Phone", userData['phone']),
-              _buildCustomTextFormField("Phone", userData['phone']),
-              _buildDetailSection("Account Holder's Name", userData['name']),
-              _buildCustomTextFormField("Account Holder's Name", userData['name']),
+                  ),
+                  SizedBox(height: 8.h),
+                  _buildDetailSection("Email Address", userData['email']),
+                  _buildCustomTextFormField("Email Address", userData['email']),
+                  _buildDetailSection("Phone", userData['phone']),
+                  _buildCustomTextFormField("Phone", userData['phone']),
+                  _buildDetailSection("Account Holder's Name", userData['name']),
+                  _buildCustomTextFormField("Account Holder's Name", userData['name']),
 
-              CustomBottom(
-                text: "Save",
-                onPressed: () {
-                  // Save button action, you can call your API here
-                },
+                  CustomBottom(
+                    text: "Save",
+                    onPressed: () {
+                      // Save button action, you can call your API here
+                    },
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            _buildLoadingIndicator(), // Show loading indicator
+          ],
         ),
       ),
     );
+  }
+
+  Widget _buildLoadingIndicator() {
+    return _isLoading
+        ? Center(
+      child: CircularProgressIndicator(
+        color: Colors.blue, // Set the loading indicator color to blue
+      ),
+    )
+        : SizedBox.shrink(); // Return an empty widget if not loading
   }
 
   Widget _buildDetailSection(String title, String value) {
@@ -185,7 +202,6 @@ class _UserProfileViewState extends State<UserProfileView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         SizedBox(
-
           height: 20.h,
           child: Row(
             children: [
@@ -200,11 +216,10 @@ class _UserProfileViewState extends State<UserProfileView> {
     );
   }
 
-  Widget _buildCustomTextFormField(String label, String value, {bool isPassword = false}) {
+  Widget _buildCustomTextFormField(String label, String value,) {
     return CustomTextFormField(
       hintText: label,
       controller: TextEditingController(text: value),
-      // isObsecureText: isPassword,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return '$label cannot be empty';
