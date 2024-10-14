@@ -6,7 +6,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meem/core/utils/colors.dart';
 import 'package:meem/core/utils/string.dart';
 import 'package:meem/core/utils/constant.dart';
-
 import '../../../Auth/presentation/widgets/custom_bottom.dart';
 import '../../../Auth/presentation/widgets/custom_text_form_field.dart';
 
@@ -27,7 +26,8 @@ class _UserProfileViewState extends State<UserProfileView> {
     "phone": "01068714251",
     "points": 0,
     "credit": 0,
-    "token": "8gw03WCdU59iOCDmrdlKXa71SAKDo94SY0SfATl0f84rxs4C1T7hRkvRwacKUmGAfkFzu2"
+    "token":
+        "8gw03WCdU59iOCDmrdlKXa71SAKDo94SY0SfATl0f84rxs4C1T7hRkvRwacKUmGAfkFzu2"
   };
 
   XFile? _image; // Variable to hold the selected image
@@ -64,7 +64,8 @@ class _UserProfileViewState extends State<UserProfileView> {
 
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
-    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedFile =
+        await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       setState(() {
@@ -80,7 +81,8 @@ class _UserProfileViewState extends State<UserProfileView> {
     }
   }
 
-  Future<void> saveDataLocally({required String key, required String? value}) async {
+  Future<void> saveDataLocally(
+      {required String key, required String? value}) async {
     final box = Hive.box(Constants.tokenBox);
     await box.put(key, value);
   }
@@ -94,12 +96,16 @@ class _UserProfileViewState extends State<UserProfileView> {
         centerTitle: true,
         title: Text(
           "Profile",
-          style: TextStyle(fontWeight: FontWeight.bold, color: ColorsManager.textBlue, fontSize: 20.sp),
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: ColorsManager.textBlue,
+              fontSize: 20.sp),
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Stack( // Use Stack to overlay loading indicator
+        child: Stack(
+          // Use Stack to overlay loading indicator
           children: [
             SingleChildScrollView(
               child: Column(
@@ -115,7 +121,9 @@ class _UserProfileViewState extends State<UserProfileView> {
                             radius: 50.r,
                             backgroundImage: _image != null
                                 ? FileImage(File(_image!.path))
-                                : const AssetImage('assets/images/defaultavatar.jpg') as ImageProvider<Object>,
+                                : const AssetImage(
+                                        'assets/images/defaultavatar.jpg')
+                                    as ImageProvider<Object>,
                           ),
                         ),
                         Positioned(
@@ -125,7 +133,8 @@ class _UserProfileViewState extends State<UserProfileView> {
                             height: 30.r,
                             width: 30.r,
                             decoration: BoxDecoration(
-                              border: Border.all(color: ColorsManager.white, width: 4.w),
+                              border: Border.all(
+                                  color: ColorsManager.white, width: 4.w),
                               shape: BoxShape.circle,
                               color: ColorsManager.mainBlue,
                             ),
@@ -142,11 +151,18 @@ class _UserProfileViewState extends State<UserProfileView> {
                   SizedBox(height: 8.h),
                   Text(
                     userData['name'],
-                    style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold, fontFamily: StringManager.fontFamily, color: ColorsManager.textBlue),
+                    style: TextStyle(
+                        fontSize: 24.sp,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: StringManager.fontFamily,
+                        color: ColorsManager.textBlue),
                   ),
-
                   SizedBox(height: 8.h),
-                  Text(userData['email'], style: const TextStyle(fontFamily: StringManager.fontFamily),),
+                  Text(
+                    userData['email'],
+                    style:
+                        const TextStyle(fontFamily: StringManager.fontFamily),
+                  ),
                   SizedBox(height: 8.h),
                   SizedBox(
                     height: 20.h,
@@ -168,13 +184,14 @@ class _UserProfileViewState extends State<UserProfileView> {
                   _buildCustomTextFormField("Email Address", userData['email']),
                   _buildDetailSection("Phone", userData['phone']),
                   _buildCustomTextFormField("Phone", userData['phone']),
-                  _buildDetailSection("Account Holder's Name", userData['name']),
-                  _buildCustomTextFormField("Account Holder's Name", userData['name']),
-
+                  _buildDetailSection(
+                      "Account Holder's Name", userData['name']),
+                  _buildCustomTextFormField(
+                      "Account Holder's Name", userData['name']),
                   CustomBottom(
                     text: "Save",
                     onPressed: () {
-                      // Save button action, you can call your API here
+                      // Save button action, djshfgkjdshfhkjadshfhdsahfkjldsfdsjhfjhdsgssssgsgsgsgsgsgsgsgsgsgsgsgsgsgsgsgsgskdsb ajfhvdsf
                     },
                   ),
                 ],
@@ -189,12 +206,12 @@ class _UserProfileViewState extends State<UserProfileView> {
 
   Widget _buildLoadingIndicator() {
     return _isLoading
-        ? Center(
-      child: CircularProgressIndicator(
-        color: Colors.blue, // Set the loading indicator color to blue
-      ),
-    )
-        : SizedBox.shrink(); // Return an empty widget if not loading
+        ? const Center(
+            child: CircularProgressIndicator(
+              color: Colors.blue,
+            ),
+          )
+        : const SizedBox.shrink();
   }
 
   Widget _buildDetailSection(String title, String value) {
@@ -207,7 +224,11 @@ class _UserProfileViewState extends State<UserProfileView> {
             children: [
               Text(
                 title,
-                style: TextStyle(fontSize: 12.sp, color: ColorsManager.textBlue, fontFamily: StringManager.fontFamily),
+                style: TextStyle(
+                    fontSize: 14.sp,
+                    color: ColorsManager.textBlue,
+                    fontFamily: StringManager.fontFamily,
+                    fontWeight: FontWeight.w500),
               ),
             ],
           ),
@@ -216,7 +237,10 @@ class _UserProfileViewState extends State<UserProfileView> {
     );
   }
 
-  Widget _buildCustomTextFormField(String label, String value,) {
+  Widget _buildCustomTextFormField(
+    String label,
+    String value,
+  ) {
     return CustomTextFormField(
       hintText: label,
       controller: TextEditingController(text: value),
