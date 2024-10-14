@@ -6,6 +6,15 @@ class OnboardingView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
-    return Scaffold();
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset('assets/images/bannar.png'),
+          ],
+        ),
+      ),
+    );
   }
 }
