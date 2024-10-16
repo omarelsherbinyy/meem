@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:meem/core/utils/string.dart';
+
+import '../../../../core/utils/colors.dart';
 
 class SearchViewAppBar extends StatelessWidget {
   const SearchViewAppBar({
@@ -15,8 +18,10 @@ class SearchViewAppBar extends StatelessWidget {
       title: Text(
         'Search',
         style: TextStyle(
+          fontFamily: StringManager.fontFamily,
+          color: ColorsManager.textBlue,
           fontWeight: FontWeight.bold,
-          fontSize: 24.sp,
+          fontSize: 22.sp,
         ),
       ),
     );

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meem/config/router/routes.dart';
+import 'package:meem/core/utils/colors.dart';
+import 'package:meem/core/utils/string.dart';
 import 'package:meem/features/Products/presentation/cubits/category_cubit/category_cubit.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -44,9 +46,12 @@ class CategoriesList extends StatelessWidget {
                           SizedBox(
                               height: 8.h), // SizedBox with responsive height
                           Text(
-                            state.categories[index].name!,
+                            state.categories[index].name!.toUpperCase(),
                             style: TextStyle(
-                              fontSize: 14.sp,
+                              fontFamily: StringManager.fontFamily,
+                              color: ColorsManager.textBlue,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12.sp,
                             ),
                           ),
                         ],

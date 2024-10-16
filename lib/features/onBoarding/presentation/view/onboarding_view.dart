@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
@@ -14,20 +16,17 @@ class _OnboardingViewState extends State<OnboardingView> {
   final List<Map<String, String>> onboardingData = [
     {
       "title": "Choose Products",
-      "subtitle":
-          "Discover bold, trendsetting products. Swipe, choose, and elevate your style with every click. Your perfect picks await.",
+      "subtitle": "Discover bold, trendsetting products. Swipe, choose, and elevate your style with every click. Your perfect picks await.",
       "image": "assets/images/splash1.png"
     },
     {
       "title": "Make Payment",
-      "subtitle":
-          "Secure your style with ease. Fast, simple, and safe payments for a seamless shopping experience. Own it now.",
+      "subtitle": "Secure your style with ease. Fast, simple, and safe payments for a seamless shopping experience. Own it now.",
       "image": "assets/images/splash2.png"
     },
     {
       "title": "Get Your Order",
-      "subtitle":
-          "Your order is on the way! Track, receive, and unwrap your style. Get ready to elevate your look.",
+      "subtitle": "Your order is on the way! Track, receive, and unwrap your style. Get ready to elevate your look.",
       "image": "assets/images/splash3.png"
     }
   ];
@@ -51,13 +50,12 @@ class _OnboardingViewState extends State<OnboardingView> {
   }
 
   void _onSkipPressed() {
-    Navigator.of(context).pushReplacementNamed('/home');
+    Navigator.of(context).pushReplacementNamed('/SignUp');
   }
 
   @override
   Widget build(BuildContext context) {
-    const Color darkBlueColor =
-        Color(0xFF133B5C); // Blue color for the "Next" button
+    const Color darkBlueColor = Color(0xFF133B5C);
 
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
@@ -65,8 +63,7 @@ class _OnboardingViewState extends State<OnboardingView> {
         child: Column(
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.0.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -84,12 +81,12 @@ class _OnboardingViewState extends State<OnboardingView> {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          const TextSpan(
+                          TextSpan(
                             text: "/3",
                             style: TextStyle(
                               color: Color(0xFFA0A0A1),
                               fontFamily: 'Montserrat',
-                              fontSize: 18,
+                              fontSize: 18.sp,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -137,17 +134,26 @@ class _OnboardingViewState extends State<OnboardingView> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(
-                      height: 120,
+                    SmoothPageIndicator(
+                      controller: _pageController,
+                      count: onboardingData.length,
+                      effect: ExpandingDotsEffect(
+                        activeDotColor: darkBlueColor,
+                        dotColor: Colors.grey.shade300,
+                        dotHeight: 10.0,
+                        dotWidth: 10.0,
+                        expansionFactor: 2,
+                        spacing: 5.0,
+                      ),
                     ),
+                    const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         if (_currentPage == 0)
-                          const SizedBox(
-                            width: 50,
-                          )
+                          const SizedBox(width: 50)
                         else
                           TextButton(
                             onPressed: _onPrevPressed,
@@ -161,13 +167,6 @@ class _OnboardingViewState extends State<OnboardingView> {
                               ),
                             ),
                           ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(
-                            onboardingData.length,
-                            (index) => buildDot(index: index),
-                          ),
-                        ),
                         TextButton(
                           onPressed: _onNextPressed,
                           child: Text(
@@ -190,22 +189,6 @@ class _OnboardingViewState extends State<OnboardingView> {
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget buildDot({required int index}) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      height: 10,
-      width: _currentPage == index ? 20 : 10,
-      margin: const EdgeInsets.only(right: 5),
-      decoration: BoxDecoration(
-        color: _currentPage == index
-            ? const Color(0xFF133B5C)
-            : Colors.grey.shade300,
-        // Dot color
-        borderRadius: BorderRadius.circular(5),
       ),
     );
   }
