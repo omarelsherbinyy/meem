@@ -15,19 +15,19 @@ class _OnboardingViewState extends State<OnboardingView> {
     {
       "title": "Choose Products",
       "subtitle":
-      "Discover bold, trendsetting products. Swipe, choose, and elevate your style with every click. Your perfect picks await.",
+          "Discover bold, trendsetting products. Swipe, choose, and elevate your style with every click. Your perfect picks await.",
       "image": "assets/images/splash1.png"
     },
     {
       "title": "Make Payment",
       "subtitle":
-      "Secure your style with ease. Fast, simple, and safe payments for a seamless shopping experience. Own it now.",
+          "Secure your style with ease. Fast, simple, and safe payments for a seamless shopping experience. Own it now.",
       "image": "assets/images/splash2.png"
     },
     {
       "title": "Get Your Order",
       "subtitle":
-      "Your order is on the way! Track, receive, and unwrap your style. Get ready to elevate your look.",
+          "Your order is on the way! Track, receive, and unwrap your style. Get ready to elevate your look.",
       "image": "assets/images/splash3.png"
     }
   ];
@@ -43,6 +43,13 @@ class _OnboardingViewState extends State<OnboardingView> {
     }
   }
 
+  void _onPrevPressed() {
+    _pageController.previousPage(
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
   void _onSkipPressed() {
     Navigator.of(context).pushReplacementNamed('/home');
   }
@@ -50,7 +57,7 @@ class _OnboardingViewState extends State<OnboardingView> {
   @override
   Widget build(BuildContext context) {
     const Color darkBlueColor =
-    Color(0xFF133B5C); // Blue color for the "Next" button
+        Color(0xFF133B5C); // Blue color for the "Next" button
 
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
@@ -59,7 +66,7 @@ class _OnboardingViewState extends State<OnboardingView> {
           children: [
             Padding(
               padding:
-              const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -137,21 +144,37 @@ class _OnboardingViewState extends State<OnboardingView> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const SizedBox(
-                          width: 50,
-                        ),
+                        if (_currentPage == 0)
+                          const SizedBox(
+                            width: 50,
+                          )
+                        else
+                          TextButton(
+                            onPressed: _onPrevPressed,
+                            child: const Text(
+                              "Prev",
+                              style: TextStyle(
+                                color: Color(0xFFC4C4C4),
+                                fontFamily: 'Montserrat',
+                                fontSize: 18,
+                                fontWeight: FontWeight.w400,
+                              ),
+                            ),
+                          ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(
                             onboardingData.length,
-                                (index) => buildDot(index: index),
+                            (index) => buildDot(index: index),
                           ),
                         ),
                         TextButton(
                           onPressed: _onNextPressed,
-                          child: const Text(
-                            "Next",
-                            style: TextStyle(
+                          child: Text(
+                            _currentPage < onboardingData.length - 1
+                                ? "Next"
+                                : "Get Started",
+                            style: const TextStyle(
                               color: Color(0xFF38B6FF),
                               fontFamily: 'Montserrat',
                               fontSize: 18,
