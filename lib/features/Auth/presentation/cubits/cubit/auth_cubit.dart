@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meem/core/utils/models/auth_model/auth_model.dart';
@@ -61,5 +63,4 @@ class AuthCubit extends Cubit<AuthState> {
       ),
     );
   }
-
 }

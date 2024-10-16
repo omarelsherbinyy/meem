@@ -1,5 +1,4 @@
 class Routes {
-
   static const String onboarding = '/On Boarding';
   static const String logIn = '/Log in';
   static const String logOut = '/log Out';
@@ -10,8 +9,7 @@ class Routes {
   static const String signUp = '/SignUp';
   static const String forgotPassword = '/ForgotPassword';
   static const String onboardingLoginSignUp = '/OnboardingLoginSignUp';
-  static const String productDetailsPage='/ProductDetailsPage';
-  static const String checkoutScreen='/CheckoutScreen';
-
-
+  static const String productDetailsPage = '/ProductDetailsPage';
+  static const String checkoutScreen = '/CheckoutScreen';
+  static const String categoriesView = '/categoriesView';
 }

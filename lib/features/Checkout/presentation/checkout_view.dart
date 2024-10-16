@@ -22,7 +22,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -34,7 +34,6 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               SizedBox(height: 20.h),
               _buildShoppingList(),
               SizedBox(height: 20.h),
@@ -50,14 +49,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
     );
   }
 
-
   Widget _buildShoppingList() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildShoppingItem(
           imageUrl:
-          'https://i.pinimg.com/736x/de/58/da/de58dacb099924318d53790d2e177db3.jpg',
+              'https://i.pinimg.com/736x/de/58/da/de58dacb099924318d53790d2e177db3.jpg',
           title: 'Women\'s Casual Wear',
           variations: ['Black', 'Red'],
           price: 34.00,
@@ -67,7 +65,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
         SizedBox(height: 16.h),
         _buildShoppingItem(
           imageUrl:
-          'https://m.media-amazon.com/images/I/61DZCttaKfL._AC_SY741_.jpg',
+              'https://m.media-amazon.com/images/I/61DZCttaKfL._AC_SY741_.jpg',
           title: 'Men\'s Jacket',
           variations: ['Green', 'Grey'],
           price: 45.00,
@@ -229,7 +227,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             title,
             style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
           ),
-          Spacer(),
+          const Spacer(),
           Text(
             number,
             style: TextStyle(fontSize: 14.sp),

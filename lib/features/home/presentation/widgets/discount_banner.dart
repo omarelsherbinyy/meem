@@ -1,11 +1,10 @@
-
 import 'package:flutter/material.dart';
 import 'package:meem/core/utils/colors.dart';
 
 class DiscountBanner extends StatelessWidget {
   const DiscountBanner({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class DiscountBanner extends StatelessWidget {
         vertical: 16,
       ),
       decoration: BoxDecoration(
-        color:  ColorsManager.lightPink,
+        color: ColorsManager.lightPink,
         borderRadius: BorderRadius.circular(20),
       ),
       child: const Text.rich(

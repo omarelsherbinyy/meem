@@ -24,6 +24,7 @@ class EmailAndPassword extends StatefulWidget {
   });
 
   @override
+  // ignore: library_private_types_in_public_api
   _EmailAndPasswordState createState() => _EmailAndPasswordState();
 }
 
@@ -31,7 +32,6 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
   bool isObscureText = true; // State variable to toggle password visibility
   bool isObscureConfirmText =
       true; // State variable to toggle confirm password visibility
-  
 
   String? _emailValidator(String? value) {
     if (value == null || value.isEmpty) {
@@ -108,8 +108,7 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
               ),
               onPressed: () {
                 setState(() {
-                  isObscureText =
-                      !isObscureText; // Toggle password visibility
+                  isObscureText = !isObscureText; // Toggle password visibility
                 });
               },
             ),

@@ -6,21 +6,21 @@ import 'package:meem/core/utils/string.dart';
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField(
       {super.key,
-        this.contentPadding,
-        this.focusedBorder,
-        this.enableBorder,
-        this.errorBorder,
-        this.focusedErrorBorder,
-        this.inputTextStyle,
-        required this.hintText,
-        this.onSaved,
-        this.onChanged,
-        this.isObscureText,
-        this.suffixIcon,
-        this.prefixIcon,
-        this.backgroundColor,
-        required this.validator,
-        this.controller});
+      this.contentPadding,
+      this.focusedBorder,
+      this.enableBorder,
+      this.errorBorder,
+      this.focusedErrorBorder,
+      this.inputTextStyle,
+      required this.hintText,
+      this.onSaved,
+      this.onChanged,
+      this.isObscureText,
+      this.suffixIcon,
+      this.prefixIcon,
+      this.backgroundColor,
+      required this.validator,
+      this.controller});
 
   final EdgeInsetsDirectional? contentPadding;
   final InputBorder? focusedBorder;
@@ -62,7 +62,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           contentPadding: widget.contentPadding ??
               EdgeInsets.symmetric(
                 horizontal: 16.w, // Consistent horizontal padding
-                vertical: 14.h,   // Consistent vertical padding
+                vertical: 14.h, // Consistent vertical padding
               ),
           suffixIcon: widget.suffixIcon,
           prefixIcon: widget.prefixIcon,
@@ -74,9 +74,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             fontWeight: FontWeight.normal,
           ),
           enabledBorder: widget.enableBorder ?? customBorder(),
-          focusedBorder: widget.focusedBorder ?? customBorder(ColorsManager.lightPink),
+          focusedBorder:
+              widget.focusedBorder ?? customBorder(ColorsManager.lightPink),
           errorBorder: widget.errorBorder ?? customBorder(Colors.red),
-          focusedErrorBorder: widget.focusedErrorBorder ?? customBorder(Colors.red),
+          focusedErrorBorder:
+              widget.focusedErrorBorder ?? customBorder(Colors.red),
           errorStyle: TextStyle(fontSize: 12.sp),
         ),
         validator: (value) => widget.validator(value),

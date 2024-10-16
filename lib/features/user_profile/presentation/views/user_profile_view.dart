@@ -9,7 +9,7 @@ import '../../../Auth/presentation/widgets/custom_bottom.dart';
 import '../../../Auth/presentation/widgets/custom_text_form_field.dart';
 
 class UserProfileView extends StatefulWidget {
-  const UserProfileView({Key? key}) : super(key: key);
+  const UserProfileView({super.key});
 
   @override
   _UserProfileViewState createState() => _UserProfileViewState();
@@ -22,11 +22,12 @@ class _UserProfileViewState extends State<UserProfileView> {
     "name": "Mahmoud Hatem",
     "email": "Mahmoudhatems@gmail.com",
     "phone": "01068714251",
-    "image":"https://student.valuxapps.com/storage/uploads/users/FTA2SQvNqY_1727862495.jpeg",
+    "image":
+        "https://student.valuxapps.com/storage/uploads/users/FTA2SQvNqY_1727862495.jpeg",
     "points": 0,
     "credit": 0,
-    "token":"8gw03WCdU59iOCDmrdlKXa71SAKDo94SY0SfATl0f84rxs4C1T7hRkvRwacKUmGAfkFzu2"
-
+    "token":
+        "8gw03WCdU59iOCDmrdlKXa71SAKDo94SY0SfATl0f84rxs4C1T7hRkvRwacKUmGAfkFzu2"
   };
 
   XFile? _image; // Variable to hold the selected image
@@ -35,7 +36,7 @@ class _UserProfileViewState extends State<UserProfileView> {
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
     final XFile? pickedFile =
-    await picker.pickImage(source: ImageSource.gallery);
+        await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       setState(() {
@@ -50,8 +51,15 @@ class _UserProfileViewState extends State<UserProfileView> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
-        title:  Text("Profile",style: TextStyle(fontWeight: FontWeight.bold,color: ColorsManager.textBlue,fontSize: 20.sp),),
+        title: Text(
+          "Profile",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 24.sp,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -67,7 +75,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                       backgroundImage: _image != null
                           ? FileImage(File(_image!.path))
                           : NetworkImage(userData['image'])
-                      as ImageProvider<Object>, // Show default image
+                              as ImageProvider<Object>, // Show default image
                     ),
                     Positioned(
                       bottom: 0,
@@ -77,8 +85,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                         width: 30.r,
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: ColorsManager.white,width:4.w
-                          ),
+                              color: ColorsManager.white, width: 4.w),
 
                           shape: BoxShape.circle,
                           color: Colors.blue, // Blue background
@@ -96,8 +103,7 @@ class _UserProfileViewState extends State<UserProfileView> {
               SizedBox(height: 16.h),
               Text(
                 userData['name'],
-                style:
-                TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 24.sp, fontWeight: FontWeight.bold),
               ),
               SizedBox(height: 8.h),
               Text(userData['email']),
@@ -122,8 +128,7 @@ class _UserProfileViewState extends State<UserProfileView> {
               _buildCustomTextFormField("Email Address", userData['email']),
               _buildDetailSection("Phone", userData['phone']),
               _buildCustomTextFormField("Phone", userData['phone']),
-              _buildDetailSection(
-                  "Account Holder's Name", userData['name']),
+              _buildDetailSection("Account Holder's Name", userData['name']),
               _buildCustomTextFormField(
                   "Account Holder's Name", userData['name']),
               SizedBox(height: 16.h),
@@ -152,7 +157,7 @@ class _UserProfileViewState extends State<UserProfileView> {
               Text(
                 title,
                 style:
-                TextStyle(fontSize: 12.sp, color: ColorsManager.textBlue),
+                    TextStyle(fontSize: 12.sp, color: ColorsManager.textBlue),
               )
             ],
           ),
@@ -168,7 +173,7 @@ class _UserProfileViewState extends State<UserProfileView> {
       child: CustomTextFormField(
         hintText: label,
         controller: TextEditingController(text: value),
-   //    isObsecureText: isPassword,
+        //    isObsecureText: isPassword,
         validator: (value) {
           if (value == null || value.isEmpty) {
             return '$label cannot be empty';
