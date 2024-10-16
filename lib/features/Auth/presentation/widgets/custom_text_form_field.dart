@@ -52,6 +52,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       width: width,
       height: height,
       child: TextFormField(
+        cursorColor: ColorsManager.mainBlue,
         controller: widget.controller,
         onChanged: widget.onChanged,
         onSaved: widget.onSaved,
