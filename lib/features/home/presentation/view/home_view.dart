@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:meem/core/utils/di/di.dart';
+import 'package:meem/features/Search/presentation/cubit/get_searched_product_cubit/get_searched_product_cubit.dart';
+import 'package:meem/features/Search/presentation/pages/search_view.dart';
+import 'package:meem/features/cart/presentation/views/cart_view.dart';
+import 'package:meem/features/Products/presentation/views/product_view.dart';
+import 'package:meem/features/home/data/repos/home_repo.dart';
+import 'package:meem/features/user_profile/presentation/views/user_profile_view.dart';
 import '../../../../core/utils/colors.dart';
-import '../../../../core/utils/string.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import '../../widgets/banners.dart';
-import '../../widgets/categories_list.dart';
-import '../../widgets/deals_of_day.dart';
-import '../../widgets/populer_products_state.dart';
-
-import '../../widgets/recently_added_products.dart';
-import '../../widgets/search_bar.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -19,6 +19,18 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  List<Widget> screens = [
+    
+    
+    const ProductsView(),
+    BlocProvider(
+      create: (context) =>
+          GetSearchedProductCubit(homeRepo: git.get<HomeRepoImpl>()),
+      child: SearchView(),
+    ),
+    const CartView(),
+    const UserProfileView()
+  ];
   int _selectedIndex = 0;
 
   @override
@@ -26,64 +38,7 @@ class _HomeViewState extends State<HomeView> {
     return Scaffold(
       backgroundColor: ColorsManager.white,
       body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              floating: true,
-              pinned: false,
-              backgroundColor: Colors.white,
-              elevation: 0,
-              leading: const Icon(Icons.menu_outlined, color: Colors.black),
-              title: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset('assets/images/cart logo.png', height: 40.h),
-                  Text(
-                    "meem",
-                    style: TextStyle(
-                      fontSize: 26.sp,
-                      fontFamily: StringManager.fontFamily,
-                      fontWeight: FontWeight.bold,
-                      color: ColorsManager.mainBlue,
-                    ),
-                  ),
-                ],
-              ),
-              actions: [
-                IconButton(
-                  icon:
-                      const Icon(Icons.account_circle_outlined, color: Colors.black),
-                  onPressed: () {},
-                ),
-              ],
-            ),
-            SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  const CustomSearchBar(),
-                  Padding(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-                    child: Text(
-                      "All Featured",
-                      style: TextStyle(
-                        fontSize: 18.sp,
-                        fontFamily: StringManager.fontFamily,
-                        fontWeight: FontWeight.w600,
-                        color: ColorsManager.textBlue,
-                      ),
-                    ),
-                  ),
-                  CategoriesList(categories: categories),
-                  buildBannerSlider(),
-                  const PopularProducts(),
-                  const DealsOfDay(),
-                  const RecentlyAddedProducts()
-                ],
-              ),
-            ),
-          ],
-        ),
+        child: screens[_selectedIndex],
       ),
       bottomNavigationBar: Container(
         color: Colors.white,

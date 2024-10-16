@@ -29,7 +29,7 @@ class AuthRepoImpl implements AuthRepo {
     try {
       AuthModel authModel =
           await authRemoteDataSource.login(email: email, password: password);
-   
+
       return right(authModel);
     } on DioException catch (e) {
       return left(ServerFailure.fromDioException(e));

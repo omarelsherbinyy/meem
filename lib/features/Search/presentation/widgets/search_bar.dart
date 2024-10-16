@@ -1,15 +1,17 @@
-
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/utils/colors.dart';
-import '../../../core/utils/string.dart';
+import '../../../../core/utils/colors.dart';
+import '../../../../core/utils/string.dart';
 
+// ignore: must_be_immutable
 class CustomSearchBar extends StatelessWidget {
-  const CustomSearchBar({
+  void Function(String)? onSubmit;
+  TextEditingController? controller;
+  CustomSearchBar({
     super.key,
+    this.onSubmit,
+    this.controller,
   });
 
   @override
@@ -17,7 +19,7 @@ class CustomSearchBar extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8),
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16.sp, vertical: 8.sp),
+        margin: EdgeInsets.symmetric(horizontal: 3.sp, vertical: 8.sp),
         padding: EdgeInsets.symmetric(horizontal: 12.sp),
         decoration: BoxDecoration(
           boxShadow: [
@@ -33,24 +35,25 @@ class CustomSearchBar extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(Icons.search_outlined, color: ColorsManager.lightGray),
+            const Icon(Icons.search_outlined, color: ColorsManager.lightGray),
             Expanded(
               child: TextField(
+                controller: controller,
+                onSubmitted: onSubmit,
                 style: TextStyle(
                   fontSize: 15.sp,
                   fontFamily: StringManager.fontFamily,
                   fontWeight: FontWeight.normal,
                   color: ColorsManager.lightGray,
                 ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     hintText: ' Search any product', border: InputBorder.none),
               ),
             ),
-            Icon(Icons.mic_none_rounded, color: ColorsManager.lightGray),
+            const Icon(Icons.mic_none_rounded, color: ColorsManager.lightGray),
           ],
         ),
       ),
     );
   }
 }
-

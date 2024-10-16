@@ -93,6 +93,7 @@ class _UserProfileViewState extends State<UserProfileView> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         title: Text(
           "Profile",
@@ -100,6 +101,7 @@ class _UserProfileViewState extends State<UserProfileView> {
               fontWeight: FontWeight.bold,
               color: ColorsManager.textBlue,
               fontSize: 20.sp),
+
         ),
       ),
       body: Padding(
@@ -125,6 +127,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                                         'assets/images/defaultavatar.jpg')
                                     as ImageProvider<Object>,
                           ),
+
                         ),
                         Positioned(
                           bottom: 0,
@@ -195,6 +198,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                     },
                   ),
                 ],
+
               ),
             ),
             _buildLoadingIndicator(), // Show loading indicator
@@ -250,6 +254,7 @@ class _UserProfileViewState extends State<UserProfileView> {
         }
         return null;
       },
+
     );
   }
 }

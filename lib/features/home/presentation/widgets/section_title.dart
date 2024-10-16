@@ -1,16 +1,13 @@
-
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/utils/colors.dart';
+import '../../../../core/utils/colors.dart';
 
 class SectionTitle extends StatelessWidget {
   const SectionTitle({
-    Key? key,
+    super.key,
     required this.title,
     required this.press,
-  }) : super(key: key);
+  });
 
   final String title;
   final GestureTapCallback press;
@@ -23,10 +20,9 @@ class SectionTitle extends StatelessWidget {
         Text(
           title,
           style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: ColorsManager.textBlue
-          ),
+              fontSize: 16,
+              fontWeight: FontWeight.w600,
+              color: ColorsManager.textBlue),
         ),
         TextButton(
           onPressed: press,

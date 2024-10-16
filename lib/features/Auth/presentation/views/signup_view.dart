@@ -87,16 +87,16 @@ class SignUpView extends StatelessWidget {
                     emailController: authCubit.registerEmailController,
                     formKeyController: authCubit.registerFormKeyController,
                     autovalidateModeController:
-                    authCubit.registerAutovalidateModeController,
+                        authCubit.registerAutovalidateModeController,
                     passwordController: authCubit.registerPasswordController,
                   ),
                   SizedBox(height: 10.h),
 
                   // Sign Up button
                   BlocConsumer<AuthCubit, AuthState>(
-                    listener:  (context, state) {
+                    listener: (context, state) {
                       if (state is RegisterSuccessState) {
-                        if (state.authModel.data!=null){
+                        if (state.authModel.data != null) {
                           context.showAwesomeSnackBar(
                             title: 'Success!',
                             message: 'You have logged in successfully.',
@@ -105,9 +105,7 @@ class SignUpView extends StatelessWidget {
                           if (state.authModel.data?.token != null) {
                             navigateToView(context, route: Routes.home);
                           }
-
-                        }
-                        else {
+                        } else {
                           context.showAwesomeSnackBar(
                             title: 'Error!',
                             message: state.authModel.message!,
@@ -136,16 +134,20 @@ class SignUpView extends StatelessWidget {
                         return CustomBottom(
                           text: "Sign Up",
                           onPressed: () {
-                            if (authCubit.registerFormKeyController.currentState!.validate()) {
+                            if (authCubit
+                                .registerFormKeyController.currentState!
+                                .validate()) {
                               authCubit.register(
                                 context,
                                 email: authCubit.registerEmailController.text,
-                                password: authCubit.registerPasswordController.text,
+                                password:
+                                    authCubit.registerPasswordController.text,
                                 name: authCubit.registerNameController.text,
                                 phone: authCubit.registerPhoneController.text,
                               );
                             } else {
-                              authCubit.loginAutovalidateModeController = AutovalidateMode.always;
+                              authCubit.loginAutovalidateModeController =
+                                  AutovalidateMode.always;
                             }
                           },
                         );

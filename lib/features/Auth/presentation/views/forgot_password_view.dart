@@ -6,7 +6,7 @@ import 'package:meem/features/Auth/presentation/widgets/custom_bottom.dart';
 import '../widgets/custom_text_form_field.dart';
 
 class ForgotPasswordView extends StatelessWidget {
-   ForgotPasswordView({super.key});
+  ForgotPasswordView({super.key});
 
   // Declare the email controller
   final TextEditingController _emailController = TextEditingController();
@@ -35,7 +35,8 @@ class ForgotPasswordView extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start, // Align title to the left
+                crossAxisAlignment:
+                    CrossAxisAlignment.start, // Align title to the left
                 children: [
                   SizedBox(height: 10.h),
 
@@ -65,13 +66,20 @@ class ForgotPasswordView extends StatelessWidget {
 
                   SizedBox(height: 35.h),
                   RichText(
-                    text:const TextSpan(
+                    text: const TextSpan(
                       text: " *",
-                      style:  TextStyle(color: Colors.red, fontSize: 14, fontFamily: StringManager.fontFamily),
+                      style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 14,
+                          fontFamily: StringManager.fontFamily),
                       children: [
                         TextSpan(
-                          text: " We will send you a message to set or reset\n  your new password",
-                          style:  TextStyle(color: ColorsManager.gray, fontFamily: StringManager.fontFamily, fontWeight: FontWeight.normal),
+                          text:
+                              " We will send you a message to set or reset\n  your new password",
+                          style: TextStyle(
+                              color: ColorsManager.gray,
+                              fontFamily: StringManager.fontFamily,
+                              fontWeight: FontWeight.normal),
                         ),
                       ],
                     ),

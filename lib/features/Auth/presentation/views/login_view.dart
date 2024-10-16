@@ -52,7 +52,8 @@ class _LoginViewState extends State<LoginView> {
                   // Email and Password Fields
                   EmailAndPassword(
                     formKeyController: authCubit.loginFormKeyController,
-                    autovalidateModeController: authCubit.loginAutovalidateModeController,
+                    autovalidateModeController:
+                        authCubit.loginAutovalidateModeController,
                     emailController: authCubit.loginEmailController,
                     passwordController: authCubit.loginPasswordController,
                   ),
@@ -80,9 +81,9 @@ class _LoginViewState extends State<LoginView> {
 
                   // Login button
                   BlocConsumer<AuthCubit, AuthState>(
-                    listener:  (context, state) {
+                    listener: (context, state) {
                       if (state is LoginSuccessState) {
-                        if (state.authModel.data!=null){
+                        if (state.authModel.data != null) {
                           context.showAwesomeSnackBar(
                             title: 'Success!',
                             message: 'You have logged in successfully.',
@@ -91,14 +92,12 @@ class _LoginViewState extends State<LoginView> {
                           if (state.authModel.data?.token != null) {
                             navigateToView(context, route: Routes.home);
                           }
-
-                        }
-                        else {
+                        } else {
                           context.showAwesomeSnackBar(
-                          title: 'Error!',
-                          message: state.authModel.message!,
-                          contentType: ContentType.failure,
-                        );
+                            title: 'Error!',
+                            message: state.authModel.message!,
+                            contentType: ContentType.failure,
+                          );
                         }
                       } else if (state is LoginFailureState) {
                         context.showAwesomeSnackBar(
@@ -113,20 +112,25 @@ class _LoginViewState extends State<LoginView> {
                         return SizedBox(
                           height: 55.h,
                           child: const Center(
-                            child: CircularProgressIndicator(color: ColorsManager.mainBlue,),
+                            child: CircularProgressIndicator(
+                              color: ColorsManager.mainBlue,
+                            ),
                           ),
                         );
                       } else {
                         return CustomBottom(
                           text: "Login",
                           onPressed: () {
-                            if (authCubit.loginFormKeyController.currentState!.validate()) {
+                            if (authCubit.loginFormKeyController.currentState!
+                                .validate()) {
                               authCubit.login(
                                 email: authCubit.loginEmailController.text,
-                                password: authCubit.loginPasswordController.text,
+                                password:
+                                    authCubit.loginPasswordController.text,
                               );
                             } else {
-                              authCubit.loginAutovalidateModeController = AutovalidateMode.always;
+                              authCubit.loginAutovalidateModeController =
+                                  AutovalidateMode.always;
                             }
                           },
                         );

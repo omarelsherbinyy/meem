@@ -6,17 +6,17 @@ class DioConsumer implements ApiConsumer {
   final Dio dio;
   DioConsumer({
     required this.dio,
-    // String? token,
+    String? token,
     String langue = "en",
   }) {
     Map<String, dynamic> headers = {
       ApiKeys.language: langue,
     };
-    // if (token != null) {
-    //   headers.addAll({
-    //     ApiKeys.authorization: token,
-    //   });
-    // }
+    if (token != null) {
+      headers.addAll({
+        ApiKeys.authorization: token,
+      });
+    }
     dio
       ..options.headers = headers
       ..options.baseUrl = EndPoints.baseUrl

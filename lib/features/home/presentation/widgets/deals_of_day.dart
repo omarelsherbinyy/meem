@@ -1,12 +1,8 @@
-
-
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '../../../core/utils/colors.dart';
-import '../../../core/utils/string.dart';
+import '../../../../core/utils/colors.dart';
+import '../../../../core/utils/string.dart';
 
 class DealsOfDay extends StatelessWidget {
   const DealsOfDay({
@@ -33,6 +29,7 @@ class DealsOfDay extends StatelessWidget {
           ),
           subtitle: Row(
             children: [
+              // ignore: prefer_const_constructors
               Icon(Icons.timer_outlined, color: ColorsManager.white),
               SizedBox(width: 4.sp),
               // Space between icon and text
