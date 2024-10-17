@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 import 'package:meem/config/router/app_router.dart';
 import 'package:meem/config/router/routes.dart';
 import 'package:meem/core/utils/di/di.dart';
@@ -13,6 +14,7 @@ import 'package:meem/features/cart/data/repos/cart_repo.dart';
 import 'package:meem/features/cart/presentation/cubits/cubit/cart_cubit.dart';
 import 'package:meem/features/home/data/repos/home_repo.dart';
 
+import 'core/utils/constant.dart';
 class MeemApp extends StatelessWidget {
   const MeemApp({super.key});
 
@@ -52,10 +54,10 @@ class MeemApp extends StatelessWidget {
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Meem',
-            initialRoute:
-                Hive.box(Constants.tokenBox).get(Constants.tokenKey) == null
-                    ? Routes.onboardingLoginSignUp
-                    : Routes.home,
+             initialRoute:
+               Hive.box(Constants.tokenBox).get(Constants.tokenKey) == null
+                    ? Routes.onboarding
+                   : Routes.home,
 
             onGenerateRoute: AppRouter.onGenerateRoute,
           ),

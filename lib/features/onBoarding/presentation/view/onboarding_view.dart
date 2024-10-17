@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:meem/core/utils/colors.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+
+import '../../../../core/utils/string.dart';
 
 class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
@@ -14,21 +20,18 @@ class _OnboardingViewState extends State<OnboardingView> {
   final List<Map<String, String>> onboardingData = [
     {
       "title": "Choose Products",
-      "subtitle":
-          "Discover bold, trendsetting products. Swipe, choose, and elevate your style with every click. Your perfect picks await.",
-      "image": "assets/images/splash1.png"
+      "subtitle": "Discover bold, trendsetting products. Swipe, choose, and elevate your style with every click. Your perfect picks await.",
+      "image": "assets/images/firstSplash.svg"
     },
     {
       "title": "Make Payment",
-      "subtitle":
-          "Secure your style with ease. Fast, simple, and safe payments for a seamless shopping experience. Own it now.",
-      "image": "assets/images/splash2.png"
+      "subtitle": "Secure your style with ease. Fast, simple, and safe payments for a seamless shopping experience. Own it now.",
+      "image": "assets/images/secoandSplash.svg"
     },
     {
       "title": "Get Your Order",
-      "subtitle":
-          "Your order is on the way! Track, receive, and unwrap your style. Get ready to elevate your look.",
-      "image": "assets/images/splash3.png"
+      "subtitle": "Your order is on the way! Track, receive, and unwrap your style. Get ready to elevate your look.",
+      "image": "assets/images/thirdSplash.svg"
     }
   ];
 
@@ -39,7 +42,7 @@ class _OnboardingViewState extends State<OnboardingView> {
         curve: Curves.easeInOut,
       );
     } else {
-      Navigator.of(context).pushReplacementNamed('/home');
+      Navigator.of(context).pushReplacementNamed('/SignUp');
     }
   }
 
@@ -51,22 +54,18 @@ class _OnboardingViewState extends State<OnboardingView> {
   }
 
   void _onSkipPressed() {
-    Navigator.of(context).pushReplacementNamed('/home');
+    Navigator.of(context).pushReplacementNamed('/SignUp');
   }
 
   @override
   Widget build(BuildContext context) {
-    const Color darkBlueColor =
-        Color(0xFF133B5C); // Blue color for the "Next" button
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFFFF),
       body: SafeArea(
         child: Column(
           children: [
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.0.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -77,19 +76,19 @@ class _OnboardingViewState extends State<OnboardingView> {
                         children: [
                           TextSpan(
                             text: (_currentPage + 1).toString(),
-                            style: const TextStyle(
-                              color: darkBlueColor,
-                              fontFamily: 'Montserrat',
-                              fontSize: 18,
+                            style:  TextStyle(
+                              color: ColorsManager.textBlue,
+                              fontFamily: StringManager.fontFamily,
+                              fontSize: 18.sp,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          const TextSpan(
+                          TextSpan(
                             text: "/3",
                             style: TextStyle(
-                              color: Color(0xFFA0A0A1),
-                              fontFamily: 'Montserrat',
-                              fontSize: 18,
+                              color:ColorsManager.lightGray,
+                              fontFamily: StringManager.fontFamily,
+                              fontSize: 18.sp,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -101,12 +100,12 @@ class _OnboardingViewState extends State<OnboardingView> {
                     alignment: Alignment.topLeft,
                     child: TextButton(
                       onPressed: _onSkipPressed,
-                      child: const Text(
+                      child:  Text(
                         "Skip",
                         style: TextStyle(
-                          color: darkBlueColor,
-                          fontFamily: 'Montserrat',
-                          fontSize: 18,
+                          color: ColorsManager.textBlue,
+                          fontFamily: StringManager.fontFamily,
+                          fontSize: 18.sp,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -137,47 +136,49 @@ class _OnboardingViewState extends State<OnboardingView> {
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const SizedBox(
-                      height: 120,
+                    SmoothPageIndicator(
+                      controller: _pageController,
+                      count: onboardingData.length,
+                      effect: ExpandingDotsEffect(
+                        activeDotColor: ColorsManager.textBlue,
+                        dotColor: Colors.grey.shade300,
+                        dotHeight: 10.0,
+                        dotWidth: 10.0,
+                        expansionFactor: 2,
+                        spacing: 5.0,
+                      ),
                     ),
+                     SizedBox(height: 20.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         if (_currentPage == 0)
-                          const SizedBox(
-                            width: 50,
-                          )
+                           SizedBox(width: 50.w)
                         else
                           TextButton(
                             onPressed: _onPrevPressed,
-                            child: const Text(
+                            child:  Text(
                               "Prev",
                               style: TextStyle(
-                                color: Color(0xFFC4C4C4),
-                                fontFamily: 'Montserrat',
-                                fontSize: 18,
+                                color: ColorsManager.lightGray,
+                                fontFamily: StringManager.fontFamily,
+                                fontSize: 18.sp,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
                           ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(
-                            onboardingData.length,
-                            (index) => buildDot(index: index),
-                          ),
-                        ),
                         TextButton(
                           onPressed: _onNextPressed,
                           child: Text(
                             _currentPage < onboardingData.length - 1
                                 ? "Next"
                                 : "Get Started",
-                            style: const TextStyle(
-                              color: Color(0xFF38B6FF),
-                              fontFamily: 'Montserrat',
-                              fontSize: 18,
+                            style:  TextStyle(
+                              color: ColorsManager.mainBlue,
+                              fontFamily: StringManager.fontFamily,
+                              fontSize: 18.sp,
                               fontWeight: FontWeight.w400,
                             ),
                           ),
@@ -191,22 +192,7 @@ class _OnboardingViewState extends State<OnboardingView> {
           ],
         ),
       ),
-    );
-  }
-
-  Widget buildDot({required int index}) {
-    return AnimatedContainer(
-      duration: const Duration(milliseconds: 300),
-      height: 10,
-      width: _currentPage == index ? 20 : 10,
-      margin: const EdgeInsets.only(right: 5),
-      decoration: BoxDecoration(
-        color: _currentPage == index
-            ? const Color(0xFF133B5C)
-            : Colors.grey.shade300,
-        // Dot color
-        borderRadius: BorderRadius.circular(5),
-      ),
+      backgroundColor: ColorsManager.white,
     );
   }
 }
@@ -230,26 +216,26 @@ class OnboardingContent extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset(image, height: 400, fit: BoxFit.contain),
-          const SizedBox(height: 40),
+          SvgPicture.asset(image, height: 400, fit: BoxFit.contain),
+           SizedBox(height: 40.h),
           Text(
             title,
-            style: const TextStyle(
-              fontFamily: 'Montserrat',
-              fontSize: 24,
+            style:  TextStyle(
+              fontFamily: StringManager.fontFamily,
+              fontSize: 24.sp,
               fontWeight: FontWeight.w800,
-              color: Color(0xFF133B5C),
+              color: ColorsManager.textBlue,
             ),
           ),
-          const SizedBox(height: 10),
+           SizedBox(height: 10.h),
           Text(
             subtitle,
             textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontFamily: 'Montserrat',
-              fontSize: 14,
+            style:  TextStyle(
+              fontFamily: StringManager.fontFamily,
+              fontSize: 14.sp,
               fontWeight: FontWeight.w600,
-              color: Color(0xFFA8A8A9),
+              color: ColorsManager.lightGray,
             ),
           ),
         ],

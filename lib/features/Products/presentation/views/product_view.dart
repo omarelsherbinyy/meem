@@ -22,7 +22,7 @@ class ProductsView extends StatelessWidget {
           backgroundColor: Colors.white,
           elevation: 0,
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Image.asset('assets/images/cart logo.png', height: 40.h),
               Text(
@@ -38,8 +38,8 @@ class ProductsView extends StatelessWidget {
           ),
           actions: [
             IconButton(
-              icon: const Icon(Icons.account_circle_outlined,
-                  color: Colors.black),
+              icon:  Icon(Icons.account_circle_outlined,
+                  color: ColorsManager.mainBlue ,size: 28.sp,),
               onPressed: () {},
             ),
           ],
@@ -50,7 +50,7 @@ class ProductsView extends StatelessWidget {
               // const CustomSearchBar(),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 20, ),
                 child: Text(
                   "All Featured",
                   style: TextStyle(

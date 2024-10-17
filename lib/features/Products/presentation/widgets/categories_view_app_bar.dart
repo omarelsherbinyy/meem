@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import '../../../../core/utils/colors.dart';
+import '../../../../core/utils/string.dart';
+
 class CategoriesViewAppBar extends StatelessWidget {
   final String name;
   const CategoriesViewAppBar({
@@ -23,9 +26,11 @@ class CategoriesViewAppBar extends StatelessWidget {
       title: Text(
         name,
         style: TextStyle(
-          fontWeight: FontWeight.bold,
-          fontSize: 22.sp,
-        ),
+        fontFamily: StringManager.fontFamily,
+        color: ColorsManager.textBlue,
+        fontWeight: FontWeight.bold,
+        fontSize: 22.sp,
+      ),
       ),
     );
   }

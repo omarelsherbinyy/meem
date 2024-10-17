@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:meem/config/router/routes.dart';
+import 'package:meem/core/utils/colors.dart';
+import 'package:meem/core/utils/string.dart';
 import 'package:meem/features/Products/presentation/cubits/category_cubit/category_cubit.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -16,9 +18,10 @@ class CategoriesList extends StatelessWidget {
         builder: (context, state) {
           if (state is GetCategorySuccess) {
             return Container(
-              height: 120.h, // Height is scaled using ScreenUtil
+
+              height: 120.h,
               padding: EdgeInsets.symmetric(
-                  horizontal: 8.w), // Use w for width and h for height
+                  horizontal: 8.w),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: state.categories.length,
@@ -37,16 +40,22 @@ class CategoriesList extends StatelessWidget {
                       child: Column(
                         children: [
                           CircleAvatar(
-                            backgroundImage:
-                                NetworkImage(state.categories[index].image!),
-                            radius: 34.r, // Use ScreenUtil for radius
+                            backgroundColor: ColorsManager.textBlue,radius: 35.r,
+                            child: CircleAvatar(
+                              backgroundImage:
+                                  NetworkImage(state.categories[index].image!),
+                              radius: 34.r,
+                            ),
                           ),
                           SizedBox(
                               height: 8.h), // SizedBox with responsive height
                           Text(
-                            state.categories[index].name!,
+                            state.categories[index].name!.toUpperCase(),
                             style: TextStyle(
-                              fontSize: 14.sp,
+                              fontFamily: StringManager.fontFamily,
+                              color: ColorsManager.textBlue,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 12.sp,
                             ),
                           ),
                         ],
