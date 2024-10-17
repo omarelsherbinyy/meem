@@ -50,7 +50,7 @@ class ProductsView extends StatelessWidget {
               // const CustomSearchBar(),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                 child: Text(
                   "All Featured",
                   style: TextStyle(
