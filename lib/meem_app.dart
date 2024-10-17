@@ -15,7 +15,6 @@ import 'package:meem/features/cart/presentation/cubits/cubit/cart_cubit.dart';
 import 'package:meem/features/home/data/repos/home_repo.dart';
 
 import 'core/utils/constant.dart';
-
 class MeemApp extends StatelessWidget {
   const MeemApp({super.key});
 
@@ -55,10 +54,10 @@ class MeemApp extends StatelessWidget {
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Meem',
-             initialRoute:Routes.onboarding,
-            //     Hive.box(Constants.tokenBox).get(Constants.tokenKey) == null
-            //         ? Routes.onboardingLoginSignUp
-            //         : Routes.home,
+             initialRoute:
+               Hive.box(Constants.tokenBox).get(Constants.tokenKey) == null
+                    ? Routes.onboarding
+                   : Routes.home,
 
             onGenerateRoute: AppRouter.onGenerateRoute,
           ),

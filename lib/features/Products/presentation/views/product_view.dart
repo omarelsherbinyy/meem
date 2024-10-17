@@ -22,7 +22,7 @@ class ProductsView extends StatelessWidget {
           backgroundColor: Colors.white,
           elevation: 0,
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Image.asset('assets/images/cart logo.png', height: 40.h),
               Text(
@@ -38,8 +38,8 @@ class ProductsView extends StatelessWidget {
           ),
           actions: [
             IconButton(
-              icon: const Icon(Icons.account_circle_outlined,
-                  color: Colors.black),
+              icon:  Icon(Icons.account_circle_outlined,
+                  color: ColorsManager.mainBlue ,size: 28.sp,),
               onPressed: () {},
             ),
           ],

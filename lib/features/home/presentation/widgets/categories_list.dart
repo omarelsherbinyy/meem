@@ -18,9 +18,10 @@ class CategoriesList extends StatelessWidget {
         builder: (context, state) {
           if (state is GetCategorySuccess) {
             return Container(
-              height: 120.h, // Height is scaled using ScreenUtil
+
+              height: 120.h,
               padding: EdgeInsets.symmetric(
-                  horizontal: 8.w), // Use w for width and h for height
+                  horizontal: 8.w),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: state.categories.length,
@@ -39,9 +40,12 @@ class CategoriesList extends StatelessWidget {
                       child: Column(
                         children: [
                           CircleAvatar(
-                            backgroundImage:
-                                NetworkImage(state.categories[index].image!),
-                            radius: 34.r, // Use ScreenUtil for radius
+                            backgroundColor: ColorsManager.textBlue,radius: 35.r,
+                            child: CircleAvatar(
+                              backgroundImage:
+                                  NetworkImage(state.categories[index].image!),
+                              radius: 34.r,
+                            ),
                           ),
                           SizedBox(
                               height: 8.h), // SizedBox with responsive height
@@ -50,7 +54,7 @@ class CategoriesList extends StatelessWidget {
                             style: TextStyle(
                               fontFamily: StringManager.fontFamily,
                               color: ColorsManager.textBlue,
-                              fontWeight: FontWeight.w500,
+                              fontWeight: FontWeight.w600,
                               fontSize: 12.sp,
                             ),
                           ),
