@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:meem/features/Auth/presentation/views/forgot_password_view.dart';
 import 'package:meem/features/Search/presentation/cubit/get_searched_product_cubit/get_searched_product_cubit.dart';
 import 'package:meem/features/home/presentation/widgets/product_card.dart';
+import 'package:meem/meem_app.dart';
 import 'package:shimmer/shimmer.dart';
 
 class SearchedProduct extends StatelessWidget {
@@ -36,22 +40,15 @@ class SearchedProduct extends StatelessWidget {
             child: Center(
               child: Text(
                 state.errorMessage,
-                style: const TextStyle(
-                    fontSize: 20, color: Color.fromARGB(255, 255, 17, 0)),
+                style:  TextStyle(
+                    fontSize: 20.sp, color:Colors.redAccent),
               ),
             ),
           );
         } else if (state is GetSearchedProductInitial) {
-          return const SliverFillRemaining(
-            hasScrollBody: false,
-            child: Center(
-              child: Text(
-                "Search for a Product",
-                style: TextStyle(
-                    fontSize: 16, color: Color.fromARGB(255, 0, 0, 0)),
-              ),
-            ),
-          );
+          return  SliverFillRemaining( hasScrollBody: false,
+              child: Center(child: SvgPicture.asset(  "assets/images/searching.svg", height: 240.h, fit: BoxFit.contain),
+              ));
         } else {
           return SliverGrid.builder(
             itemCount: 10, // Example skeleton count
@@ -68,7 +65,7 @@ class SearchedProduct extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.r),
                   ),
                 ),
               );

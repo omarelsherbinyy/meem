@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:meem/core/utils/string.dart';
@@ -127,7 +128,11 @@ class _CartViewState extends State<CartView> {
                       ),
                     );
                   } else {
-                    return const SliverToBoxAdapter(child: SizedBox());
+                    return SliverFillRemaining( hasScrollBody: false,
+                        child: Center(
+                      child: SvgPicture.asset(  "assets/images/emptycart.svg", height: 240.h, fit: BoxFit.contain),
+
+                    ));
                   }
                 } else if (state is GetCartProductsFail) {
                   return SliverFillRemaining(
