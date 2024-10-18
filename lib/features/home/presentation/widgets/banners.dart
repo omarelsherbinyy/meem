@@ -6,8 +6,8 @@ import 'package:shimmer/shimmer.dart';
 Widget buildBannerSlider() {
   return CarouselSlider(
     options: CarouselOptions(
-      aspectRatio: 3/2,
-      height: 120.h,
+      aspectRatio: 3 / 2,
+      height: 180.h,
       autoPlay: true,
       enlargeCenterPage: true,
       autoPlayInterval: const Duration(seconds: 3),
@@ -22,7 +22,7 @@ Widget buildBannerSlider() {
             borderRadius: BorderRadius.circular(10),
             child: Image.asset(
               banner['image'],
-              fit: BoxFit.cover,
+              fit: BoxFit.fill,
               width: double.infinity,
             ),
           );
@@ -53,15 +53,13 @@ class ShimmerBanner extends StatelessWidget {
 }
 
 final List<Map<String, dynamic>> banners = [
-
-
-  {"image": "assets/images/b0.jpg"},{"image": "assets/images/b1.jpg"},{"image": "assets/images/b2.jpg"},
-  {"image": "assets/images/bannar1.jpg"},
-  {"image": "assets/images/bannar2.jpg"},
-  {"image": "assets/images/bannar3.jpg"},
-  {"image": "assets/images/bannar4.jpg"},
-  {"image": "assets/images/bannar5.jpg"},
-  {"image": "assets/images/bannar6.jpg"},
-  {"image": "assets/images/bannar7.jpg"},
-  {"image": "assets/images/bannar8.jpg"},
+  {"image": "assets/images/b0.jpg"},
+  {"image": "assets/images/b1.jpg"},
+  {"image": "assets/images/b2.jpg"},
+  {"image": "assets/images/b3.png"},
+  {"image": "assets/images/b4.png"},
+  {"image": "assets/images/b5.png"},
+  {"image": "assets/images/b6.jpg"},
+  {"image": "assets/images/b7.jpg"},
+  {"image": "assets/images/b8.jpg"},
 ];

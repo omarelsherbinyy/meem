@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:meem/config/router/routes.dart';
 import 'package:meem/core/utils/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../../../../core/utils/string.dart';
 
 class OnboardingView extends StatefulWidget {
@@ -45,7 +45,7 @@ class _OnboardingViewState extends State<OnboardingView> {
         curve: Curves.easeInOut,
       );
     } else {
-      Navigator.of(context).pushReplacementNamed('/SignUp');
+      Navigator.of(context).pushNamedAndRemoveUntil( Routes.signUp,(context){return false;});
     }
   }
 
@@ -57,7 +57,7 @@ class _OnboardingViewState extends State<OnboardingView> {
   }
 
   void _onSkipPressed() {
-    Navigator.of(context).pushReplacementNamed('/SignUp');
+    Navigator.of(context).pushNamedAndRemoveUntil( Routes.signUp,(context){return false;});
   }
 
   @override
@@ -69,37 +69,10 @@ class _OnboardingViewState extends State<OnboardingView> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.0.h),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Align(
                     alignment: Alignment.topRight,
-                    child: Text.rich(
-                      TextSpan(
-                        children: [
-                          TextSpan(
-                            text: (_currentPage + 1).toString(),
-                            style: TextStyle(
-                              color: ColorsManager.textBlue,
-                              fontFamily: StringManager.fontFamily,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          TextSpan(
-                            text: "/3",
-                            style: TextStyle(
-                              color: ColorsManager.lightGray,
-                              fontFamily: StringManager.fontFamily,
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.topLeft,
                     child: TextButton(
                       onPressed: _onSkipPressed,
                       child: Text(
@@ -136,11 +109,12 @@ class _OnboardingViewState extends State<OnboardingView> {
             Expanded(
               flex: 1,
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                padding:  EdgeInsets.symmetric(horizontal: 20.0.h),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SmoothPageIndicator(
+
                       controller: _pageController,
                       count: onboardingData.length,
                       effect: ExpandingDotsEffect(

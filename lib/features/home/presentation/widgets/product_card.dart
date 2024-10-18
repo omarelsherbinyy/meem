@@ -57,18 +57,20 @@ class ProductCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8),
                       child: SizedBox(
-                        height: 140.h, // Limit image height
+                        height: 130.h,
                         child: AspectRatio(
                           aspectRatio: 1.7,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(15.r)),
-                            child: Image.network(
-                              product.images![0],
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return const Center(child: Icon(Icons.error));
-                              },
+                          child: FittedBox(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(15.r)),
+                              child: Image.network(
+                                product.images![0],
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return const Center(child: Icon(Icons.error));
+                                },
+                              ),
                             ),
                           ),
                         ),

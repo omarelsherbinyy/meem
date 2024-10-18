@@ -52,7 +52,6 @@ class _CartViewState extends State<CartView> {
               listener: (context, state) {
                 if (state is AddOrRemoveFromCartSuccess) {
                   BlocProvider.of<CartCubit>(context).getCartProducts();
-                  // Show Awesome Snackbar
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       backgroundColor: Colors.white,
@@ -164,126 +163,137 @@ class _CartViewState extends State<CartView> {
   Widget buildCartItem(CartItem cartItem, String formattedDeliveryDate) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5),
-      child: Card(
-        color: ColorsManager.white,
-        elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.r),
-        ),
-        margin: EdgeInsets.symmetric(vertical: 10.h),
-        child: Padding(
-          padding: EdgeInsets.all(12.w),
-          child: Column(
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Stack(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(10.r),
-                        child: Image.network(
-                          cartItem.product!.image!,
-                          height: 100.h,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return const Center(child: Icon(Icons.error));
-                          },
-                        ),
-                      ),
-                      if (cartItem.product!.discount! > 0)
-                        Positioned(
-                          top: 5.h,
-                          left: 5.w,
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 6.w, vertical: 2.h),
-                            decoration: BoxDecoration(
-                              color: Colors.red,
-                              borderRadius: BorderRadius.circular(8.r),
-                            ),
-                            child: Text(
-                              '${cartItem.product!.discount}%',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 12.sp,
-                              ),
-                            ),
-                          ),
-                        ),
-                    ],
-                  ),
-                  SizedBox(width: 8.w),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+      child: GestureDetector(
+        onTap: (){
+
+          // handel NAve to product details of product ya 3maaaaaaaar
+        },
+        child: Card(
+          color: ColorsManager.white,
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+          margin: EdgeInsets.symmetric(vertical: 10.h),
+          child: Padding(
+            padding: EdgeInsets.all(12.w),
+            child: Column(
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Stack(
                       children: [
-                        Text(
-                          cartItem.product!.name!,
-                          style: TextStyle(
-                            fontSize: 16.sp,
-                            fontWeight: FontWeight.bold,
+                        SizedBox(height: 90.h,width: 120.w,
+                          child: FittedBox(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10.r),
+                              child: Image.network(
+                                cartItem.product!.image!,
+                                height: 100.h,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return const Center(child: Icon(Icons.error));
+                                },
+                              ),
+                            ),
                           ),
                         ),
-                        SizedBox(height: 2.h),
-                        Text(
-                          cartItem.product!.description!,
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            color: Colors.grey,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Row(
-                          children: [
-                            Flexible(
+                        if (cartItem.product!.discount! > 0)
+                          Positioned(
+                            top: 5.h,
+                            left: 5.w,
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 6.w, vertical: 2.h),
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(8.r),
+                              ),
                               child: Text(
-                                'EGP ${cartItem.product!.price!.toStringAsFixed(2)}',
+                                '${cartItem.product!.discount}%',
                                 style: TextStyle(
-                                  fontSize: 14.sp,
+                                  color: Colors.white,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.green,
+                                  fontSize: 14.sp,
                                 ),
                               ),
                             ),
-                            Row(
-                              children: [
-                                IconButton(
-                                  icon: Icon(Icons.remove, size: 20.sp),
-                                  onPressed: () {
-                                    // Decrement logic
-                                  },
-                                ),
-                                Text(
-                                  cartItem.quantity.toString(),
-                                  style: TextStyle(fontSize: 16.sp),
-                                ),
-                                IconButton(
-                                  icon: Icon(Icons.add, size: 20.sp),
-                                  onPressed: () {
-                                    // Increment logic
-                                  },
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                          ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  buildInfoContainer('Free Shipping', Colors.green),
-                  buildInfoContainer(
-                      'Delivery by $formattedDeliveryDate', Colors.blue),
-                ],
-              ),
-            ],
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            cartItem.product!.name!,
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 2.h),
+                          Text(
+                            cartItem.product!.description!,
+                            style: TextStyle(
+                              fontSize: 14.sp,
+                              color: Colors.grey,
+                            ),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          Row(mainAxisSize: MainAxisSize.max,mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  'EGP ${cartItem.product!.price!.toStringAsFixed(0)}',
+                                  style: TextStyle(
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.green,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis ,
+                                ),
+                              ),
+                              Row(mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  IconButton(
+                                    icon: Icon(Icons.remove, size: 20.sp),
+                                    onPressed: () {
+                                      // Decrement logic
+                                    },
+                                  ),
+                                  Text(
+                                    cartItem.quantity.toString(),
+                                    style: TextStyle(fontSize: 16.sp),
+                                  ),
+                                  IconButton(
+                                    icon: Icon(Icons.add, size: 20.sp),
+                                    onPressed: () {
+                                      // Increment logic
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    buildInfoContainer('Free Shipping', Colors.green),
+                    buildInfoContainer(
+                        'Delivery by $formattedDeliveryDate', Colors.blue),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -314,13 +324,6 @@ class _CartViewState extends State<CartView> {
       decoration: BoxDecoration(
         color: ColorsManager.white,
         borderRadius: BorderRadius.circular(12.r),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 4,
-            offset: const Offset(0, 0),
-          ),
-        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -335,37 +338,42 @@ class _CartViewState extends State<CartView> {
             ),
           ),
           SizedBox(height: 4.h),
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintText: 'Enter coupon code',
-                    hintStyle: TextStyle(color: Colors.grey),
-                    filled: true,
-                    fillColor: Colors.grey[200],
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.r),
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
+      Row(
+        children: [
+          Expanded(
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'Enter coupon code',
+                hintStyle: TextStyle(color: Colors.grey),
+                filled: true,
+                fillColor: Colors.grey[200],
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8.r),
+                  borderSide: BorderSide.none,
                 ),
+                contentPadding: EdgeInsets.symmetric(vertical: 16.0.w, horizontal: 12.0.h), // Set vertical padding here
               ),
-              SizedBox(width: 8.w),
-              ElevatedButton(
-                onPressed: () {
-                  // Apply coupon logic here
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: ColorsManager.mainBlue,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                ),
-                child: Text('Apply'),
-              ),
-            ],
+            ),
           ),
+          SizedBox(width: 8.w),
+          ElevatedButton(
+            onPressed: () {
+              // Apply coupon logic here
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: ColorsManager.mainBlue,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(8.r),
+              ),
+              padding: EdgeInsets.symmetric(vertical: 16.0.w, horizontal: 16.0.h), // Same vertical padding
+            ),
+            child: Text(
+              'Apply',
+              style: TextStyle(color: Colors.white, fontSize: 14.sp,fontWeight: FontWeight.w600,fontFamily: StringManager.fontFamily),
+            ),
+          ),
+        ],
+      ),
         ],
       ),
     );
