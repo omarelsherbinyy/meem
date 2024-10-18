@@ -31,8 +31,8 @@ class ProductCard extends StatelessWidget {
       child: GestureDetector(
         onTap: () {
           Navigator.pushNamed(context, Routes.productDetailsPage);
-         BlocProvider.of<GetProductDetailsCubit>(context)
-             .getProductDetails(id: product.id.toString());
+          BlocProvider.of<GetProductDetailsCubit>(context)
+              .getProductDetails(id: product.id.toString());
         },
         child: Container(
           decoration: BoxDecoration(

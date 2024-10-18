@@ -1,22 +1,19 @@
 import 'package:dio/dio.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meem/core/api/api_consumer.dart';
 import 'package:meem/core/api/endpoints.dart';
+import 'package:meem/core/utils/constant.dart';
 
 class DioConsumer implements ApiConsumer {
   final Dio dio;
   DioConsumer({
     required this.dio,
-    String? token,
     String langue = "en",
   }) {
     Map<String, dynamic> headers = {
+      "Authorization": Hive.box(Constants.tokenBox).get(Constants.tokenKey),
       ApiKeys.language: langue,
     };
-    if (token != null) {
-      headers.addAll({
-        ApiKeys.authorization: token,
-      });
-    }
     dio
       ..options.headers = headers
       ..options.baseUrl = EndPoints.baseUrl

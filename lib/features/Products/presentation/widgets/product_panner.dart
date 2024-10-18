@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shimmer/shimmer.dart';
@@ -31,7 +30,7 @@ class ProductPanner extends StatelessWidget {
                   ),
                 ),
               ),
-    
+
               // Dots Indicator Placeholder
               SizedBox(height: 10.h),
               Shimmer.fromColors(
@@ -55,9 +54,9 @@ class ProductPanner extends StatelessWidget {
               ),
             ],
           ),
-    
+
           SizedBox(height: 16.h),
-    
+
           // Shimmer effect for the Product Name
           Shimmer.fromColors(
             baseColor: Colors.grey[300]!,
@@ -69,7 +68,7 @@ class ProductPanner extends StatelessWidget {
             ),
           ),
           SizedBox(height: 8.h),
-    
+
           // Shimmer effect for Ratings and Reviews Count
           Shimmer.fromColors(
             baseColor: Colors.grey[300]!,
@@ -91,7 +90,7 @@ class ProductPanner extends StatelessWidget {
             ),
           ),
           SizedBox(height: 8.h),
-    
+
           // Shimmer effect for Price and Discount Information
           Shimmer.fromColors(
             baseColor: Colors.grey[300]!,
@@ -119,7 +118,7 @@ class ProductPanner extends StatelessWidget {
             ),
           ),
           SizedBox(height: 16.h),
-    
+
           // Shimmer effect for Product Details Title
           Shimmer.fromColors(
             baseColor: Colors.grey[300]!,
@@ -131,7 +130,7 @@ class ProductPanner extends StatelessWidget {
             ),
           ),
           SizedBox(height: 8.h),
-    
+
           // Shimmer effect for Expandable Product Description
           Shimmer.fromColors(
             baseColor: Colors.grey[300]!,
@@ -143,7 +142,7 @@ class ProductPanner extends StatelessWidget {
             ),
           ),
           SizedBox(height: 16.h),
-    
+
           // Shimmer effect for Add to Cart & Buy Now Buttons
           Shimmer.fromColors(
             baseColor: Colors.grey[300]!,
@@ -171,7 +170,7 @@ class ProductPanner extends StatelessWidget {
             ),
           ),
           SizedBox(height: 16.h),
-    
+
           // Shimmer effect for Delivery Information
           Shimmer.fromColors(
             baseColor: Colors.grey[300]!,

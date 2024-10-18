@@ -15,7 +15,7 @@ class CategoriesProducts extends StatefulWidget {
 class _CategoriesProductsState extends State<CategoriesProducts> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CategoryCubit,CategoryState >(
+    return BlocBuilder<CategoryCubit, CategoryState>(
       builder: (context, state) {
         if (state is GetCategoryProductsSuccess) {
           return Padding(

@@ -8,8 +8,10 @@ class CategoriesView extends StatelessWidget {
   String name;
   final TextEditingController controller = TextEditingController();
   GlobalKey<FormState> form = GlobalKey();
-  CategoriesView({super.key,
-    required this.name,});
+  CategoriesView({
+    super.key,
+    required this.name,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +19,9 @@ class CategoriesView extends StatelessWidget {
       backgroundColor: Colors.white,
       body: CustomScrollView(
         slivers: [
-           CategoriesViewAppBar(name: name,),
+          CategoriesViewAppBar(
+            name: name,
+          ),
           SliverToBoxAdapter(
             child: SizedBox(
               height: 20.h,

@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meem/core/utils/constant.dart';
 
-saveDataLocally({required String key, required String? value}) async {
-  Hive.box(Constants.tokenBox).put(key, value);
+Future saveToken({required String? value}) async {
+  await Hive.box(Constants.tokenBox).put(Constants.tokenKey, value);
 }

@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:meem/core/utils/models/product_model/product_model.dart';
+import 'package:meem/features/cart/data/models/cart_item/cart_item.dart';
 import 'package:meem/features/cart/data/models/operation_cart_response.dart';
 import 'package:meem/features/cart/data/repos/cart_repo.dart';
 

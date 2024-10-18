@@ -26,11 +26,11 @@ class CategoriesViewAppBar extends StatelessWidget {
       title: Text(
         name,
         style: TextStyle(
-        fontFamily: StringManager.fontFamily,
-        color: ColorsManager.textBlue,
-        fontWeight: FontWeight.bold,
-        fontSize: 22.sp,
-      ),
+          fontFamily: StringManager.fontFamily,
+          color: ColorsManager.textBlue,
+          fontWeight: FontWeight.bold,
+          fontSize: 22.sp,
+        ),
       ),
     );
   }

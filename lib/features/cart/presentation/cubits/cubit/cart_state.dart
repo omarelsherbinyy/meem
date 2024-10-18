@@ -8,7 +8,7 @@ class CartInitial extends CartState {}
 class GetCartProductsLoading extends CartState {}
 
 class GetCartProductsSuccess extends CartState {
-  List<ProductModel> products;
+  List<CartItem> products;
   GetCartProductsSuccess({
     required this.products,
   });
@@ -20,7 +20,6 @@ class GetCartProductsFail extends CartState {
     required this.errorMessage,
   });
 }
-
 
 class AddOrRemoveFromCartLoading extends CartState {}
 

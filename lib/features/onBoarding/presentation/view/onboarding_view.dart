@@ -20,17 +20,20 @@ class _OnboardingViewState extends State<OnboardingView> {
   final List<Map<String, String>> onboardingData = [
     {
       "title": "Choose Products",
-      "subtitle": "Discover bold, trendsetting products. Swipe, choose, and elevate your style with every click. Your perfect picks await.",
+      "subtitle":
+          "Discover bold, trendsetting products. Swipe, choose, and elevate your style with every click. Your perfect picks await.",
       "image": "assets/images/firstSplash.svg"
     },
     {
       "title": "Make Payment",
-      "subtitle": "Secure your style with ease. Fast, simple, and safe payments for a seamless shopping experience. Own it now.",
+      "subtitle":
+          "Secure your style with ease. Fast, simple, and safe payments for a seamless shopping experience. Own it now.",
       "image": "assets/images/secoandSplash.svg"
     },
     {
       "title": "Get Your Order",
-      "subtitle": "Your order is on the way! Track, receive, and unwrap your style. Get ready to elevate your look.",
+      "subtitle":
+          "Your order is on the way! Track, receive, and unwrap your style. Get ready to elevate your look.",
       "image": "assets/images/thirdSplash.svg"
     }
   ];
@@ -59,7 +62,6 @@ class _OnboardingViewState extends State<OnboardingView> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -76,7 +78,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                         children: [
                           TextSpan(
                             text: (_currentPage + 1).toString(),
-                            style:  TextStyle(
+                            style: TextStyle(
                               color: ColorsManager.textBlue,
                               fontFamily: StringManager.fontFamily,
                               fontSize: 18.sp,
@@ -86,7 +88,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                           TextSpan(
                             text: "/3",
                             style: TextStyle(
-                              color:ColorsManager.lightGray,
+                              color: ColorsManager.lightGray,
                               fontFamily: StringManager.fontFamily,
                               fontSize: 18.sp,
                               fontWeight: FontWeight.w600,
@@ -100,7 +102,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                     alignment: Alignment.topLeft,
                     child: TextButton(
                       onPressed: _onSkipPressed,
-                      child:  Text(
+                      child: Text(
                         "Skip",
                         style: TextStyle(
                           color: ColorsManager.textBlue,
@@ -150,16 +152,16 @@ class _OnboardingViewState extends State<OnboardingView> {
                         spacing: 5.0,
                       ),
                     ),
-                     SizedBox(height: 20.h),
+                    SizedBox(height: 20.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         if (_currentPage == 0)
-                           SizedBox(width: 50.w)
+                          SizedBox(width: 50.w)
                         else
                           TextButton(
                             onPressed: _onPrevPressed,
-                            child:  Text(
+                            child: Text(
                               "Prev",
                               style: TextStyle(
                                 color: ColorsManager.lightGray,
@@ -175,7 +177,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                             _currentPage < onboardingData.length - 1
                                 ? "Next"
                                 : "Get Started",
-                            style:  TextStyle(
+                            style: TextStyle(
                               color: ColorsManager.mainBlue,
                               fontFamily: StringManager.fontFamily,
                               fontSize: 18.sp,
@@ -217,21 +219,21 @@ class OnboardingContent extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SvgPicture.asset(image, height: 400, fit: BoxFit.contain),
-           SizedBox(height: 40.h),
+          SizedBox(height: 40.h),
           Text(
             title,
-            style:  TextStyle(
+            style: TextStyle(
               fontFamily: StringManager.fontFamily,
               fontSize: 24.sp,
               fontWeight: FontWeight.w800,
               color: ColorsManager.textBlue,
             ),
           ),
-           SizedBox(height: 10.h),
+          SizedBox(height: 10.h),
           Text(
             subtitle,
             textAlign: TextAlign.center,
-            style:  TextStyle(
+            style: TextStyle(
               fontFamily: StringManager.fontFamily,
               fontSize: 14.sp,
               fontWeight: FontWeight.w600,
