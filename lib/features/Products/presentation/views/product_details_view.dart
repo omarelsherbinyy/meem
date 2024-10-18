@@ -5,12 +5,9 @@ import 'package:meem/core/utils/colors.dart';
 import 'package:meem/features/Products/presentation/cubits/get_product_details_cubit/get_product_details_cubit.dart';
 import 'package:meem/features/Products/presentation/widgets/product_panner.dart';
 import 'package:meem/features/cart/presentation/cubits/cubit/cart_cubit.dart';
-
 import 'package:shimmer/shimmer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../widgets/calculate_discount_percentage.dart';
-
 class ProductDetailsPage extends StatefulWidget {
   const ProductDetailsPage({super.key});
 
@@ -260,45 +257,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                           },
                         ),
                       ),
-                      SizedBox(
-                        width: 8.w,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30.0.r),
-                          // Rounded corners
-                          gradient: const LinearGradient(
-                            colors: [Colors.green, Colors.greenAccent],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                        ),
-                        child: ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                            padding: EdgeInsets.symmetric(
-                                vertical: 12.0.sp, horizontal: 20.0.sp),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0.sp),
-                            ),
-                          ),
-                          icon: Icon(
-                            Icons.touch_app,
-                            color: Colors.white,
-                            size: 26.sp,
-                          ),
-                          // Hand icon
-                          label: Text(
-                            "Buy Now",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 14.sp),
-                          ),
-                          onPressed: () {
-                            // Add your onPressed logic here BUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUYYYYYYYYYYYYYYYYYYYYYYY
-                          },
-                        ),
-                      )
+
                     ],
                   ),
                   SizedBox(height: 16.h),
@@ -320,7 +279,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         ),
                         SizedBox(width: 8.w),
                         const Text(
-                          "Delivery in \n1 Within Hour",
+                          "Delivery in \nTwo Days",
                           style: TextStyle(color: Colors.red),
                         ),
                       ],

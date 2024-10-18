@@ -48,6 +48,7 @@ dependencies:
   hive: ^2.2.3
   hive_flutter: ^1.1.0
   image_picker: ^1.1.2
+  rive: ^0.13.15
   shimmer: ^3.0.0
   smooth_page_indicator: ^1.2.0+3
 

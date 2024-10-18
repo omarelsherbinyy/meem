@@ -3,7 +3,7 @@ class CategoryModel {
   String? name;
   String? image;
 
-  CategoryModel({this.id, this.name, this.image});
+  CategoryModel({ required this.id,required this.name,required this.image});
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
         id: json['id'] as int?,
@@ -17,3 +17,11 @@ class CategoryModel {
         'image': image,
       };
 }
+
+
+final List<Map<String, dynamic>> categoryimages = [
+
+
+  {"image": "assets/images/b0.jpg"},
+
+];

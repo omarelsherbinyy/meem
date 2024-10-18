@@ -56,7 +56,7 @@ class MeemApp extends StatelessWidget {
             BlocProvider(
               create: (context) =>
                   CategoryCubit(homeRepo: git.get<HomeRepoImpl>())
-                    ..getCategory(),
+                    ,
             ),
           ],
           child: MaterialApp(
