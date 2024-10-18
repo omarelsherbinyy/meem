@@ -18,10 +18,8 @@ class CategoriesList extends StatelessWidget {
         builder: (context, state) {
           if (state is GetCategorySuccess) {
             return Container(
-
               height: 120.h,
-              padding: EdgeInsets.symmetric(
-                  horizontal: 8.w),
+              padding: EdgeInsets.symmetric(horizontal: 8.w),
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: state.categories.length,
@@ -40,22 +38,25 @@ class CategoriesList extends StatelessWidget {
                       child: Column(
                         children: [
                           CircleAvatar(
-                            backgroundColor: ColorsManager.textBlue,radius: 35.r,
-                            child: CircleAvatar(
-                              backgroundImage:
-                                  NetworkImage(state.categories[index].image!),
-                              radius: 34.r,
-                            ),
+                            backgroundColor: Colors.grey[200],
+                            backgroundImage:
+                                NetworkImage(state.categories[index].image!),
+                            radius: 34.r,
                           ),
                           SizedBox(
                               height: 8.h), // SizedBox with responsive height
-                          Text(
-                            state.categories[index].name!.toUpperCase(),
-                            style: TextStyle(
-                              fontFamily: StringManager.fontFamily,
-                              color: ColorsManager.textBlue,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 12.sp,
+                          SizedBox(
+                            width: 80.w,
+                            child: Text(
+                              maxLines: 2,
+                              textAlign: TextAlign.center,
+                              state.categories[index].name!,
+                              style: TextStyle(
+                                fontFamily: StringManager.fontFamily,
+                                color: ColorsManager.textBlue,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 12.sp,
+                              ),
                             ),
                           ),
                         ],

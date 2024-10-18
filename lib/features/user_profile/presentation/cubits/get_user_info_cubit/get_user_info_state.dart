@@ -18,3 +18,17 @@ final class GetUserInfoFailure extends GetUserInfoState {
 
   GetUserInfoFailure({required this.errorMessage});
 }
+
+final class UpdateUserInfoLoading extends GetUserInfoState {}
+
+final class UpdateUserInfoSuccess extends GetUserInfoState {
+  final AuthModel user;
+
+  UpdateUserInfoSuccess({required this.user});
+}
+
+final class UpdateUserInfoFailure extends GetUserInfoState {
+  final String errorMessage;
+
+  UpdateUserInfoFailure({required this.errorMessage});
+}

@@ -22,7 +22,7 @@ class ProductsView extends StatelessWidget {
           backgroundColor: Colors.white,
           elevation: 0,
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset('assets/images/cart logo.png', height: 40.h),
               Text(
@@ -36,21 +36,14 @@ class ProductsView extends StatelessWidget {
               ),
             ],
           ),
-          actions: [
-            IconButton(
-              icon:  Icon(Icons.account_circle_outlined,
-                  color: ColorsManager.mainBlue ,size: 28.sp,),
-              onPressed: () {},
-            ),
-          ],
         ),
         SliverList(
           delegate: SliverChildListDelegate(
             [
-              // const CustomSearchBar(),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                ),
                 child: Text(
                   "All Featured",
                   style: TextStyle(
@@ -61,8 +54,7 @@ class ProductsView extends StatelessWidget {
                   ),
                 ),
               ),
-              const CategoriesList(),
-
+              CategoriesList(),
               buildBannerSlider(),
               const PopularProducts(),
             ],

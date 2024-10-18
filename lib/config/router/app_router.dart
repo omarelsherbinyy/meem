@@ -27,7 +27,9 @@ class AppRouter {
         );
       case Routes.categoriesView:
         return MaterialPageRoute(
-          builder: (context) => CategoriesView(name: settings.arguments as String,),
+          builder: (context) => CategoriesView(
+            name: settings.arguments as String,
+          ),
         );
       case Routes.logOut:
         return MaterialPageRoute(

@@ -20,8 +20,6 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   List<Widget> screens = [
-    
-    
     const ProductsView(),
     BlocProvider(
       create: (context) =>
@@ -36,7 +34,6 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       backgroundColor: ColorsManager.white,
       body: SafeArea(
         child: screens[_selectedIndex],
@@ -82,4 +79,3 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 }
-

@@ -13,8 +13,10 @@ import 'package:meem/features/Products/presentation/cubits/get_product_details_c
 import 'package:meem/features/cart/data/repos/cart_repo.dart';
 import 'package:meem/features/cart/presentation/cubits/cubit/cart_cubit.dart';
 import 'package:meem/features/home/data/repos/home_repo.dart';
+import 'package:meem/features/user_profile/presentation/cubits/get_user_info_cubit/get_user_info_cubit.dart';
 
 import 'core/utils/constant.dart';
+
 class MeemApp extends StatelessWidget {
   const MeemApp({super.key});
 
@@ -38,7 +40,13 @@ class MeemApp extends StatelessWidget {
               ),
             ),
             BlocProvider(
-              create: (context) =>  GetProductDetailsCubit(homeRepo: git.get<HomeRepoImpl>()),
+              create: (context) => GetUserInfoCubit(
+                homeRepo: git.get<HomeRepoImpl>(),
+              ),
+            ),
+            BlocProvider(
+              create: (context) =>
+                  GetProductDetailsCubit(homeRepo: git.get<HomeRepoImpl>()),
             ),
             BlocProvider(
               create: (context) =>
@@ -54,11 +62,10 @@ class MeemApp extends StatelessWidget {
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Meem',
-             initialRoute:
-               Hive.box(Constants.tokenBox).get(Constants.tokenKey) == null
+            initialRoute:
+                Hive.box(Constants.tokenBox).get(Constants.tokenKey) == null
                     ? Routes.onboarding
-                   : Routes.home,
-
+                    : Routes.home,
             onGenerateRoute: AppRouter.onGenerateRoute,
           ),
         );

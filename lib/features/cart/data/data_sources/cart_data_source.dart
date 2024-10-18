@@ -1,10 +1,10 @@
 import 'package:meem/core/api/api_consumer.dart';
 import 'package:meem/core/api/endpoints.dart';
-import 'package:meem/core/utils/models/product_model/product_model.dart';
+import 'package:meem/features/cart/data/models/cart_item/cart_item.dart';
 import 'package:meem/features/cart/data/models/operation_cart_response.dart';
 
 abstract class CartRemoteDataSource {
-  Future<List<ProductModel>> getCartProducts();
+  Future<List<CartItem>> getCartProducts();
   Future<OperationCartResponse> addOrRemoveFromCart({required String id});
 }
 
@@ -23,15 +23,15 @@ class MyCartRemoteDataSourceImpl implements CartRemoteDataSource {
   }
 
   @override
-  Future<List<ProductModel>> getCartProducts() async {
+  Future<List<CartItem>> getCartProducts() async {
     Map<String, dynamic> jsonData =
         await apiConsumer.get(endPoint: EndPoints.carts);
     List<dynamic> results = jsonData["data"]["cart_items"];
-    List<ProductModel> products = [];
+    List<CartItem> products = [];
     for (var item in results) {
-      products.add(ProductModel.fromJson(item));
+      products.add(CartItem.fromJson(item));
     }
-   
+
     return products;
   }
 }
