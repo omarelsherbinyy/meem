@@ -41,8 +41,8 @@ class ProductsView extends StatelessWidget {
           delegate: SliverChildListDelegate(
             [
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
+                padding:  EdgeInsets.symmetric(
+                  horizontal: 10.h,
                 ),
                 child: Text(
                   "All Featured",

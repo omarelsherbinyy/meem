@@ -56,16 +56,16 @@ class MeemApp extends StatelessWidget {
             BlocProvider(
               create: (context) =>
                   CategoryCubit(homeRepo: git.get<HomeRepoImpl>())
-                    ..getCategory(),
+                    ,
             ),
           ],
           child: MaterialApp(
             debugShowCheckedModeBanner: false,
             title: 'Meem',
-            initialRoute:
-                Hive.box(Constants.tokenBox).get(Constants.tokenKey) == null
-                    ? Routes.onboarding
-                    : Routes.home,
+             initialRoute:
+               Hive.box(Constants.tokenBox).get(Constants.tokenKey) == null
+                     ? Routes.onboarding
+                   : Routes.home,
             onGenerateRoute: AppRouter.onGenerateRoute,
           ),
         );

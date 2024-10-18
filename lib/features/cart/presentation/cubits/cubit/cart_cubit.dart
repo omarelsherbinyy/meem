@@ -6,6 +6,7 @@ import 'package:meem/features/cart/data/repos/cart_repo.dart';
 part 'cart_state.dart';
 
 class CartCubit extends Cubit<CartState> {
+
   CartRepo cardRepo;
   CartCubit({required this.cardRepo}) : super(CartInitial());
   getCartProducts() async {

@@ -57,18 +57,20 @@ class ProductCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8),
                       child: SizedBox(
-                        height: 140.h, // Limit image height
+                        height: 130.h,
                         child: AspectRatio(
                           aspectRatio: 1.7,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.vertical(
-                                top: Radius.circular(15.r)),
-                            child: Image.network(
-                              product.images![0],
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return const Center(child: Icon(Icons.error));
-                              },
+                          child: FittedBox(
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.vertical(
+                                  top: Radius.circular(15.r)),
+                              child: Image.network(
+                                product.images![0],
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) {
+                                  return const Center(child: Icon(Icons.error));
+                                },
+                              ),
                             ),
                           ),
                         ),
@@ -125,8 +127,9 @@ class ProductCard extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: Colors.red,
                           ),
+                          maxLines: 1, overflow: TextOverflow.ellipsis,
                         ),
-                        // Favorite icon positioned after price
+                        // Favorite icon positioned after prices
                         IconButton(
                           color: Colors.redAccent,
                           onPressed: onFavoriteToggle,
@@ -143,12 +146,14 @@ class ProductCard extends StatelessWidget {
                       ],
                     ),
                     if (product.discount != null && product.discount! > 0) ...[
-                      Text(
-                        'EGP ${product.price!.toStringAsFixed(2)}',
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          color: Colors.grey,
-                          decoration: TextDecoration.lineThrough,
+                      FittedBox(
+                        child: Text(
+                          'EGP ${product.price!.toStringAsFixed(2)}',
+                          style: TextStyle(
+                            fontSize: 12.sp,
+                            color: Colors.grey,
+                            decoration: TextDecoration.lineThrough,
+                          ),
                         ),
                       ),
                     ],

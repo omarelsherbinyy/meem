@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,9 +24,9 @@ class UserProfileView extends StatefulWidget {
 }
 
 class _UserProfileViewState extends State<UserProfileView> {
-  XFile? _image; // Variable to hold the selected image
-  bool _isLoading = false; // Loading state
-
+  XFile? _image;
+  bool _isLoading = false;
+  AutovalidateMode? autovalidateMode = AutovalidateMode.disabled;
   @override
   void initState() {
     super.initState();
@@ -82,7 +83,7 @@ class _UserProfileViewState extends State<UserProfileView> {
     await box.put(key, value);
   }
 
-  GlobalKey<FormState> _formKey = GlobalKey();
+  final GlobalKey<FormState> _formKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context); // Initialize ScreenUtil
@@ -103,6 +104,7 @@ class _UserProfileViewState extends State<UserProfileView> {
       ),
       body: Form(
         key: _formKey,
+        autovalidateMode: autovalidateMode,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Stack(
@@ -230,13 +232,16 @@ class _UserProfileViewState extends State<UserProfileView> {
                               state.user.phone!,
                               BlocProvider.of<GetUserInfoCubit>(context)
                                   .phoneController),
-                          CustomBottom(
+                          CustomBottom(// el zoraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaar
                             text: "Update",
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 BlocProvider.of<GetUserInfoCubit>(context)
                                     .updateUserInfo();
                               }
+                              else setState(() {
+                                autovalidateMode=AutovalidateMode.always;
+                              });
                             },
                           ),
                         ],
@@ -307,11 +312,24 @@ class _UserProfileViewState extends State<UserProfileView> {
         if (value == null || value.isEmpty) {
           return '$label cannot be empty';
         }
+        if (label == "Email Address") {
+          // Validate email format
+          final emailRegex = RegExp(
+            r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
+          );
+          if (!emailRegex.hasMatch(value)) {
+            return 'Please enter a valid email address';
+          }
+        }
+        if (label == "Phone") {
+          if (value.length != 10) {
+            return 'Phone number must be 10 digits';
+          }
+        }
         return null;
       },
     );
   }
-
   Widget _buildShimmerProfile() {
     return Column(
       children: [
@@ -360,5 +378,11 @@ class _UserProfileViewState extends State<UserProfileView> {
         }),
       ],
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(EnumProperty<AutovalidateMode?>('autovalidateMode', autovalidateMode));
   }
 }

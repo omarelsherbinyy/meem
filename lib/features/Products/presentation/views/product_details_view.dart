@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart';
 import 'package:meem/core/utils/colors.dart';
+import 'package:meem/core/utils/string.dart';
 import 'package:meem/features/Products/presentation/cubits/get_product_details_cubit/get_product_details_cubit.dart';
 import 'package:meem/features/Products/presentation/widgets/product_panner.dart';
 import 'package:meem/features/cart/presentation/cubits/cubit/cart_cubit.dart';
-
 import 'package:shimmer/shimmer.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 import '../widgets/calculate_discount_percentage.dart';
 
 class ProductDetailsPage extends StatefulWidget {
@@ -20,13 +20,35 @@ class ProductDetailsPage extends StatefulWidget {
 
 class _ProductDetailsPageState extends State<ProductDetailsPage> {
   bool isDescriptionExpanded = false;
-
   final PageController _pageController = PageController();
 
   @override
   void dispose() {
-    _pageController.dispose(); // Dispose of the PageController when done
+    _pageController.dispose();
     super.dispose();
+  }
+
+  void _showAddToCartDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return SizedBox(
+          width: 330.w, // Set the dialog width
+          height: 330.h, // Set the dialog height
+          child: Center(
+            child: Lottie.asset(
+              'assets/images/Animation2.json',
+              fit: BoxFit.fill,
+            ),
+          ),
+        );
+      },
+    );
+    // Close the dialog after a delay
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.of(context).pop(); // Close the dialog
+    });
   }
 
   @override
@@ -38,6 +60,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
         title: Text(
           "Product Details",
           style: TextStyle(
+            fontFamily: StringManager.fontFamily,
+            color: ColorsManager.textBlue,
             fontSize: 22.sp,
             fontWeight: FontWeight.bold,
           ),
@@ -67,7 +91,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                   Column(
                     children: [
                       SizedBox(
-                        height: 200.h, // Adjust the height as needed
+                        height: 200.h,
                         child: PageView.builder(
                           controller: _pageController,
                           itemCount: productData.images!.length,
@@ -92,7 +116,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                                   return Container(
                                     color: Colors.grey[300],
                                     child:
-                                        const Center(child: Icon(Icons.error)),
+                                    const Center(child: Icon(Icons.error)),
                                   );
                                 },
                               ),
@@ -103,16 +127,15 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
 
                       // Dots Indicator under the images within the card
                       SizedBox(height: 10.h),
-                      // Add spacing between the images and dots
                       SmoothPageIndicator(
-                        controller: _pageController, // Controller for PageView
-                        count: productData.images!.length, // Number of dots
+                        controller: _pageController,
+                        count: productData.images!.length,
                         effect: ExpandingDotsEffect(
                           dotColor: Colors.grey,
                           activeDotColor: ColorsManager.mainBlue,
                           dotHeight: 8.0.h,
                           dotWidth: 8.0.w,
-                          spacing: 5.0.sp, // Spacing between dots
+                          spacing: 5.0.sp,
                         ),
                       ),
                     ],
@@ -156,7 +179,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         ),
                       ),
                       SizedBox(width: 10.h),
-                      if (productData.price != productData.price)
+                      if (productData.oldPrice != productData.price)
                         Text(
                           "EGP ${productData.oldPrice}",
                           style: TextStyle(
@@ -202,8 +225,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                           isDescriptionExpanded
                               ? productData.description!
                               : (productData.description!.length > 100
-                                  ? '${productData.description!.substring(0, 100)}...'
-                                  : productData.description!),
+                              ? '${productData.description!.substring(0, 100)}...'
+                              : productData.description!),
                           style: TextStyle(fontSize: 16.sp),
                         ),
                         SizedBox(height: 8.h),
@@ -225,7 +248,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                       Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(30.0.r),
-                          // Rounded corners
                           gradient: const LinearGradient(
                             colors: [Colors.deepPurpleAccent, Colors.blue],
                             begin: Alignment.topLeft,
@@ -235,7 +257,6 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         child: ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.transparent,
-                            // To apply the container gradient
                             shadowColor: Colors.transparent,
                             padding: EdgeInsets.symmetric(
                                 vertical: 12.0.sp, horizontal: 20.0.sp),
@@ -247,58 +268,21 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                             Icons.shopping_cart_outlined,
                             color: Colors.white,
                             size: 26.sp,
-                          ), // Hand icon
+                          ),
                           label: Text(
                             "Add To Cart",
                             style:
-                                TextStyle(color: Colors.white, fontSize: 14.sp),
+                            TextStyle(color: Colors.white, fontSize: 14.sp),
                           ),
                           onPressed: () {
+                            _showAddToCartDialog(); // Show the dialog
+
+                            // Add product to cart
                             BlocProvider.of<CartCubit>(context)
-                                .addOrRemoveFromCart(
-                                    id: productData.id.toString());
+                                .addOrRemoveFromCart(id: productData.id.toString());
                           },
                         ),
                       ),
-                      SizedBox(
-                        width: 8.w,
-                      ),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(30.0.r),
-                          // Rounded corners
-                          gradient: const LinearGradient(
-                            colors: [Colors.green, Colors.greenAccent],
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                          ),
-                        ),
-                        child: ElevatedButton.icon(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                            padding: EdgeInsets.symmetric(
-                                vertical: 12.0.sp, horizontal: 20.0.sp),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30.0.sp),
-                            ),
-                          ),
-                          icon: Icon(
-                            Icons.touch_app,
-                            color: Colors.white,
-                            size: 26.sp,
-                          ),
-                          // Hand icon
-                          label: Text(
-                            "Buy Now",
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 14.sp),
-                          ),
-                          onPressed: () {
-                            // Add your onPressed logic here BUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUYYYYYYYYYYYYYYYYYYYYYYY
-                          },
-                        ),
-                      )
                     ],
                   ),
                   SizedBox(height: 16.h),
@@ -320,7 +304,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                         ),
                         SizedBox(width: 8.w),
                         const Text(
-                          "Delivery in \n1 Within Hour",
+                          "Delivery in \nTwo Days",
                           style: TextStyle(color: Colors.red),
                         ),
                       ],

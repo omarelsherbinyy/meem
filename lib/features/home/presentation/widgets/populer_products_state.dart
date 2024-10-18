@@ -35,10 +35,10 @@ class _PopularProductsState extends State<PopularProducts> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: state.products.length,
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 200, // Maximum width for each child
-                    childAspectRatio: 0.585, // Maintain aspect ratio
-                    crossAxisSpacing: 16, // Spacing between grid items
-                    mainAxisSpacing: 16, // Spacing between rows
+                    maxCrossAxisExtent: 210,
+                    childAspectRatio: 0.5, // Maintain aspect ratio
+                    crossAxisSpacing: 10, // Spacing between grid items
+                    mainAxisSpacing: 10, // Spacing between rows
                   ),
                   itemBuilder: (context, index) {
                     final product = state.products[index];
