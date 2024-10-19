@@ -31,8 +31,7 @@ class _UserProfileViewState extends State<UserProfileView> {
   void initState() {
     super.initState();
     _loadImage();
-    BlocProvider.of<GetUserInfoCubit>(context)
-        .getUserInfo(); // Load the image when the view initializes
+    BlocProvider.of<GetUserInfoCubit>(context).getUserInfo(); // Load the image when the view initializes
   }
 
   void _loadImage() async {
@@ -60,8 +59,7 @@ class _UserProfileViewState extends State<UserProfileView> {
 
   Future<void> _pickImage() async {
     final ImagePicker picker = ImagePicker();
-    final XFile? pickedFile =
-        await picker.pickImage(source: ImageSource.gallery);
+    final XFile? pickedFile = await picker.pickImage(source: ImageSource.gallery);
 
     if (pickedFile != null) {
       setState(() {
@@ -77,8 +75,7 @@ class _UserProfileViewState extends State<UserProfileView> {
     }
   }
 
-  Future<void> saveDataLocally(
-      {required String key, required String? value}) async {
+  Future<void> saveDataLocally({required String key, required String? value}) async {
     final box = Hive.box(Constants.tokenBox);
     await box.put(key, value);
   }
@@ -119,8 +116,7 @@ class _UserProfileViewState extends State<UserProfileView> {
                           backgroundColor: Colors.white,
                           content: AwesomeSnackbarContent(
                             title: 'Update',
-                            message:
-                                state.user.message ?? "Updated Successfully",
+                            message: state.user.message ?? "Updated Successfully",
                             contentType: ContentType.success,
                           ),
                           duration: const Duration(seconds: 2),
@@ -167,9 +163,8 @@ class _UserProfileViewState extends State<UserProfileView> {
                                     radius: 50.r,
                                     backgroundImage: _image != null
                                         ? FileImage(File(_image!.path))
-                                        : const AssetImage(
-                                                'assets/images/defaultavatar.jpg')
-                                            as ImageProvider<Object>,
+                                        : const AssetImage('assets/images/defaultavatar.jpg')
+                                    as ImageProvider<Object>,
                                   ),
                                 ),
                                 Positioned(
@@ -232,16 +227,17 @@ class _UserProfileViewState extends State<UserProfileView> {
                               state.user.phone!,
                               BlocProvider.of<GetUserInfoCubit>(context)
                                   .phoneController),
-                          CustomBottom(// el zoraaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaar
+                          CustomBottom(
                             text: "Update",
                             onPressed: () {
                               if (_formKey.currentState!.validate()) {
                                 BlocProvider.of<GetUserInfoCubit>(context)
                                     .updateUserInfo();
+                              } else {
+                                setState(() {
+                                  autovalidateMode = AutovalidateMode.always;
+                                });
                               }
-                              else setState(() {
-                                autovalidateMode=AutovalidateMode.always;
-                              });
                             },
                           ),
                         ],
@@ -273,10 +269,10 @@ class _UserProfileViewState extends State<UserProfileView> {
   Widget _buildLoadingIndicator() {
     return _isLoading
         ? const Center(
-            child: CircularProgressIndicator(
-              color: Colors.blue,
-            ),
-          )
+      child: CircularProgressIndicator(
+        color: Colors.blue,
+      ),
+    )
         : const SizedBox.shrink();
   }
 
@@ -303,8 +299,7 @@ class _UserProfileViewState extends State<UserProfileView> {
     );
   }
 
-  Widget _buildCustomTextFormField(
-      String label, String value, TextEditingController? controller) {
+  Widget _buildCustomTextFormField(String label, String value, TextEditingController? controller) {
     return CustomTextFormField(
       hintText: label,
       controller: controller,
@@ -315,74 +310,62 @@ class _UserProfileViewState extends State<UserProfileView> {
         if (label == "Email Address") {
           // Validate email format
           final emailRegex = RegExp(
-            r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$',
-          );
+              r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$');
           if (!emailRegex.hasMatch(value)) {
             return 'Please enter a valid email address';
-          }
-        }
-        if (label == "Phone") {
-          if (value.length != 10) {
-            return 'Phone number must be 10 digits';
           }
         }
         return null;
       },
     );
   }
+
   Widget _buildShimmerProfile() {
-    return Column(
-      children: [
-        Shimmer.fromColors(
-          baseColor: Colors.grey[300]!,
-          highlightColor: Colors.grey[100]!,
-          child: CircleAvatar(
+    return Shimmer.fromColors(
+      baseColor: Colors.grey.shade300,
+      highlightColor: Colors.grey.shade100,
+      child: Column(
+        children: [
+          CircleAvatar(
             radius: 50.r,
-            backgroundColor: Colors.grey[300]!,
+            backgroundColor: Colors.grey.shade300,
           ),
-        ),
-        SizedBox(height: 8.h),
-        Shimmer.fromColors(
-          baseColor: Colors.grey[300]!,
-          highlightColor: Colors.grey[100]!,
-          child: Container(
-            height: 20.h,
-            width: 150.w,
-            color: Colors.grey[300]!,
+          SizedBox(height: 8.h),
+          Container(
+            height: 16.h,
+            width: 120.w,
+            color: Colors.grey.shade300,
           ),
-        ),
-        SizedBox(height: 8.h),
-        Shimmer.fromColors(
-          baseColor: Colors.grey[300]!,
-          highlightColor: Colors.grey[100]!,
-          child: Container(
-            height: 15.h,
+          SizedBox(height: 8.h),
+          Container(
+            height: 14.h,
             width: 200.w,
-            color: Colors.grey[300]!,
+            color: Colors.grey.shade300,
           ),
-        ),
-        SizedBox(height: 8.h),
-        ...List.generate(3, (index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Shimmer.fromColors(
-              baseColor: Colors.grey[300]!,
-              highlightColor: Colors.grey[100]!,
-              child: Container(
-                height: 50.h,
-                width: double.infinity,
-                color: Colors.grey[300]!,
+          SizedBox(height: 16.h),
+          ...List.generate(
+            3,
+                (index) => Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    height: 14.h,
+                    width: 100.w,
+                    color: Colors.grey.shade300,
+                  ),
+                  SizedBox(height: 8.h),
+                  Container(
+                    height: 44.h,
+                    color: Colors.grey.shade300,
+                  ),
+                ],
               ),
             ),
-          );
-        }),
-      ],
+          ),
+        ],
+      ),
     );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(EnumProperty<AutovalidateMode?>('autovalidateMode', autovalidateMode));
   }
 }

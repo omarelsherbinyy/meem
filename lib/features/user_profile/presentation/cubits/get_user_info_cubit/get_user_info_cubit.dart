@@ -22,9 +22,9 @@ class GetUserInfoCubit extends Cubit<GetUserInfoState> {
         (failure) =>
             emit(GetUserInfoFailure(errorMessage: failure.errorMessage)),
         (userInfo) {
-      nameController.text = userInfo.name!;
-      emailController.text = userInfo.email!;
-      phoneController.text = userInfo.phone!;
+      nameController.text = userInfo.name ??'';
+      emailController.text = userInfo.email??'';
+      phoneController.text = userInfo.phone??'';
 
       return emit(GetUserInfoSuccess(user: userInfo));
     });

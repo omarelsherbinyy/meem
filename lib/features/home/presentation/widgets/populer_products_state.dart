@@ -36,7 +36,7 @@ class _PopularProductsState extends State<PopularProducts> {
                   itemCount: state.products.length,
                   gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 210,
-                    childAspectRatio: 0.5, // Maintain aspect ratio
+                    childAspectRatio: 0.55, // Maintain aspect ratio
                     crossAxisSpacing: 10, // Spacing between grid items
                     mainAxisSpacing: 10, // Spacing between rows
                   ),
