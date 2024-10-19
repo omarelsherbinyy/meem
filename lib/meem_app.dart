@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:meem/config/router/app_router.dart';
 import 'package:meem/config/router/routes.dart';
+import 'package:meem/core/api/dio_consumer.dart';
 import 'package:meem/core/utils/di/di.dart';
 import 'package:meem/features/Auth/data/repos/auth_repo.dart';
 import 'package:meem/features/Auth/presentation/cubits/cubit/auth_cubit.dart';
@@ -13,6 +14,9 @@ import 'package:meem/features/Products/presentation/cubits/get_product_details_c
 import 'package:meem/features/cart/data/repos/cart_repo.dart';
 import 'package:meem/features/cart/presentation/cubits/cubit/cart_cubit.dart';
 import 'package:meem/features/home/data/repos/home_repo.dart';
+import 'package:meem/features/my_favorites/data/data_sources/favorites_data_source.dart';
+import 'package:meem/features/my_favorites/data/repos/favorites_repo.dart';
+import 'package:meem/features/my_favorites/presentation/cubits/change_favorites/change_favorites_cubit.dart';
 import 'package:meem/features/user_profile/presentation/cubits/get_user_info_cubit/get_user_info_cubit.dart';
 
 import 'core/utils/constant.dart';
@@ -32,6 +36,11 @@ class MeemApp extends StatelessWidget {
             BlocProvider(
               create: (context) => AuthCubit(
                 authRepo: git.get<AuthRepoImpl>(),
+              ),
+            ),
+            BlocProvider(
+              create: (context) => ChangeFavoritesCubit(
+                favoritesRepo:MyFavoritesRepoImpl(favoritesDataSource: MyFavoritesDataSourceImpl(apiConsumer:git.get<DioConsumer>() )) ,
               ),
             ),
             BlocProvider(

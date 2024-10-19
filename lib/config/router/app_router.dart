@@ -4,7 +4,6 @@ import 'package:meem/features/Auth/presentation/views/login_view.dart';
 import 'package:meem/features/Auth/presentation/views/logout_view.dart';
 import 'package:meem/features/Products/presentation/views/categories_view.dart';
 import 'package:meem/features/cart/presentation/views/cart_view.dart';
-import 'package:meem/features/favorites/presentation/views/favorites_view.dart';
 import 'package:meem/features/home/presentation/view/home_view.dart';
 import 'package:meem/features/onBoarding/presentation/view/onboarding_view.dart';
 import 'package:meem/features/user_profile/presentation/views/user_profile_view.dart';
@@ -39,10 +38,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => const HomeView(),
         );
-      case Routes.favorites:
-        return MaterialPageRoute(
-          builder: (context) => const FavoritesView(),
-        );
+     
       case Routes.userProfile:
         return MaterialPageRoute(
           // ignore: prefer_const_constructors

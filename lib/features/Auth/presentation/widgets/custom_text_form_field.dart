@@ -89,10 +89,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   OutlineInputBorder customBorder([Color? color]) {
     return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12), // Consistent border radius
+      borderRadius: BorderRadius.circular(100), // Consistent border radius
       borderSide: BorderSide(
-        color: color ?? ColorsManager.lightGray,
-        width: 2, // Consistent border width
+        color: color ?? Colors.black,
+        width: 1, // Consistent border width
       ),
     );
   }

@@ -1,3 +1,4 @@
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:meem/features/cart/data/models/cart_item/cart_item.dart';
 import 'package:meem/features/cart/data/models/operation_cart_response.dart';

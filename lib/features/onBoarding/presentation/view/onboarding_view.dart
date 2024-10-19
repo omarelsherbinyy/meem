@@ -10,6 +10,7 @@ class OnboardingView extends StatefulWidget {
   const OnboardingView({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _OnboardingViewState createState() => _OnboardingViewState();
 }
 

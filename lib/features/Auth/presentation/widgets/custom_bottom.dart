@@ -25,7 +25,7 @@ class CustomBottom extends StatelessWidget {
         textColor: ColorsManager.white,
         padding: EdgeInsets.only(right: 50.w, left: 50.w),
         shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.r)),
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(100.r)),
         hoverColor: ColorsManager.white.withOpacity(0.1),
         highlightColor: ColorsManager.white.withOpacity(0.2),
         splashColor: ColorsManager.white.withOpacity(0.3),
@@ -34,8 +34,8 @@ class CustomBottom extends StatelessWidget {
           text,
           style: TextStyle(
             fontFamily: StringManager.fontFamily,
-            fontSize: 20.sp,
-            fontWeight: FontWeight.w500,
+            fontSize: 18.sp,
+            fontWeight: FontWeight.bold,
           ),
         ),
       ),

@@ -1,7 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+// ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:meem/core/utils/string.dart';
@@ -15,6 +19,7 @@ class CartView extends StatefulWidget {
   const CartView({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _CartViewState createState() => _CartViewState();
 }
 
@@ -36,10 +41,10 @@ class _CartViewState extends State<CartView> {
         title: Text(
           'Shopping Cart',
           style: TextStyle(
-            color: ColorsManager.textBlue,
             fontFamily: StringManager.fontFamily,
-            fontWeight: FontWeight.w600,
-            fontSize: 18.sp,
+            color: ColorsManager.textBlue,
+            fontWeight: FontWeight.bold,
+            fontSize: 22.sp,
           ),
         ),
         centerTitle: true,
@@ -127,11 +132,12 @@ class _CartViewState extends State<CartView> {
                       ),
                     );
                   } else {
-                    return SliverFillRemaining( hasScrollBody: false,
+                    return SliverFillRemaining(
+                        hasScrollBody: false,
                         child: Center(
-                      child: SvgPicture.asset(  "assets/images/emptycart.svg", height: 240.h, fit: BoxFit.contain),
-
-                    ));
+                          child: SvgPicture.asset("assets/images/emptycart.svg",
+                              height: 240.h, fit: BoxFit.contain),
+                        ));
                   }
                 } else if (state is GetCartProductsFail) {
                   return SliverFillRemaining(
@@ -147,10 +153,12 @@ class _CartViewState extends State<CartView> {
                     ),
                   ));
                 } else {
-                  return SliverList(
-                      delegate: SliverChildBuilderDelegate(
-                    (context, index) => buildShimmerLoading(),
-                  ));
+                  return const SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Center(
+                      child: CupertinoActivityIndicator(),
+                    ),
+                  ); // Use shimmer for loading state
                 }
               },
             ),
@@ -164,8 +172,7 @@ class _CartViewState extends State<CartView> {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 5),
       child: GestureDetector(
-        onTap: (){
-
+        onTap: () {
           // handel NAve to product details of product ya 3maaaaaaaar
         },
         child: Card(
@@ -184,7 +191,9 @@ class _CartViewState extends State<CartView> {
                   children: [
                     Stack(
                       children: [
-                        SizedBox(height: 90.h,width: 120.w,
+                        SizedBox(
+                          height: 90.h,
+                          width: 120.w,
                           child: FittedBox(
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10.r),
@@ -243,7 +252,9 @@ class _CartViewState extends State<CartView> {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          Row(mainAxisSize: MainAxisSize.max,mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Flexible(
                                 child: Text(
@@ -254,10 +265,11 @@ class _CartViewState extends State<CartView> {
                                     color: Colors.green,
                                   ),
                                   maxLines: 1,
-                                  overflow: TextOverflow.ellipsis ,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
-                              Row(mainAxisAlignment: MainAxisAlignment.end,
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   IconButton(
                                     icon: Icon(Icons.remove, size: 20.sp),
@@ -338,42 +350,50 @@ class _CartViewState extends State<CartView> {
             ),
           ),
           SizedBox(height: 4.h),
-      Row(
-        children: [
-          Expanded(
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Enter coupon code',
-                hintStyle: TextStyle(color: Colors.grey),
-                filled: true,
-                fillColor: Colors.grey[200],
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8.r),
-                  borderSide: BorderSide.none,
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Enter coupon code',
+                    hintStyle: TextStyle(color: Colors.grey),
+                    filled: true,
+                    fillColor: Colors.grey[200],
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8.r),
+                      borderSide: BorderSide.none,
+                    ),
+                    contentPadding: EdgeInsets.symmetric(
+                        vertical: 16.0.w,
+                        horizontal: 12.0.h), // Set vertical padding here
+                  ),
                 ),
-                contentPadding: EdgeInsets.symmetric(vertical: 16.0.w, horizontal: 12.0.h), // Set vertical padding here
               ),
-            ),
-          ),
-          SizedBox(width: 8.w),
-          ElevatedButton(
-            onPressed: () {
-              // Apply coupon logic here
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: ColorsManager.mainBlue,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8.r),
+              SizedBox(width: 8.w),
+              ElevatedButton(
+                onPressed: () {
+                  // Apply coupon logic here
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: ColorsManager.mainBlue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  padding: EdgeInsets.symmetric(
+                      vertical: 16.0.w,
+                      horizontal: 16.0.h), // Same vertical padding
+                ),
+                child: Text(
+                  'Apply',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: StringManager.fontFamily),
+                ),
               ),
-              padding: EdgeInsets.symmetric(vertical: 16.0.w, horizontal: 16.0.h), // Same vertical padding
-            ),
-            child: Text(
-              'Apply',
-              style: TextStyle(color: Colors.white, fontSize: 14.sp,fontWeight: FontWeight.w600,fontFamily: StringManager.fontFamily),
-            ),
+            ],
           ),
-        ],
-      ),
         ],
       ),
     );

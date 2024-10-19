@@ -15,22 +15,20 @@ class CategoriesView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: CustomScrollView(
-        slivers: [
-          CategoriesViewAppBar(
-            name: name,
-          ),
-          SliverToBoxAdapter(
-            child: SizedBox(
-              height: 20.h,
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        body: CustomScrollView(
+          slivers: [
+            CategoriesViewAppBar(name: name),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: 20.h,
+              ),
             ),
-          ),
-          const SliverToBoxAdapter(
-            child: CategoriesProducts(),
-          ),
-        ],
+            const CategoriesProducts(),
+          ],
+        ),
       ),
     );
   }

@@ -18,11 +18,11 @@ class SearchViewAppBar extends StatelessWidget {
       title: Text(
         'Search',
         style: TextStyle(
-          fontFamily: StringManager.fontFamily,
-          color: ColorsManager.textBlue,
-          fontWeight: FontWeight.bold,
-          fontSize: 22.sp,
-        ),
+            fontFamily: StringManager.fontFamily,
+            color: ColorsManager.textBlue,
+            fontWeight: FontWeight.bold,
+            fontSize: 22.sp,
+          ),
       ),
     );
   }

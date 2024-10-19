@@ -1,9 +1,9 @@
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meem/core/utils/models/auth_model/auth_model.dart';
 import 'package:meem/core/utils/models/auth_model/user_info_model.dart';
 import 'package:meem/features/home/data/repos/home_repo.dart';
-import 'package:meta/meta.dart';
 
 part 'get_user_info_state.dart';
 

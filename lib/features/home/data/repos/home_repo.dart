@@ -43,9 +43,6 @@ class HomeRepoImpl implements HomeRepo {
   Future<Either<Failure, UserInfoModel>> getUserInfo() async {
     try {
       UserInfoModel userInfoModel = await homeDataSource.getUserInfo();
-      print(
-          "===========================================================================");
-      print(userInfoModel.name);
       return Right(userInfoModel);
     } on DioException catch (e) {
       return left(ServerFailure.fromDioException(e));

@@ -1,8 +1,8 @@
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meem/core/utils/models/product_model/product_model.dart';
 import 'package:meem/features/home/data/repos/home_repo.dart';
-import 'package:meta/meta.dart';
 
 part 'get_searched_product_state.dart';
 

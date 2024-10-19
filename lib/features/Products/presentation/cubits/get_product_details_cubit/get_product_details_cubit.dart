@@ -1,6 +1,8 @@
+// ignore: depend_on_referenced_packages
 import 'package:bloc/bloc.dart';
 import 'package:meem/core/utils/models/product_model/product_model.dart';
 import 'package:meem/features/home/data/repos/home_repo.dart';
+// ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 
 part 'get_product_details_state.dart';
