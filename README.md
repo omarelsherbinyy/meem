@@ -1,10 +1,11 @@
 # Meem - E-commerce App
 
-*Meem* is a Flutter-based e-commerce application developed as part of the DEPI graduation project. Our team of five has collaborated to create an app that offers a seamless shopping experience, complete with engaging features, modern UI, and responsive design.
+*Meem* is a comprehensive e-commerce application developed using Flutter as part of the DEPI graduation project. The app offers a modern and user-friendly interface for browsing products, managing a shopping cart, and exploring various categories. Our team of five has designed this app with a focus on delivering a seamless shopping experience.
 
 ## Table of Contents
 - [Overview](#overview)
 - [Features](#features)
+- [Architecture and Code Structure](#architecture-and-code-structure)
 - [Technology Stack](#technology-stack)
 - [Packages Used](#packages-used)
 - [Installation](#installation)
@@ -12,60 +13,71 @@
 - [License](#license)
 
 ## Overview
-Meem is an e-commerce app that allows users to browse products, manage their shopping carts, and explore categories effortlessly. The app leverages state-of-the-art Flutter technologies to deliver a modern and visually appealing interface. Although the app does not currently feature a checkout system or secure authentication, it provides offline data access and smooth user interactions.
+Meem provides an intuitive platform for users to explore different products, manage cart items, and engage in a seamless shopping journey. Although the app does not currently include a checkout process or secure user authentication, it lays the groundwork for future enhancements with features like offline data access, caching, and efficient product management.
 
 ## Features
-- *Product Browsing:* Explore a variety of products across different categories.
-- *Cart Management:* Add or remove items from the cart with ease.
-- *Offline Access:* Save data locally using Hive for a seamless offline experience.
-- *Animated UI:* Leverage Lottie animations for dynamic interactions.
-- *Page Navigation:* Use a smooth page indicator and carousel sliders for an engaging browsing experience.
-- *Responsiveness:* Optimized layout for different screen sizes with Flutter ScreenUtil.
-- *Caching:* Efficient image loading and caching for improved performance.
+- *User Authentication*: Supports login and registration functionalities, including saving user tokens for session management.
+- *Product Browsing*: Allows users to browse and search for products across various categories.
+- *Cart Management*: Users can add or remove items from the shopping cart, with updates reflected in real-time.
+- *Category Exploration*: Provides a categorized view of products, enabling users to filter products by category.
+- *User Profile Management*: Allows updating user information like name, email, and phone.
+- *Offline Access*: Uses local storage for offline data access.
+- *Responsive Design*: Optimized for various screen sizes using flutter_screenutil.
+- *Smooth Animations*: Enhances user experience with Lottie animations and shimmering effects for loading states.
+
+## Architecture and Code Structure
+The project follows a clean architecture, using separate layers for data, domain, and presentation. The architecture includes:
+- *Data Layer*: Handles API interactions and data caching using remote data sources.
+  - AuthRemoteDataSource, CartRemoteDataSource, and HomeDataSource are used for authentication, cart management, and product data retrieval respectively.
+- *Presentation Layer*: Manages the app's UI using widgets and screens like CategoriesView for displaying categorized products.
+- *Models*: Includes models for managing data throughout the app, such as AuthModel, ProductModel, UserInfoModel, CategoryModel, and PosterModel.
+- *Utilities*: Core functionalities like saving tokens and API endpoint management are abstracted for easier code maintenance.
+
+### Example Code Snippets
+1. *Authentication Implementation*
+   - Login and Registration are managed using AuthRemoteDataSource and AuthRemoteDataSourceImpl:
+     dart
+     Future<AuthModel> login({required String email, required String password}) async {
+       Map<String, dynamic> jsonData = await apiConsumer.post(
+           endPoint: EndPoints.login,
+           bodyData: {"email": email, "password": password},
+           isFormData: true);
+       AuthModel authModel = AuthModel.fromJson(jsonData);
+       await saveToken(value: authModel.data?.token);
+       return authModel;
+     }
+     
+2. *Fetching Products*
+   - Products are retrieved through the HomeDataSourceImpl class:
+     dart
+     Future<List<ProductModel>> getProducts() async {
+       Map<String, dynamic> jsonData =
+           await apiConsumer.get(endPoint: EndPoints.home);
+       List<dynamic> results = jsonData["data"]["products"];
+       List<ProductModel> products = [];
+       for (var productData in results) {
+         products.add(ProductModel.fromJson(productData));
+       }
+       return products;
+     }
+     
 
 ## Technology Stack
-- *Flutter*: Used for cross-platform development, ensuring a consistent experience across Android, iOS, and web.
-- *Dart*: The primary programming language for Flutter.
-- *Hive*: Local storage for offline access and caching.
-- *Flutter Bloc*: For state management, allowing a clear separation between business logic and UI.
+- *Flutter*: Utilized for developing the app on multiple platforms including Android, iOS, and web.
+- *Dart*: The programming language used for Flutter development.
+- *Hive*: Manages local storage for offline capabilities.
+- *Flutter Bloc*: Manages state across the app with a clean architecture approach.
 
 ## Packages Used
 
-1. *[awesome_snackbar_content](https://pub.dev/packages/awesome_snackbar_content)*: For enhanced Snackbar notifications, offering visually appealing alerts for user actions.
-
-2. *[cached_network_image](https://pub.dev/packages/cached_network_image)*: Caches images to reduce load times and enhance performance.
-
-3. *[carousel_slider](https://pub.dev/packages/carousel_slider)*: Creates image and content carousels for showcasing featured products.
-
-4. *[cupertino_icons](https://pub.dev/packages/cupertino_icons)*: Provides iOS-style icons for consistent cross-platform UI design.
-
-5. *[dartz](https://pub.dev/packages/dartz)*: Adds functional programming features for safer error handling.
-
-6. *[dio](https://pub.dev/packages/dio)*: A versatile HTTP client for handling network requests and integrating with backend services.
-
-7. *[flutter_bloc](https://pub.dev/packages/flutter_bloc)*: Utilized for state management, offering a scalable architecture for app development.
-
-8. *[flutter_launcher_icons](https://pub.dev/packages/flutter_launcher_icons)*: Automates the generation of launcher icons across multiple platforms.
-
-9. *[flutter_product_card](https://pub.dev/packages/flutter_product_card)*: Simplifies product card layouts for consistent UI components.
-
-10. *[flutter_screenutil](https://pub.dev/packages/flutter_screenutil)*: Aids in developing responsive layouts for various device screen sizes.
-
-11. *[flutter_svg](https://pub.dev/packages/flutter_svg)*: Allows the use of SVG images, providing high-quality vector graphics.
-
-12. *[get_it](https://pub.dev/packages/get_it)*: A service locator for dependency injection, enabling easy access to shared services.
-
-13. *[google_nav_bar](https://pub.dev/packages/google_nav_bar)*: Adds a customizable bottom navigation bar for intuitive navigation.
-
-14. *[hive](https://pub.dev/packages/hive)* & *[hive_flutter](https://pub.dev/packages/hive_flutter)*: Provide local data storage for offline functionality.
-
-15. *[image_picker](https://pub.dev/packages/image_picker)*: Allows users to select images from the device gallery or camera.
-
-16. *[lottie](https://pub.dev/packages/lottie)*: Integrates Lottie animations for dynamic, vector-based visual effects.
-
-17. *[shimmer](https://pub.dev/packages/shimmer)*: Displays shimmering loading placeholders to enhance the user experience while fetching data.
-
-18. *[smooth_page_indicator](https://pub.dev/packages/smooth_page_indicator)*: Adds smooth, customizable page indicators.
+1. *[awesome_snackbar_content](https://pub.dev/packages/awesome_snackbar_content)*: Provides styled snackbars for displaying alerts.
+2. *[cached_network_image](https://pub.dev/packages/cached_network_image)*: Caches images to improve performance.
+3. *[carousel_slider](https://pub.dev/packages/carousel_slider)*: Used for creating carousels to display featured products.
+4. *[flutter_screenutil](https://pub.dev/packages/flutter_screenutil)*: Facilitates responsive layouts for various screen sizes.
+5. *[flutter_bloc](https://pub.dev/packages/flutter_bloc)*: Enables state management using the Bloc pattern.
+6. *[dio](https://pub.dev/packages/dio)*: A powerful HTTP client for network requests.
+7. *[lottie](https://pub.dev/packages/lottie)*: For animations that enhance the visual appeal of the app.
+8. *[shimmer](https://pub.dev/packages/shimmer)*: Displays shimmering effects while content is loading.
 
 ## Installation
 To run the Meem app locally, follow these steps:
