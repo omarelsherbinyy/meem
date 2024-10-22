@@ -15,4 +15,5 @@ void main() async {
   setUp();
   Bloc.observer = MyBlocObserver();
   runApp(const MeemApp());
+  
 }
