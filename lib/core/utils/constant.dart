@@ -1,4 +1,4 @@
 abstract class Constants {
-  static const String tokenBox = "Box Token";
-  static const String tokenKey = "toke key";
+  static const String tokenBox = "box token";
+  static const String tokenKey = "token key";
 }

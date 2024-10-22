@@ -1,5 +1,6 @@
 import 'package:meem/core/api/api_consumer.dart';
 import 'package:meem/core/api/endpoints.dart';
+import 'package:meem/core/cached/cached_secure.dart';
 import 'package:meem/core/functions/save_data_locally.dart';
 import 'package:meem/core/utils/models/auth_model/auth_model.dart';
 
@@ -30,8 +31,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         bodyData: {"email": email, "password": password},
         isFormData: true);
     AuthModel authModel = AuthModel.fromJson(jsonData);
-
-    await saveToken(value: authModel.data?.token);
+    await changeTokenState(value: "true");
+    CachedSecure.saveToken(authModel.data!.token!);
 
     return authModel;
   }
@@ -55,8 +56,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         },
         isFormData: true);
     AuthModel authModel = AuthModel.fromJson(jsonData);
-    await saveToken(value: authModel.data?.token);
-
+    await changeTokenState(value: "true");
+    CachedSecure.saveToken(authModel.data!.token!);
     return authModel;
   }
 }

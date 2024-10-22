@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meem/core/api/api_consumer.dart';
 import 'package:meem/core/api/endpoints.dart';
+import 'package:meem/core/cached/cached_secure.dart';
 import 'package:meem/core/utils/constant.dart';
 
 class DioConsumer implements ApiConsumer {
@@ -11,12 +12,12 @@ class DioConsumer implements ApiConsumer {
     String langue = "en",
   }) {
     Map<String, dynamic> headers = {
-      "Authorization": Hive.box(Constants.tokenBox).get(Constants.tokenKey),
+      "Authorization": CachedSecure.getToken(),
       ApiKeys.language: langue,
     };
     dio
-      ..options.headers = headers
       ..options.baseUrl = EndPoints.baseUrl
+      ..options.headers = headers
       ..interceptors
           .add(LogInterceptor(error: true, request: true, responseBody: true));
   }
@@ -31,8 +32,13 @@ class DioConsumer implements ApiConsumer {
   @override
   Future get(
       {required String endPoint, Map<String, dynamic>? queryParameters}) async {
-    Response response =
-        await dio.get(endPoint, queryParameters: queryParameters);
+    Response response = await dio.get(endPoint,
+        queryParameters: queryParameters,
+        options: Options(
+          headers: {
+            "Authorization": await CachedSecure.getToken(),
+          },
+        ));
     return response.data;
   }
 
@@ -44,7 +50,12 @@ class DioConsumer implements ApiConsumer {
       Map<String, dynamic>? queryParameters}) async {
     Response response = await dio.patch(endPoint,
         queryParameters: queryParameters,
-        data: isFormData ? FormData.fromMap(bodyData!) : bodyData);
+        data: isFormData ? FormData.fromMap(bodyData!) : bodyData,
+        options: Options(
+          headers: {
+            "Authorization": await CachedSecure.getToken(),
+          },
+        ));
     return response.data;
   }
 
@@ -56,7 +67,12 @@ class DioConsumer implements ApiConsumer {
       Map<String, dynamic>? queryParameters}) async {
     Response response = await dio.post(endPoint,
         queryParameters: queryParameters,
-        data: isFormData ? FormData.fromMap(bodyData!) : bodyData);
+        data: isFormData ? FormData.fromMap(bodyData!) : bodyData,
+        options: Options(
+          headers: {
+            "Authorization": await CachedSecure.getToken(),
+          },
+        ));
     return response.data;
   }
 
@@ -68,7 +84,12 @@ class DioConsumer implements ApiConsumer {
       Map<String, dynamic>? queryParameters}) async {
     Response response = await dio.put(endPoint,
         queryParameters: queryParameters,
-        data: isFormData ? FormData.fromMap(bodyData!) : bodyData);
+        data: isFormData ? FormData.fromMap(bodyData!) : bodyData,
+        options: Options(
+          headers: {
+            "Authorization": await CachedSecure.getToken(),
+          },
+        ));
     return response.data;
   }
 }

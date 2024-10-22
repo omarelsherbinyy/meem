@@ -86,26 +86,28 @@ class ProductCard extends StatelessWidget {
                         )),
                   ),
                 ),
-                product.discount != 0
-                    ? Positioned(
-                        left: 0,
-                        top: 0,
-                        child: Container(
-                          height: 20,
-                          width: 30,
-                          decoration: const BoxDecoration(
-                            color: Colors.red,
-                          ),
-                          child: Center(
-                            child: Text(
-                              "${product.discount}%",
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold),
+                product.oldPrice != null
+                    ? product.discount != 0
+                        ? Positioned(
+                            left: 0,
+                            top: 0,
+                            child: Container(
+                              height: 20,
+                              width: 30,
+                              decoration: const BoxDecoration(
+                                color: Colors.red,
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "${product.discount}%",
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      )
+                          )
+                        : SizedBox()
                     : SizedBox()
               ],
             ),
@@ -136,18 +138,20 @@ class ProductCard extends StatelessWidget {
                 ),
               ),
             ),
-            product.discount != 0
-                ? Text(
-                    "\$${product.oldPrice}",
-                    style: TextStyle(
-                        fontSize: 15.sp,
-                        decoration: TextDecoration.lineThrough,
-                        decorationColor: Colors.red,
-                        decorationThickness: 1.7,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.red),
-                  )
-                : const SizedBox()
+            product.oldPrice != null
+                ? product.discount != 0
+                    ? Text(
+                        "\$${product.oldPrice}",
+                        style: TextStyle(
+                            fontSize: 15.sp,
+                            decoration: TextDecoration.lineThrough,
+                            decorationColor: Colors.red,
+                            decorationThickness: 1.7,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red),
+                      )
+                    : const SizedBox()
+                : SizedBox()
           ],
         ),
       ),
