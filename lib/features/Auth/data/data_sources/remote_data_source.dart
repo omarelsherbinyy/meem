@@ -1,7 +1,7 @@
 import 'package:meem/core/api/api_consumer.dart';
 import 'package:meem/core/api/endpoints.dart';
 import 'package:meem/core/cached/cached_secure.dart';
-import 'package:meem/core/functions/save_data_locally.dart';
+import 'package:meem/core/functions/change_token_state.dart';
 import 'package:meem/core/utils/models/auth_model/auth_model.dart';
 
 abstract class AuthRemoteDataSource {

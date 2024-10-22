@@ -1,9 +1,7 @@
 import 'package:dio/dio.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:meem/core/api/api_consumer.dart';
 import 'package:meem/core/api/endpoints.dart';
 import 'package:meem/core/cached/cached_secure.dart';
-import 'package:meem/core/utils/constant.dart';
 
 class DioConsumer implements ApiConsumer {
   final Dio dio;
